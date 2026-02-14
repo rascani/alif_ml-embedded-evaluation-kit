@@ -40,6 +40,9 @@ assert_defined(EXECUTORCH_SRC_PATH)
 assert_defined(PYTHON_VENV)
 assert_defined(PYTHON)
 
+# Option to enable ETDump profiling support.
+USER_OPTION(ETDUMP_ENABLED "Enable ExecuTorch ETDump profiling" OFF BOOL)
+
 # Prepare CMake configuration overrides.
 set(EXECUTORCH_BUILD_EXECUTOR_RUNNER            OFF)
 set(EXECUTORCH_BUILD_KERNELS_QUANTIZED          ON)
@@ -47,6 +50,12 @@ set(EXECUTORCH_BUILD_EXTENSION_RUNNER_UTIL      ON)
 set(EXECUTORCH_ENABLE_LOGGING                   ON)
 set(EXECUTORCH_BUILD_DEVTOOLS                   OFF)
 set(EXECUTORCH_ENABLE_EVENT_TRACER              OFF)
+
+if(ETDUMP_ENABLED)
+    set(EXECUTORCH_BUILD_DEVTOOLS              ON)
+    set(EXECUTORCH_ENABLE_EVENT_TRACER         ON)
+    set(FLATCC_ALLOW_WERROR                    OFF)
+endif()
 set(GFLAGS_INTTYPES_FORMAT                      C99)
 
 if(TARGET_PLATFORM STREQUAL native)

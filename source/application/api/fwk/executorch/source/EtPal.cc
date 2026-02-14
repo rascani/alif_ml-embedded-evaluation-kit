@@ -16,6 +16,19 @@
  */
 #include "ExecuTorch.hpp"
 
+#if defined(MLEK_BAREMETAL)
+extern "C" uint64_t Get_SysTick_Cycle_Count(void);
+#endif
+
+et_timestamp_t et_pal_current_ticks(void)
+{
+#if defined(MLEK_BAREMETAL)
+    return static_cast<et_timestamp_t>(Get_SysTick_Cycle_Count());
+#else
+    return 0;
+#endif
+}
+
 /* For ExecuTorch logging the et_pal_emit_log_message needs to be overridden. */
 void et_pal_emit_log_message(
     ET_UNUSED et_timestamp_t timestamp,

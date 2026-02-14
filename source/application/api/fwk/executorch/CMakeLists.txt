@@ -58,6 +58,15 @@ target_link_libraries(${ML_FWK_ET_TARGET}
 target_compile_definitions(${ML_FWK_ET_TARGET} INTERFACE
     MLEK_FWK_EXECUTORCH=1)
 
+if(ETDUMP_ENABLED)
+    target_link_libraries(${ML_FWK_ET_TARGET} PUBLIC etdump)
+    target_compile_definitions(${ML_FWK_ET_TARGET} PUBLIC ETDUMP_ENABLED=1)
+endif()
+
+if(NOT TARGET_PLATFORM STREQUAL "native")
+    target_compile_definitions(${ML_FWK_ET_TARGET} PRIVATE MLEK_BAREMETAL=1)
+endif()
+
 # By default, use 16 MiB of temporary allocation size. Note that
 # this may be overridden by the platform definitions.
 set(ML_FWK_TMP_MEM_SIZE "0x01000000" CACHE STRING "Temporary memory allocation size")

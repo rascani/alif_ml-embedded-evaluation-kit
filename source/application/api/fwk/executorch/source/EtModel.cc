@@ -22,6 +22,10 @@
 
 #include <memory>
 
+#if defined(ETDUMP_ENABLED)
+#include <executorch/devtools/etdump/etdump_flatcc.h>
+#endif
+
 #if !(defined(ML_FWK_TMP_MEM_SIZE))
 #error "ML_FWK_TMP_MEM_SIZE should be defined."
 #endif /* ML_FWK_TMP_MEM_SIZE */
@@ -139,6 +143,15 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     size_t methodMemBeforeMark = this->m_backendData.m_methodAllocPtr->UsedSizeCurrent();
 
     executorch::runtime::EventTracer* eventTracerPtr = nullptr;
+
+#if defined(ETDUMP_ENABLED)
+    if (!this->m_backendData.m_etDumpGen) {
+        this->m_backendData.m_etDumpGen =
+            std::make_shared<executorch::etdump::ETDumpGen>();
+    }
+    eventTracerPtr = this->m_backendData.m_etDumpGen.get();
+#endif
+
     static auto method =
         this->m_backendData.m_program->get().load_method(this->m_backendData.m_methodName.c_str(),
                                                          this->m_backendData.m_memMgrPtr.get(),
@@ -400,4 +413,22 @@ bool EtModel::PrepareInputTensors()
     }
     return true;
 }
+
+#if defined(ETDUMP_ENABLED)
+void EtModel::DumpProfilingData() const
+{
+    if (!this->m_backendData.m_etDumpGen) {
+        return;
+    }
+    auto result = this->m_backendData.m_etDumpGen->get_etdump_data();
+    if (result.buf != nullptr && result.size > 0) {
+        info("ETDump data: %zu bytes captured\n", result.size);
+        info("ETDump blocks: %zu\n",
+             this->m_backendData.m_etDumpGen->get_num_blocks());
+        if (!this->m_backendData.m_etDumpGen->is_static_etdump()) {
+            free(result.buf);
+        }
+    }
+}
+#endif
 } /* namespace arm::app::fwk::et */

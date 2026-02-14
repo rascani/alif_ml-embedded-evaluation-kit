@@ -162,6 +162,11 @@ bool RunInferenceHandler(ApplicationContext& ctx)
     info("Total number of inferences: 1\n");
     profiler.PrintProfilingResult();
 
+#if defined(ETDUMP_ENABLED) && defined(MLEK_FWK_EXECUTORCH)
+    auto& etModel = static_cast<fwk::et::EtModel&>(model);
+    etModel.DumpProfilingData();
+#endif
+
 #if VERIFY_TEST_OUTPUT
     DumpOutputs(model, "output tensors post inference");
 #endif /* VERIFY_TEST_OUTPUT */

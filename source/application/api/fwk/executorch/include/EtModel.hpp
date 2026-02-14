@@ -22,6 +22,10 @@
 #include "Model.hpp"
 #include <functional>
 
+#if defined(ETDUMP_ENABLED)
+#include <executorch/devtools/etdump/etdump_flatcc.h>
+#endif
+
 namespace arm::app::fwk::et {
 
 using executorch::runtime::HierarchicalAllocator;
@@ -39,6 +43,9 @@ struct EtBackendData {
     std::shared_ptr<MemoryManager> m_memMgrPtr{nullptr};
     std::shared_ptr<Result<Program>> m_program{nullptr};
     std::string m_methodName{};
+#if defined(ETDUMP_ENABLED)
+    std::shared_ptr<executorch::etdump::ETDumpGen> m_etDumpGen{nullptr};
+#endif
 };
 
 /**
@@ -81,6 +88,11 @@ public:
 
     /** @brief Logs overall runtime memory usage to stdout. */
     void LogMemoryUsage() const;
+
+#if defined(ETDUMP_ENABLED)
+    /** @brief  Dumps ETDump profiling data to log. */
+    void DumpProfilingData() const;
+#endif
 
     /** @brief      Initialise the model class object.
      *  @return     true if initialisation succeeds, false otherwise.
