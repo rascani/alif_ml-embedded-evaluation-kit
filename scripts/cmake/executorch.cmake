@@ -178,7 +178,7 @@ endif()
 add_library(meta::executorch ALIAS mlek_executorch)
 
 # Include code generation wrappers from ExecuTorch.
-set(EXECUTORCH_ROOT ${EXECUTORCH_SRC_PATH})
+set(EXECUTORCH_ROOT ${EXECUTORCH_SRC_PATH} CACHE INTERNAL "ExecuTorch source root")
 include(${EXECUTORCH_SRC_PATH}/tools/cmake/Utils.cmake)
 include(${EXECUTORCH_SRC_PATH}/tools/cmake/Codegen.cmake)
 
@@ -218,7 +218,7 @@ function(generate_pte_ops_lib)
     execute_process(
         COMMAND ${PYTHON_EXECUTABLE}
             "${EXECUTORCH_SRC_PATH}/codegen/tools/gen_oplist.py"
-            --model_file_path=${PARSED_MODEL_PATH}
+            --model_file_path=${ABS_MODEL_PATH}
             --output_path=${CMAKE_CURRENT_BINARY_DIR}/${PARSED_LIB_NAME}-ops.yaml
         COMMAND_ERROR_IS_FATAL  ANY
         COMMAND_ECHO            STDOUT
@@ -231,7 +231,7 @@ function(generate_pte_ops_lib)
     # the path to PTE file for ops lib gen. Otherwise, we pass in an empty argument.
     if (OPS_YML_GEN_RESULT MATCHES "aten::" OR
         OPS_YML_GEN_RESULT MATCHES "dim_order_ops::")
-        set(PTE_FOR_OPS_LIB ${PARSED_MODEL_PATH})
+        set(PTE_FOR_OPS_LIB ${ABS_MODEL_PATH})
     else()
         message(STATUS "No aten or dim_order_ops found in ${PARSED_MODEL_PATH}")
         set(PTE_FOR_OPS_LIB "")

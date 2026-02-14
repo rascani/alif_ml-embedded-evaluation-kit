@@ -128,6 +128,7 @@ SECTIONS
     * (.bss.camera_frame_bayer_to_rgb_buf) /* (Optional) Camera Frame Buffer for Bayer to RGB Convertion.*/
     * (.bss.NoInit.ethos_u_cache)
     * (.bss.NoInit.activation_buf_sram) /* 2MB */
+    * (.bss.NoInit.temp_buf_sram)
   } > SRAM
 
   .bss.unstriped (NOLOAD) :

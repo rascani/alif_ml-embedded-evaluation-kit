@@ -16,8 +16,13 @@
  * limitations under the License.
  */
 #include "hal.h"                    /* Brings in platform definitions. */
-#include "TestModel.hpp"            /* Model class for running inference. */
 #include "UseCaseHandler.hpp"       /* Handlers for different user options. */
+
+#if defined(MLEK_FWK_TFLM)
+#include "TestModel.hpp"            /* Model class for running inference. */
+#elif defined(MLEK_FWK_EXECUTORCH)
+#include "EtModel.hpp"             /* Model class for running inference. */
+#endif
 #include "UseCaseCommonUtils.hpp"   /* Utils functions. */
 #include "log_macros.h"             /* Logging functions */
 #include "BufAttributes.hpp"        /* Buffer attributes to be applied */
@@ -54,7 +59,11 @@ extern size_t GetModelLen();
 
 void MainLoop()
 {
+#if defined(MLEK_FWK_TFLM)
     arm::app::fwk::tflm::TestModel model; /* Model wrapper object. */
+#elif defined(MLEK_FWK_EXECUTORCH)
+    arm::app::fwk::et::EtModel model; /* Model wrapper object. */
+#endif
     arm::app::fwk::iface::MemoryRegion modelMem{arm::app::inference_runner::GetModelPointer(),
                                                 arm::app::inference_runner::GetModelLen()};
     arm::app::fwk::iface::MemoryRegion computeMem{arm::app::activationBuf,

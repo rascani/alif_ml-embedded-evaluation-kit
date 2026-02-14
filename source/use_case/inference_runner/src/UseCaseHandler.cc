@@ -16,7 +16,11 @@
  */
 #include "UseCaseHandler.hpp"
 
+#if defined(MLEK_FWK_TFLM)
 #include "TestModel.hpp"
+#elif defined(MLEK_FWK_EXECUTORCH)
+#include "EtModel.hpp"
+#endif
 #include "UseCaseCommonUtils.hpp"
 #include "hal.h"
 #include "log_macros.h"
