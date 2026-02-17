@@ -24,6 +24,7 @@
 
 #if defined(ETDUMP_ENABLED)
 #include <executorch/devtools/etdump/etdump_flatcc.h>
+#include <flatcc/portable/pbase64.h>
 #endif
 
 #if !(defined(ML_FWK_TMP_MEM_SIZE))
@@ -421,13 +422,37 @@ void EtModel::DumpProfilingData() const
         return;
     }
     auto result = this->m_backendData.m_etDumpGen->get_etdump_data();
-    if (result.buf != nullptr && result.size > 0) {
-        info("ETDump data: %zu bytes captured\n", result.size);
-        info("ETDump blocks: %zu\n",
-             this->m_backendData.m_etDumpGen->get_num_blocks());
-        if (!this->m_backendData.m_etDumpGen->is_static_etdump()) {
-            free(result.buf);
-        }
+    if (result.buf == nullptr || result.size == 0) {
+        return;
+    }
+
+    info("ETDump: %zu bytes, %zu blocks\n",
+         result.size,
+         this->m_backendData.m_etDumpGen->get_num_blocks());
+
+    /* Base64-encode and output in 76-char lines (57 raw bytes -> 76 base64 chars). */
+    constexpr size_t kRawChunkSize = 57;
+    constexpr size_t kB64ChunkSize = 76;
+    uint8_t b64Buf[kB64ChunkSize + 1]; /* +1 for null terminator */
+
+    const auto* src = static_cast<const uint8_t*>(result.buf);
+    size_t remaining = result.size;
+
+    info("---ETDUMP_BEGIN---\n");
+    while (remaining > 0) {
+        size_t srcLen = (remaining > kRawChunkSize) ? kRawChunkSize : remaining;
+        size_t dstLen = 0;
+        base64_encode(b64Buf, src, &dstLen, &srcLen,
+                      base64_mode_rfc4648 | base64_enc_modifier_padding);
+        b64Buf[dstLen] = '\0';
+        info("%s\n", reinterpret_cast<const char*>(b64Buf));
+        src += srcLen;
+        remaining -= srcLen;
+    }
+    info("---ETDUMP_END---\n");
+
+    if (!this->m_backendData.m_etDumpGen->is_static_etdump()) {
+        free(result.buf);
     }
 }
 #endif
