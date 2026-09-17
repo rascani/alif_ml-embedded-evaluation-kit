@@ -10,6 +10,9 @@ models. TFLM improves more and now has the lower mean latency in every pair.
 The convolutional-model margins between frameworks are small; the much larger
 SRAM-to-DTCM improvements are the main result of this experiment.
 
+SRAM is selected for continued comparisons. This report preserves the DTCM
+measurements and their implications for deployments using TCM.
+
 The comparison uses ET v7 / TFLM v4 DTCM against the measured ET v6 / TFLM v3
 SRAM baseline. Models, reservations, GCC 15.2.1, runtime/wrapper `-Oz`, CMSIS-NN
 8.0.0 `-O3`, function sections, operator selection and the CPU-only 400 MHz HP
@@ -105,6 +108,19 @@ arena. For example, its DS-CNN arena includes per-channel multiplier/shift array
 whereas ET stores corresponding parameter tensor payloads with the model in MRAM.
 This is a plausible contributor, not a measured attribution of the difference.
 
+Another hypothesis is that ET's buffer layout provides better temporal cache
+locality in SRAM, so moving both arenas to DTCM reduces that relative advantage.
+Repeated reuse of the same addresses can preserve useful cache lines; offsets,
+alignment, set conflicts and tensor lifetimes also matter. Both frameworks reuse
+activation storage, and equal planned-buffer sizes do not establish equal layouts
+or cache behavior. The present experiment changes the memory region without
+isolating either planner, so it does not establish a planner-specific cause.
+
+DTCM bypasses the data-cache path for tensors placed there. This does not imply
+that every arena load/store takes exactly one processor cycle: access width,
+alignment, instruction throughput and dependencies still matter. Accesses to
+model constants in MRAM are unaffected by arena placement.
+
 The autoencoder benefits least: 4.90% for TFLM and 1.94% for ET. Its planned activation
 storage is only 768 bytes, while model blobs are roughly 270 KiB. This is consistent
 with less sensitivity to inference-buffer placement. Because weights were not moved,
@@ -115,8 +131,9 @@ This comparison is substantially more controlled than the earlier compiler/model
 update: models and flags are identical, as are filtered flash sizes, globals/heap/
 stack placement, startup zero-table size and MRAM read-only section base addresses.
 Pool relocations and firmware identity strings necessarily differ; arbitrary linked
-symbol addresses were not all held constant. DTCM is the clear next baseline for
-these HP measurements. Cross-framework results still use different quantization/
+symbol addresses were not all held constant. DTCM gives the lowest measured
+absolute latency for each framework in this experiment; SRAM remains the selected
+baseline for continued work. Cross-framework results still use different quantization/
 calibration paths and are not an official MLPerf accuracy or performance submission.
 
 ## Collection validation and provenance

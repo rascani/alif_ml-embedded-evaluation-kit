@@ -5,9 +5,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # E8 board results — ET v6 and TFLM v3, 17 September 2026
 
-This page preserves the measured ET v6 / TFLM v3 **SRAM baseline**. The subsequent
-[DTCM experiment](e8_tiny_dtcm_results_2026_09_17.md) is complete and is now shown in
-the [current summary](e8_tiny_current_summary.md). The
+This page records the measured ET v6 / TFLM v3 **SRAM baseline**, selected for the
+[primary comparison](e8_tiny_current_summary.md). The subsequent
+[DTCM experiment](e8_tiny_dtcm_results_2026_09_17.md) remains recorded separately. The
 [profile table](e8_tiny_profile_comparison.md) keeps logging on/off separate.
 
 ## Collection validation
