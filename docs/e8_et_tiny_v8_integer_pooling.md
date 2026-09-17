@@ -8,8 +8,10 @@ SPDX-License-Identifier: Apache-2.0
 This bundle uses the four trained PTEs from `mlperf-tiny-trained-integer-pooling.zip`.
 It keeps the SRAM configuration and compiler settings of ET v6. Integer and integer-list
 pooling reduces serialized model size and method metadata without changing tensor
-placement, weights or operator calls. E8 collection is pending; the
-[current measured comparison](e8_tiny_current_summary.md) remains ET v6 versus TFLM v3.
+placement, weights or operator calls. **E8 collection completed on 17 September:**
+all 12 selected boots and saved-output checks pass, confirming every simulator RAM
+total below. The [board analysis](e8_et_tiny_v8_results.md) records the measured latency
+and deltas; the [current comparison](e8_tiny_current_summary.md) now uses ET v8 versus TFLM v3.
 
 ## Configuration and validation
 
@@ -57,19 +59,18 @@ firmware checks. The benchmark is not an official MLPerf result.
 
 ## Model and RAM savings
 
-All values below are bytes. Old RAM is the measured v6 E8 result; new RAM is measured
-in the Corstone harness using the same runtime and allocation settings, with E8
-confirmation pending. The savings are entirely in method metadata; planned tensors,
+All values below are bytes. Old RAM is the measured v6 E8 result; new RAM was first
+measured in the Corstone harness and is now confirmed on E8 across all three boots. The savings are entirely in method metadata; planned tensors,
 inference temporary peak, outside persistent state and runtime static storage are unchanged.
 
-| Model | Old PTE | New PTE | PTE saved | Old metadata | New metadata | RAM saved | Old accounted RAM | New accounted RAM, simulator |
+| Model | Old PTE | New PTE | PTE saved | Old metadata | New metadata | RAM saved | Old accounted RAM | New accounted RAM, E8 confirmed |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | DS-CNN | 42,416 | 38,576 | 3,840 | 8,008 | 5,056 | 2,952 | 29,580 | 26,628 |
 | ResNet8 | 96,152 | 91,928 | 4,224 | 8,920 | 5,640 | 3,280 | 59,744 | 56,464 |
 | MobileNetV1 0.25 | 270,792 | 259,144 | 11,648 | 21,588 | 12,372 | 9,216 | 96,412 | 87,196 |
 | Deep autoencoder | 279,968 | 278,560 | 1,408 | 4,480 | 3,552 | 928 | 6,248 | 5,320 |
 
-| Model | Planned tensors | Method metadata | Inference temp peak | Outside persistent | Runtime static | Accounted RAM, simulator |
+| Model | Planned tensors | Method metadata | Inference temp peak | Outside persistent | Runtime static | Accounted RAM, E8 confirmed |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | DS-CNN | 20,464 | 5,056 | 0 | 808 | 300 | 26,628 |
 | ResNet8 | 49,728 | 5,640 | 0 | 808 | 288 | 56,464 |
@@ -105,9 +106,11 @@ binary size including those costs.
 
 [Exact CSV](results/e8-et-tiny-integer-pooling-2026-09-17.csv) and
 [JSON](results/e8-et-tiny-integer-pooling-2026-09-17.json) record all eight images,
-individual kernel/CMSIS-NN/registry counts, allocator evidence and firmware hashes.
-Changes in MRAM layout and method metadata can affect caches, so latency must be
-measured again on E8 even though the operators and tensor plan are unchanged.
+individual kernel/CMSIS-NN/registry counts, allocator evidence and firmware hashes
+at build time. Their pending board fields are preserved as build provenance; the
+[completed collection](e8_et_tiny_v8_results.md) records actual E8 measurements.
+Changes in MRAM layout and method metadata can affect caches even though the
+operators and tensor plan are unchanged.
 
 ## Run on the Mac
 
