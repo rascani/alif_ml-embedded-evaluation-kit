@@ -104,8 +104,12 @@ Choose new bundle names when directories already exist; builders refuse to
 overwrite experiments. DTCM builds use separate build trees. The default
 `--inference-memory sram` preserves the original linker layout.
 
-Hardware latency and RAM measurements for these new images are pending. Any
-included Corstone validation is functional testing of the inference libraries,
+Hardware collection is complete: all 24 selected boots and 12 ET output checks
+passed. See the [SRAM versus DTCM results](e8_tiny_dtcm_results_2026_09_17.md) for
+latency improvements and unchanged accounted RAM/filtered flash. The build-time
+CSV/JSON audit above remains a preserved pre-collection snapshot.
+
+Included Corstone validation is functional testing of the inference libraries,
 not validation of E8 TCM behavior or performance. Each bundle's
 `validation/fvp/checks.json` records functional checks and byte-for-byte firmware
 reproduction. `validation/linker-guards/checks.json` records successful rejection

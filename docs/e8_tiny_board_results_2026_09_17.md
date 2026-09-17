@@ -5,9 +5,10 @@ SPDX-License-Identifier: Apache-2.0
 
 # E8 board results — ET v6 and TFLM v3, 17 September 2026
 
-The [current summary](e8_tiny_current_summary.md) combines silent-build flash with logged
-board latency/RAM. The [profile table](e8_tiny_profile_comparison.md) keeps the profiles
-separate. These results supersede pending measurement fields for ET v6 and TFLM v3.
+This page preserves the measured ET v6 / TFLM v3 **SRAM baseline**. The subsequent
+[DTCM experiment](e8_tiny_dtcm_results_2026_09_17.md) is complete and is now shown in
+the [current summary](e8_tiny_current_summary.md). The
+[profile table](e8_tiny_profile_comparison.md) keeps logging on/off separate.
 
 ## Collection validation
 

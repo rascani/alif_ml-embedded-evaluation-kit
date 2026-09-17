@@ -5,30 +5,31 @@ SPDX-License-Identifier: Apache-2.0
 
 # Complete E8 Tiny profile comparison — 17 September 2026
 
-Current flash uses **TFLM v3 INT8 registrations** and **ExecuTorch v6 trained PTEs**,
-GCC 15.2.1 `-Oz` runtime/wrappers, CMSIS-NN 8.0.0 `-O3`, and function/data sections.
-The logged images were measured on E8 on 17 September: three boots and 300 measured
-inferences per model/framework. Silent images have flash measurements only. KiB = 1,024 bytes.
+Current flash uses **TFLM v4 INT8 registrations** and **ExecuTorch v7 trained PTEs**,
+with DTCM inference pools, GCC 15.2.1 `-Oz` runtime/wrappers, CMSIS-NN 8.0.0 `-O3`,
+and function/data sections. Logged images were measured on E8: three boots and 300
+measured inferences per model/framework. Silent images have flash measurements only.
+All model/operator/core sizes match ET v6 / TFLM v3 SRAM. KiB = 1,024 bytes.
 
 ## Current flash and board measurements
 
 | Model | Framework | Logging | Model KiB | Operators KiB | Core KiB | Total KiB | E8 latency ms | Mean cycles | E8 RAM KiB |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DS-CNN | TFLM | On | 52.67 | 33.35 | 11.59 | 97.62 | 6.038 | 2,415,103 | 27.48 |
+| DS-CNN | TFLM | On | 52.67 | 33.35 | 11.59 | 97.62 | 5.290 | 2,115,966 | 27.48 |
 | DS-CNN | TFLM | Off | 52.67 | 30.58 | 10.30 | 93.55 | Unmeasured | — | Unmeasured |
-| DS-CNN | ExecuTorch | On | 41.42 | 27.56 | 23.25 | 92.23 | 5.824 | 2,329,508 | 28.89 |
+| DS-CNN | ExecuTorch | On | 41.42 | 27.56 | 23.25 | 92.23 | 5.317 | 2,126,762 | 28.89 |
 | DS-CNN | ExecuTorch | Off | 41.42 | 23.92 | 12.11 | 77.45 | Unmeasured | — | Unmeasured |
-| ResNet8 | TFLM | On | 96.19 | 28.08 | 11.58 | 135.85 | 15.653 | 6,261,149 | 54.51 |
+| ResNet8 | TFLM | On | 96.19 | 28.08 | 11.58 | 135.85 | 13.627 | 5,450,871 | 54.51 |
 | ResNet8 | TFLM | Off | 96.19 | 25.46 | 10.29 | 131.94 | Unmeasured | — | Unmeasured |
-| ResNet8 | ExecuTorch | On | 93.90 | 21.28 | 23.25 | 138.43 | 15.231 | 6,092,558 | 58.34 |
+| ResNet8 | ExecuTorch | On | 93.90 | 21.28 | 23.25 | 138.43 | 13.660 | 5,463,880 | 58.34 |
 | ResNet8 | ExecuTorch | Off | 93.90 | 17.71 | 12.11 | 123.71 | Unmeasured | — | Unmeasured |
-| MobileNetV1 0.25 | TFLM | On | 325.48 | 33.35 | 11.59 | 370.42 | 23.994 | 9,597,727 | 99.18 |
+| MobileNetV1 0.25 | TFLM | On | 325.48 | 33.35 | 11.59 | 370.42 | 19.437 | 7,774,827 | 99.18 |
 | MobileNetV1 0.25 | TFLM | Off | 325.48 | 30.58 | 10.30 | 366.36 | Unmeasured | — | Unmeasured |
-| MobileNetV1 0.25 | ExecuTorch | On | 264.45 | 27.56 | 23.25 | 315.26 | 21.748 | 8,699,239 | 94.15 |
+| MobileNetV1 0.25 | ExecuTorch | On | 264.45 | 27.56 | 23.25 | 315.26 | 19.580 | 7,832,044 | 94.15 |
 | MobileNetV1 0.25 | ExecuTorch | Off | 264.45 | 23.92 | 12.11 | 300.47 | Unmeasured | — | Unmeasured |
-| Deep autoencoder | TFLM | On | 270.48 | 8.49 | 10.77 | 289.75 | 1.205 | 481,860 | 9.64 |
+| Deep autoencoder | TFLM | On | 270.48 | 8.49 | 10.77 | 289.75 | 1.146 | 458,240 | 9.64 |
 | Deep autoencoder | TFLM | Off | 270.48 | 7.79 | 9.52 | 287.79 | Unmeasured | — | Unmeasured |
-| Deep autoencoder | ExecuTorch | On | 273.41 | 3.95 | 23.25 | 300.60 | 1.207 | 482,996 | 6.10 |
+| Deep autoencoder | ExecuTorch | On | 273.41 | 3.95 | 23.25 | 300.60 | 1.184 | 473,639 | 6.10 |
 | Deep autoencoder | ExecuTorch | Off | 273.41 | 2.86 | 12.11 | 288.37 | Unmeasured | — | Unmeasured |
 
 Operators include framework kernels/utilities, CMSIS-NN and resolver/registry.
@@ -79,17 +80,19 @@ RAM includes accounted inference arena/pools, runtime/kernel persistent allocati
 outside persistent state and ET runtime static storage. It excludes unused reservations,
 stack high water, initialization workspace and benchmark/platform/reporting memory.
 
-The historical ET v4 rows used untrained seed-23 weights. Current ET v6 uses trained reference
-weights and removes the DS-CNN Q/DQ pairs; TFLM v3 uses trained reference models. Quantization
-and calibration differ between frameworks. The historical timings do not describe ET v6.
+The historical ET v4 rows used untrained seed-23 weights. ET v6/v7 use trained reference
+weights and removes the DS-CNN Q/DQ pairs; TFLM v3/v4 use trained reference models. Quantization
+and calibration differ between frameworks. The historical timings do not describe ET v7.
 
-[Exact CSV](results/e8-tiny-profile-comparison-2026-09-17-v6.csv) and
-[JSON](results/e8-tiny-profile-comparison-2026-09-17-v6.json) preserve current and historical
+[Exact CSV](results/e8-tiny-profile-comparison-2026-09-17-dtcm-v7-v4.csv) and
+[JSON](results/e8-tiny-profile-comparison-2026-09-17-dtcm-v7-v4.json) preserve current and historical
 records with explicit scope, image identity and blank/null fields for unavailable measurements.
-They include the older images' flash components alongside their actual measured latency/RAM.
+They include the prior SRAM profiles and older images' flash components alongside their measured latency/RAM.
 
 [ET v6 build report and Mac workflow](e8_et_tiny_v6_builds.md) ·
 [INT8 registration report](e8_tflm_int8_registration_results.md) ·
 [Current measured summary](e8_tiny_current_summary.md) ·
 [Collection validation and detailed RAM](e8_tiny_board_results_2026_09_17.md) ·
 [Historical measured report](e8_et_tiny_v4_results.md)
+
+[SRAM versus DTCM collection analysis](e8_tiny_dtcm_results_2026_09_17.md)
