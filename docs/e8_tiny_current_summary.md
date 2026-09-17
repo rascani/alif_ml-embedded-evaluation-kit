@@ -18,6 +18,11 @@ frameworks and gives TFLM the lower mean on all four models. The table below
 describes SRAM execution, not the fastest measured placement. The
 [DTCM table](results/e8-tiny-board-2026-09-17-dtcm-v7-v4.html) remains available.
 
+The [ET v8 integer-pooling bundle](e8_et_tiny_v8_integer_pooling.md) is ready for
+SRAM collection. Its build report records smaller PTEs and simulator-confirmed
+metadata RAM savings; E8 latency and RAM confirmation are pending. The measured
+table below continues to use v6 until those results are collected.
+
 **Flash columns use the separate logging-disabled size builds. Latency, cycles and RAM
 come from the logging-enabled board builds.** No latency or RAM is claimed for the silent
 builds. KiB = 1,024 bytes; bold marks the lower value in each pair.
