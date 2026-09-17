@@ -1,0 +1,1803 @@
+{
+  "scope": "Source-derived allocation reconstruction using target GCC sizeof/alignof; reconciles with actual E8 method usage. Not an instrumented allocation trace.",
+  "model_sha256": "333c377efb3722f72c50f3afa2c680b87bb43669afc3302d6402c4ad06b99825",
+  "planned_bytes": 20464,
+  "method_metadata_bytes": 8008,
+  "payload_bytes": {
+    "EValue table": 3424,
+    "Input-set flags": 1,
+    "Tensor strides": 508,
+    "TensorImpl objects": 1984,
+    "IntList value pointers": 256,
+    "IntList int64 buffers": 512,
+    "IntList boxed objects": 384,
+    "Delegate list": 0,
+    "Chain records": 16,
+    "Kernel function pointers": 48,
+    "Instruction argument spans": 96,
+    "Instruction argument pointers": 688
+  },
+  "padding_bytes": {
+    "EValue table": 0,
+    "Input-set flags": 0,
+    "Tensor strides": 3,
+    "TensorImpl objects": 0,
+    "IntList value pointers": 0,
+    "IntList int64 buffers": 84,
+    "IntList boxed objects": 0,
+    "Delegate list": 4,
+    "Chain records": 0,
+    "Kernel function pointers": 0,
+    "Instruction argument spans": 0,
+    "Instruction argument pointers": 0
+  },
+  "allocations": [
+    {
+      "category": "EValue table",
+      "bytes": 3424,
+      "padding": 0,
+      "offset": 20464,
+      "label": ""
+    },
+    {
+      "category": "Input-set flags",
+      "bytes": 1,
+      "padding": 0,
+      "offset": 23888,
+      "label": ""
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 3,
+      "offset": 23892,
+      "label": "0"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 23896,
+      "label": "0"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 23928,
+      "label": "1"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 23932,
+      "label": "1"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 23964,
+      "label": "2"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 23980,
+      "label": "2"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24012,
+      "label": "3"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24016,
+      "label": "3"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24048,
+      "label": "4"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24052,
+      "label": "4"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24084,
+      "label": "5"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24088,
+      "label": "5"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24120,
+      "label": "6"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24136,
+      "label": "6"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24168,
+      "label": "7"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24172,
+      "label": "7"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24204,
+      "label": "8"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24208,
+      "label": "8"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24240,
+      "label": "9"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24244,
+      "label": "9"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24276,
+      "label": "10"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24292,
+      "label": "10"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24324,
+      "label": "11"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24328,
+      "label": "11"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24360,
+      "label": "12"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24364,
+      "label": "12"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24396,
+      "label": "13"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24400,
+      "label": "13"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24432,
+      "label": "14"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24448,
+      "label": "14"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24480,
+      "label": "15"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24484,
+      "label": "15"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24516,
+      "label": "16"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24520,
+      "label": "16"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24552,
+      "label": "17"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24556,
+      "label": "17"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24588,
+      "label": "18"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24604,
+      "label": "18"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24636,
+      "label": "19"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24640,
+      "label": "19"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24672,
+      "label": "20"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24676,
+      "label": "20"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24708,
+      "label": "21"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24712,
+      "label": "21"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24744,
+      "label": "22"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24760,
+      "label": "22"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24792,
+      "label": "23"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24796,
+      "label": "23"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24828,
+      "label": "24"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24832,
+      "label": "24"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24864,
+      "label": "25"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24868,
+      "label": "25"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 24900,
+      "label": "26"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24916,
+      "label": "26"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24948,
+      "label": "27"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24952,
+      "label": "27"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 24984,
+      "label": "28"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 24988,
+      "label": "28"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25020,
+      "label": "29"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25024,
+      "label": "29"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25056,
+      "label": "30"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25072,
+      "label": "30"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25104,
+      "label": "31"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25108,
+      "label": "31"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25140,
+      "label": "32"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25144,
+      "label": "32"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25176,
+      "label": "33"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25180,
+      "label": "33"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25212,
+      "label": "34"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25228,
+      "label": "34"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25260,
+      "label": "35"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25264,
+      "label": "35"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25296,
+      "label": "36"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25304,
+      "label": "36"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25336,
+      "label": "37"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25344,
+      "label": "37"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25376,
+      "label": "38"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25392,
+      "label": "38"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25424,
+      "label": "39"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25428,
+      "label": "39"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25460,
+      "label": "40"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25476,
+      "label": "40"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25508,
+      "label": "43"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 25520,
+      "label": "43"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25536,
+      "label": "43"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25548,
+      "label": "48"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 32,
+      "padding": 4,
+      "offset": 25568,
+      "label": "48"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25600,
+      "label": "48"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25612,
+      "label": "51"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 25624,
+      "label": "51"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25640,
+      "label": "51"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25652,
+      "label": "56"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25656,
+      "label": "56"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25688,
+      "label": "57"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25704,
+      "label": "57"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25736,
+      "label": "60"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25744,
+      "label": "60"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25760,
+      "label": "60"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25772,
+      "label": "63"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 25784,
+      "label": "63"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25800,
+      "label": "63"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25812,
+      "label": "66"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 25824,
+      "label": "66"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25840,
+      "label": "66"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 25852,
+      "label": "72"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25856,
+      "label": "72"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25888,
+      "label": "73"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 25904,
+      "label": "73"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25936,
+      "label": "76"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 25944,
+      "label": "76"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 25960,
+      "label": "76"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 25972,
+      "label": "79"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 25984,
+      "label": "79"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26000,
+      "label": "79"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26012,
+      "label": "82"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26024,
+      "label": "82"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26040,
+      "label": "82"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 26052,
+      "label": "87"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26056,
+      "label": "87"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26088,
+      "label": "88"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26104,
+      "label": "88"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26136,
+      "label": "91"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26144,
+      "label": "91"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26160,
+      "label": "91"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26172,
+      "label": "94"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26184,
+      "label": "94"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26200,
+      "label": "94"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26212,
+      "label": "97"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26224,
+      "label": "97"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26240,
+      "label": "97"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 26252,
+      "label": "103"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26256,
+      "label": "103"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26288,
+      "label": "104"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26304,
+      "label": "104"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26336,
+      "label": "107"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26344,
+      "label": "107"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26360,
+      "label": "107"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26372,
+      "label": "110"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26384,
+      "label": "110"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26400,
+      "label": "110"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26412,
+      "label": "113"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26424,
+      "label": "113"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26440,
+      "label": "113"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 26452,
+      "label": "118"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26456,
+      "label": "118"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26488,
+      "label": "119"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26504,
+      "label": "119"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26536,
+      "label": "122"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26544,
+      "label": "122"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26560,
+      "label": "122"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26572,
+      "label": "125"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26584,
+      "label": "125"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26600,
+      "label": "125"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26612,
+      "label": "128"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26624,
+      "label": "128"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26640,
+      "label": "128"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 26652,
+      "label": "134"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26656,
+      "label": "134"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26688,
+      "label": "135"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26704,
+      "label": "135"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26736,
+      "label": "138"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26744,
+      "label": "138"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26760,
+      "label": "138"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26772,
+      "label": "141"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26784,
+      "label": "141"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26800,
+      "label": "141"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26812,
+      "label": "144"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26824,
+      "label": "144"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26840,
+      "label": "144"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 26852,
+      "label": "149"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26856,
+      "label": "149"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26888,
+      "label": "150"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 26904,
+      "label": "150"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26936,
+      "label": "153"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 26944,
+      "label": "153"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 26960,
+      "label": "153"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 26972,
+      "label": "156"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 26984,
+      "label": "156"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27000,
+      "label": "156"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27012,
+      "label": "159"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 27024,
+      "label": "159"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27040,
+      "label": "159"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 27052,
+      "label": "165"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27056,
+      "label": "165"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 27088,
+      "label": "166"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27104,
+      "label": "166"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27136,
+      "label": "169"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 27144,
+      "label": "169"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27160,
+      "label": "169"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27172,
+      "label": "172"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 27184,
+      "label": "172"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27200,
+      "label": "172"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27212,
+      "label": "175"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 27224,
+      "label": "175"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27240,
+      "label": "175"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 27252,
+      "label": "180"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27256,
+      "label": "180"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 27288,
+      "label": "181"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27304,
+      "label": "181"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27336,
+      "label": "184"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 27344,
+      "label": "184"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27360,
+      "label": "184"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27372,
+      "label": "187"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 27384,
+      "label": "187"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27400,
+      "label": "187"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27412,
+      "label": "190"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 16,
+      "padding": 4,
+      "offset": 27424,
+      "label": "190"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27440,
+      "label": "190"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27452,
+      "label": "195"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27460,
+      "label": "195"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27492,
+      "label": "196"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27500,
+      "label": "196"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 27532,
+      "label": "202"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27536,
+      "label": "202"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27544,
+      "label": "202"
+    },
+    {
+      "category": "IntList value pointers",
+      "bytes": 4,
+      "padding": 0,
+      "offset": 27556,
+      "label": "204"
+    },
+    {
+      "category": "IntList int64 buffers",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27560,
+      "label": "204"
+    },
+    {
+      "category": "IntList boxed objects",
+      "bytes": 12,
+      "padding": 0,
+      "offset": 27568,
+      "label": "204"
+    },
+    {
+      "category": "Tensor strides",
+      "bytes": 8,
+      "padding": 0,
+      "offset": 27580,
+      "label": "207"
+    },
+    {
+      "category": "TensorImpl objects",
+      "bytes": 32,
+      "padding": 0,
+      "offset": 27588,
+      "label": "207"
+    },
+    {
+      "category": "Delegate list",
+      "bytes": 0,
+      "padding": 4,
+      "offset": 27624,
+      "label": ""
+    },
+    {
+      "category": "Chain records",
+      "bytes": 16,
+      "padding": 0,
+      "offset": 27624,
+      "label": ""
+    },
+    {
+      "category": "Kernel function pointers",
+      "bytes": 48,
+      "padding": 0,
+      "offset": 27640,
+      "label": ""
+    },
+    {
+      "category": "Instruction argument spans",
+      "bytes": 96,
+      "padding": 0,
+      "offset": 27688,
+      "label": ""
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 60,
+      "padding": 0,
+      "offset": 27784,
+      "label": "0"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 64,
+      "padding": 0,
+      "offset": 27844,
+      "label": "1"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 60,
+      "padding": 0,
+      "offset": 27908,
+      "label": "2"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 64,
+      "padding": 0,
+      "offset": 27968,
+      "label": "3"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 60,
+      "padding": 0,
+      "offset": 28032,
+      "label": "4"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 64,
+      "padding": 0,
+      "offset": 28092,
+      "label": "5"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 60,
+      "padding": 0,
+      "offset": 28156,
+      "label": "6"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 64,
+      "padding": 0,
+      "offset": 28216,
+      "label": "7"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 60,
+      "padding": 0,
+      "offset": 28280,
+      "label": "8"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 44,
+      "padding": 0,
+      "offset": 28340,
+      "label": "9"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 52,
+      "padding": 0,
+      "offset": 28384,
+      "label": "10"
+    },
+    {
+      "category": "Instruction argument pointers",
+      "bytes": 36,
+      "padding": 0,
+      "offset": 28436,
+      "label": "11"
+    }
+  ],
+  "value_type_counts": {
+    "Tensor": 62,
+    "Int": 118,
+    "IntList": 32,
+    "Bool": 1,
+    "Null": 1
+  },
+  "integer_constants": {
+    "2": 2,
+    "4": 1,
+    "1": 48,
+    "5": 3,
+    "-84": 1,
+    "-128": 21,
+    "127": 10,
+    "128": 9,
+    "0": 11,
+    "25": 2,
+    "2115829632": 1,
+    "-4": 1,
+    "31": 2,
+    "2053932800": 1,
+    "-8": 1,
+    "-1": 1,
+    "1230278912": 1,
+    "24": 1,
+    "-124": 1
+  },
+  "int_list_constants": [
+    {
+      "values": [
+        2,
+        2
+      ],
+      "count": 1
+    },
+    {
+      "values": [
+        4,
+        1,
+        5,
+        1
+      ],
+      "count": 1
+    },
+    {
+      "values": [
+        1,
+        1
+      ],
+      "count": 21
+    },
+    {
+      "values": [
+        0,
+        0
+      ],
+      "count": 5
+    },
+    {
+      "values": [
+        25,
+        5
+      ],
+      "count": 2
+    },
+    {
+      "values": [
+        2053932800
+      ],
+      "count": 1
+    },
+    {
+      "values": [
+        -8
+      ],
+      "count": 1
+    }
+  ],
+  "target_type_sizes": {
+    "EValue": 16,
+    "TensorImpl": 32,
+    "BoxedEvalueList_int64": 12,
+    "Chain": 16,
+    "InstructionArgs": 8,
+    "OpFunction": 4,
+    "pointer": 4,
+    "int64": 8
+  },
+  "target_type_alignments": {
+    "EValue": 8,
+    "TensorImpl": 4,
+    "BoxedEvalueList_int64": 4,
+    "Chain": 4,
+    "InstructionArgs": 4,
+    "OpFunction": 4,
+    "pointer": 4,
+    "int64": 8
+  },
+  "runtime_tree": "0510beb4b48b8785477a3c11b23c5bc18bd7841a",
+  "all_values_referenced": true
+}

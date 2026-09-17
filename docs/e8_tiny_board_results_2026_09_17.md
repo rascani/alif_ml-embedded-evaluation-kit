@@ -60,6 +60,10 @@ For DS-CNN, ET uses 1,124 more metadata bytes, 20 more outside-persistent bytes 
 300 runtime-static bytes: 1,444 bytes more overall. ET AD uses 4,020 fewer metadata bytes,
 offset by 200 more outside-persistent and 192 static bytes: 3,628 bytes less overall.
 
+The [DS-CNN metadata audit](e8_ds_cnn_metadata_audit.md) now reconciles ET's entire
+8,008-byte method-metadata total. Its 214-entry EValue table uses 3,424 bytes;
+repeated scalar/list constants are a candidate for export deduplication.
+
 The reported inference costs exclude initialization workspace. TFLM initialization
 arena peaks are near its 256 KiB reservation because of planner workspace behavior;
 they are retained in the per-boot data and are not substituted for the inference costs.
@@ -111,5 +115,22 @@ is exactly 19,536 planned-tensor bytes, 752 method-metadata bytes and 48 static 
 ET's other latency changes range from -0.11% to +1.50%, with unchanged accounted RAM.
 The largest of those is VWW (+1.50%); this run does not isolate its cause.
 All ET RAM totals match the earlier simulator accounting.
+
+### Interpreting the optimization-related latency changes
+
+The observed changes are mixed: only TFLM ResNet8 improves; ET DS-CNN and AD improve,
+while ET ResNet8 and VWW regress. CMSIS-NN kernels remain at `-O3` in both frameworks.
+Smaller `-Oz` runtime/wrapper code can improve instruction-cache locality and alter
+MRAM fetch alignment; reduced inlining or other size-oriented choices can increase
+executed instructions around kernel calls. These are plausible mechanisms, not measured
+attributions. Function sections/linker layout, TFLM INT8 registrations and new ET
+weights/quantization also changed. ET DS-CNN additionally removes four Q/DQ calls.
+
+ET VWW's +1.50% change is consistent within the new collection: its three boot means
+span only 0.0042%. It should not be dismissed as ordinary within-run noise, but these
+runs cannot identify which configuration/model change caused it. An isolated compiler
+comparison would use the same current PTE/TFLite, selection, sections, logging and
+memory placement, varying only runtime/wrapper `-O3` versus `-Oz` while retaining
+CMSIS-NN `-O3`. Per-operator versus executor timing could then help locate the cost.
 
 [Exact aggregate CSV](results/e8-tiny-board-2026-09-17-v6-v3.csv) · [JSON, per-boot sources and archive audit](results/e8-tiny-board-2026-09-17-v6-v3.json)
