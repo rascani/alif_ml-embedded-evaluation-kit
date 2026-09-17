@@ -1,0 +1,823 @@
+{
+  "date": "2026-09-16",
+  "status": "v2 rebuilt; E8 inference/latency/peak RAM pending",
+  "manifest": {
+    "framework": "ExecuTorch",
+    "source": {
+      "source": {
+        "base_commit": "9250dc3537862db4f66bac07a8974dad81cc0f20",
+        "checkout_commit": "0a460d27f9dc5844a9f6dc3cfe403445895ae57f",
+        "patch": "source.patch",
+        "patch_sha256": "57bf09e49aad4efba28e6ab85c1ed65c479e8d84a8ec6a7747de006a2d24b635",
+        "export_script_sha256": "64ff0433a4bc64a2f2ee7cdb319b9cb09985d7f949b05f67980f08dcbbb0ed0a"
+      },
+      "environment": {
+        "python": "3.10.20",
+        "torch": "2.14.0+cpu",
+        "torch_git_commit": "08187d9e0fba026dc8217405802ab5381dc88d90",
+        "torchao": "0.18.0.dev20260729+cpu",
+        "numpy": "2.1.3",
+        "flatbuffers": "25.2.10",
+        "cmsis_nn": "0.0.1",
+        "cmsis_nn_source": {
+          "url": "https://github.com/ARM-software/CMSIS-NN.git",
+          "vcs_info": {
+            "vcs": "git",
+            "commit_id": "13c97dbb6f781d4aab38ed34e6e441f42b79aff4",
+            "requested_revision": "13c97dbb6f781d4aab38ed34e6e441f42b79aff4"
+          }
+        }
+      },
+      "target": "cortex-m55",
+      "cmsis_backend": "MVE",
+      "explicit_layout": true,
+      "passes": [
+        "RemoveGetItemPass",
+        "FoldAndAnnotateQParamsPass",
+        "ReplaceScalarWithTensorArgPass",
+        "ActivationFusionPass",
+        "QuantizedClampActivationPass",
+        "DecomposeHardswishPass",
+        "ConvertConv1dToConv2dPass",
+        "CortexMReplaceOpsWithChannelsLastVariants",
+        "ReplaceSqueezeAndUnsqueezeWithViewPass",
+        "RemovePermutesAroundElementwiseOps",
+        "CortexMCanonicalizeViewCopyPermutePass",
+        "ValidateCortexMExplicitLayoutPass",
+        "ReplaceQuantNodesPass",
+        "AtenToCortexMPass",
+        "FuseConvPaddingPass",
+        "InitializeScratchBuffersPass",
+        "LiftConstantTensorsPass",
+        "RemoveUnusedConstantsPass"
+      ],
+      "weights": "Untrained initialization; synthetic timing/graph benchmark artifacts",
+      "model_seed": 23,
+      "calibration": {
+        "distribution": "uniform [-1, 1]",
+        "samples": 32,
+        "seed": 24
+      },
+      "validation_samples": 3,
+      "dropout_qdq_cleanup_applied": false,
+      "models": {
+        "ds_cnn": {
+          "pte": "ds_cnn.pte",
+          "bytes": 42800,
+          "sha256": "c17e6b1755d07723478a2f998498903188e47ae11727bb195f4f35519c106596",
+          "model_source": "examples/models/mlperf_tiny/ds_cnn.py",
+          "model_source_sha256": "02cb4bd3cf60d8f39df81c9812466123b2c38cba8a57cb2dc5a746d392f7cebe",
+          "initialized_state_sha256": "67f81ce9c042bc90b5e97c9e5c194d2004b351a4197005f9948da4b7986adf81",
+          "input": {
+            "scale": 0.007816269062459469,
+            "zero_point": 0,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              49,
+              10,
+              1
+            ],
+            "dim_order": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "layout": "NHWC"
+          },
+          "output": {
+            "scale": 0.00390625,
+            "zero_point": -128,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              12
+            ],
+            "dim_order": [
+              0,
+              1
+            ]
+          },
+          "quantized_softmax": true,
+          "runtime_operator_counts": {
+            "cortex_m::dequantize_per_tensor.out": 2,
+            "cortex_m::quantize_per_tensor.out": 2,
+            "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+            "cortex_m::quantized_conv2d_nhwc.out": 5,
+            "cortex_m::quantized_depthwise_conv2d_nhwc.out": 4,
+            "cortex_m::quantized_linear.out": 1,
+            "cortex_m::softmax.out": 1
+          },
+          "runtime_kernel_calls": 16,
+          "graph_operator_counts": {
+            "aten::view_copy.default": 1,
+            "cortex_m::dequantize_per_tensor.default": 2,
+            "cortex_m::quantize_per_tensor.default": 2,
+            "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+            "cortex_m::quantized_conv2d_nhwc.default": 5,
+            "cortex_m::quantized_depthwise_conv2d_nhwc.default": 4,
+            "cortex_m::quantized_linear.default": 1,
+            "cortex_m::softmax.default": 1,
+            "executorch.exir.memory.alloc": 10
+          },
+          "planned_nonconstant_buffer_sizes": [
+            0,
+            40000
+          ],
+          "validation": {
+            "pte_deserialization": true,
+            "serialized_int8_io": true,
+            "python_reference_max_error_steps": 0,
+            "python_reference_error_steps_per_sample": [
+              0,
+              0,
+              0
+            ],
+            "target_runtime_execution": false
+          },
+          "sample_output_origin": "Cortex-M Python operator reference"
+        },
+        "resnet8": {
+          "pte": "resnet8.pte",
+          "bytes": 95896,
+          "sha256": "f6b45275c23e058ad98466e585443ed9a37d71afca6b5468a902413ce4c29a40",
+          "model_source": "examples/models/mlperf_tiny/resnet8.py",
+          "model_source_sha256": "9b8e49693c54d34efc660678bf78363b4390c545c89890dfaa2dd79be42619ef",
+          "initialized_state_sha256": "f2a3e6cebe4e4a90e44f76209b7f857027ba596c6cb8b19d334a22468819a36c",
+          "input": {
+            "scale": 0.007839247584342957,
+            "zero_point": 0,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              32,
+              32,
+              3
+            ],
+            "dim_order": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "layout": "NHWC"
+          },
+          "output": {
+            "scale": 0.00390625,
+            "zero_point": -128,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              10
+            ],
+            "dim_order": [
+              0,
+              1
+            ]
+          },
+          "quantized_softmax": true,
+          "runtime_operator_counts": {
+            "cortex_m::quantized_add.out": 3,
+            "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+            "cortex_m::quantized_conv2d_nhwc.out": 9,
+            "cortex_m::quantized_linear.out": 1,
+            "cortex_m::softmax.out": 1
+          },
+          "runtime_kernel_calls": 15,
+          "graph_operator_counts": {
+            "aten::view_copy.default": 1,
+            "cortex_m::quantized_add.default": 3,
+            "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+            "cortex_m::quantized_conv2d_nhwc.default": 9,
+            "cortex_m::quantized_linear.default": 1,
+            "cortex_m::softmax.default": 1,
+            "executorch.exir.memory.alloc": 10
+          },
+          "planned_nonconstant_buffer_sizes": [
+            0,
+            49728
+          ],
+          "validation": {
+            "pte_deserialization": true,
+            "serialized_int8_io": true,
+            "python_reference_max_error_steps": 0,
+            "python_reference_error_steps_per_sample": [
+              0,
+              0,
+              0
+            ],
+            "target_runtime_execution": false
+          },
+          "sample_output_origin": "Cortex-M Python operator reference"
+        },
+        "mobilenet_v1_025": {
+          "pte": "mobilenet_v1_025.pte",
+          "bytes": 267848,
+          "sha256": "96a08cfe11bc319397c50b2f6472ab332cbe735d86d9c1ddf2dff9250dc89bf8",
+          "model_source": "examples/models/mlperf_tiny/mobilenet_v1_025.py",
+          "model_source_sha256": "8e5e568b3d175274e7e87be04af512b9372945f40409d6ac36431728e5b53922",
+          "initialized_state_sha256": "e996017c6eb8f6936579205e9abb5da510b673f605070aded3215b8c303fc7f0",
+          "input": {
+            "scale": 0.00783162284642458,
+            "zero_point": 0,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              96,
+              96,
+              3
+            ],
+            "dim_order": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "layout": "NHWC"
+          },
+          "output": {
+            "scale": 0.00390625,
+            "zero_point": -128,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              2
+            ],
+            "dim_order": [
+              0,
+              1
+            ]
+          },
+          "quantized_softmax": true,
+          "runtime_operator_counts": {
+            "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+            "cortex_m::quantized_conv2d_nhwc.out": 14,
+            "cortex_m::quantized_depthwise_conv2d_nhwc.out": 13,
+            "cortex_m::quantized_linear.out": 1,
+            "cortex_m::softmax.out": 1
+          },
+          "runtime_kernel_calls": 30,
+          "graph_operator_counts": {
+            "aten::view_copy.default": 1,
+            "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+            "cortex_m::quantized_conv2d_nhwc.default": 14,
+            "cortex_m::quantized_depthwise_conv2d_nhwc.default": 13,
+            "cortex_m::quantized_linear.default": 1,
+            "cortex_m::softmax.default": 1,
+            "executorch.exir.memory.alloc": 28
+          },
+          "planned_nonconstant_buffer_sizes": [
+            0,
+            73728
+          ],
+          "validation": {
+            "pte_deserialization": true,
+            "serialized_int8_io": true,
+            "python_reference_max_error_steps": 0,
+            "python_reference_error_steps_per_sample": [
+              0,
+              0,
+              0
+            ],
+            "target_runtime_execution": false
+          },
+          "sample_output_origin": "Cortex-M Python operator reference"
+        },
+        "deep_autoencoder": {
+          "pte": "deep_autoencoder.pte",
+          "bytes": 279968,
+          "sha256": "3c05f548efda4eba60dbf9b5c8cf514fd46ef664ab10690f9893a63720e3ccb6",
+          "model_source": "examples/models/mlperf_tiny/deep_autoencoder.py",
+          "model_source_sha256": "a96572f0823b5f87b3292e3bde882a7f53a3ddf9de87a283a0145db28a9b4add",
+          "initialized_state_sha256": "e0930e3b028d434da9f9aa24f9603124b9f9da4e943d7e04433071ac77c4eccb",
+          "input": {
+            "scale": 0.007839247584342957,
+            "zero_point": 0,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              640
+            ],
+            "dim_order": [
+              0,
+              1
+            ],
+            "layout": "NC"
+          },
+          "output": {
+            "scale": 0.0010825407225638628,
+            "zero_point": -6,
+            "quant_min": -128,
+            "quant_max": 127,
+            "dtype": "int8",
+            "shape": [
+              1,
+              640
+            ],
+            "dim_order": [
+              0,
+              1
+            ]
+          },
+          "quantized_softmax": false,
+          "runtime_operator_counts": {
+            "cortex_m::quantized_linear.out": 10
+          },
+          "runtime_kernel_calls": 10,
+          "graph_operator_counts": {
+            "cortex_m::quantized_linear.default": 10
+          },
+          "planned_nonconstant_buffer_sizes": [
+            0,
+            768
+          ],
+          "validation": {
+            "pte_deserialization": true,
+            "serialized_int8_io": true,
+            "python_reference_max_error_steps": 1,
+            "python_reference_error_steps_per_sample": [
+              0,
+              1,
+              0
+            ],
+            "target_runtime_execution": false
+          },
+          "sample_output_origin": "Cortex-M Python operator reference"
+        }
+      }
+    },
+    "executorch_tree": "0510beb4b48b8785477a3c11b23c5bc18bd7841a",
+    "export_zip_sha256": "f2a81a48a8d38d67c741c7beb4a98bc4db877cbc8517c43582ec2914321e84af",
+    "benchmark": {
+      "warmups": 10,
+      "measurements": 100
+    },
+    "board": "DevKit-e8",
+    "core": "M55-HP",
+    "npu": false,
+    "runtime_checks": true,
+    "compiler": "15.2.1",
+    "repository_commit": "91de84c8f0e6c24678e48d661f5861cdcb280b70",
+    "dependencies": {
+      "cmsis-nn": "13c97dbb6f781d4aab38ed34e6e441f42b79aff4",
+      "cmsis-alif": "abca69ecfbb102cb5bc6a826191728a392e50c1c"
+    },
+    "models": {
+      "kws": {
+        "pte": "ds_cnn.pte",
+        "bytes": 42800,
+        "sha256": "c17e6b1755d07723478a2f998498903188e47ae11727bb195f4f35519c106596",
+        "model_source": "examples/models/mlperf_tiny/ds_cnn.py",
+        "model_source_sha256": "02cb4bd3cf60d8f39df81c9812466123b2c38cba8a57cb2dc5a746d392f7cebe",
+        "initialized_state_sha256": "67f81ce9c042bc90b5e97c9e5c194d2004b351a4197005f9948da4b7986adf81",
+        "input": {
+          "scale": 0.007816269062459469,
+          "zero_point": 0,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            49,
+            10,
+            1
+          ],
+          "dim_order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "layout": "NHWC"
+        },
+        "output": {
+          "scale": 0.00390625,
+          "zero_point": -128,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            12
+          ],
+          "dim_order": [
+            0,
+            1
+          ]
+        },
+        "quantized_softmax": true,
+        "runtime_operator_counts": {
+          "cortex_m::dequantize_per_tensor.out": 2,
+          "cortex_m::quantize_per_tensor.out": 2,
+          "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+          "cortex_m::quantized_conv2d_nhwc.out": 5,
+          "cortex_m::quantized_depthwise_conv2d_nhwc.out": 4,
+          "cortex_m::quantized_linear.out": 1,
+          "cortex_m::softmax.out": 1
+        },
+        "runtime_kernel_calls": 16,
+        "graph_operator_counts": {
+          "aten::view_copy.default": 1,
+          "cortex_m::dequantize_per_tensor.default": 2,
+          "cortex_m::quantize_per_tensor.default": 2,
+          "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+          "cortex_m::quantized_conv2d_nhwc.default": 5,
+          "cortex_m::quantized_depthwise_conv2d_nhwc.default": 4,
+          "cortex_m::quantized_linear.default": 1,
+          "cortex_m::softmax.default": 1,
+          "executorch.exir.memory.alloc": 10
+        },
+        "planned_nonconstant_buffer_sizes": [
+          0,
+          40000
+        ],
+        "validation": {
+          "pte_deserialization": true,
+          "serialized_int8_io": true,
+          "python_reference_max_error_steps": 0,
+          "python_reference_error_steps_per_sample": [
+            0,
+            0,
+            0
+          ],
+          "target_runtime_execution": false
+        },
+        "sample_output_origin": "Cortex-M Python operator reference",
+        "flash_total_bytes": 349892,
+        "flash_model_bytes": 42800,
+        "flash_non_model_bytes": 307092,
+        "firmware_sha256": "59b9814be464e1c7b1b4ef16d0dbd7430a63ecf5fdbe9427b9766d253d66c2f2",
+        "elf_sha256": "b9baaf6fa4328e3f88b069f22a7ecd2886773db7053ded578ca335e6785d3d60",
+        "arena_reserved_bytes": 262144,
+        "hardware_validated": false,
+        "planned_bytes": 40000,
+        "temp_reserved_bytes": 65536,
+        "validation_samples": 3,
+        "validation_fixture_bytes": 1506,
+        "flash_runtime_filtered_bytes": 75120,
+        "flash_model_plus_runtime_bytes": 117920,
+        "flash_executorch_core_bytes": 39188,
+        "flash_kernels_bytes": 9740,
+        "flash_cmsis_nn_bytes": 20228,
+        "flash_registry_bytes": 5964,
+        "flash_validation_fixtures_bytes": 1506,
+        "flash_shared_merged_strings_bytes": 32219,
+        "runtime_static_bytes": 348,
+        "selected_operator_types": 7,
+        "registry_capacity": 8,
+        "selected_primitive_operators": 0
+      },
+      "ic": {
+        "pte": "resnet8.pte",
+        "bytes": 95896,
+        "sha256": "f6b45275c23e058ad98466e585443ed9a37d71afca6b5468a902413ce4c29a40",
+        "model_source": "examples/models/mlperf_tiny/resnet8.py",
+        "model_source_sha256": "9b8e49693c54d34efc660678bf78363b4390c545c89890dfaa2dd79be42619ef",
+        "initialized_state_sha256": "f2a3e6cebe4e4a90e44f76209b7f857027ba596c6cb8b19d334a22468819a36c",
+        "input": {
+          "scale": 0.007839247584342957,
+          "zero_point": 0,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            32,
+            32,
+            3
+          ],
+          "dim_order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "layout": "NHWC"
+        },
+        "output": {
+          "scale": 0.00390625,
+          "zero_point": -128,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            10
+          ],
+          "dim_order": [
+            0,
+            1
+          ]
+        },
+        "quantized_softmax": true,
+        "runtime_operator_counts": {
+          "cortex_m::quantized_add.out": 3,
+          "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+          "cortex_m::quantized_conv2d_nhwc.out": 9,
+          "cortex_m::quantized_linear.out": 1,
+          "cortex_m::softmax.out": 1
+        },
+        "runtime_kernel_calls": 15,
+        "graph_operator_counts": {
+          "aten::view_copy.default": 1,
+          "cortex_m::quantized_add.default": 3,
+          "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+          "cortex_m::quantized_conv2d_nhwc.default": 9,
+          "cortex_m::quantized_linear.default": 1,
+          "cortex_m::softmax.default": 1,
+          "executorch.exir.memory.alloc": 10
+        },
+        "planned_nonconstant_buffer_sizes": [
+          0,
+          49728
+        ],
+        "validation": {
+          "pte_deserialization": true,
+          "serialized_int8_io": true,
+          "python_reference_max_error_steps": 0,
+          "python_reference_error_steps_per_sample": [
+            0,
+            0,
+            0
+          ],
+          "target_runtime_execution": false
+        },
+        "sample_output_origin": "Cortex-M Python operator reference",
+        "flash_total_bytes": 397388,
+        "flash_model_bytes": 95896,
+        "flash_non_model_bytes": 301492,
+        "firmware_sha256": "82d9d3525fca09cae9107a5e2fdc02535b6098956858ade3f8fe2a5079873449",
+        "elf_sha256": "0767ef02752bef150ebd64af506d300ea3e1efc89bb04db3c36a5b6853981319",
+        "arena_reserved_bytes": 262144,
+        "hardware_validated": false,
+        "planned_bytes": 49728,
+        "temp_reserved_bytes": 65536,
+        "validation_samples": 3,
+        "validation_fixture_bytes": 9246,
+        "flash_runtime_filtered_bytes": 63840,
+        "flash_model_plus_runtime_bytes": 159736,
+        "flash_executorch_core_bytes": 39188,
+        "flash_kernels_bytes": 5592,
+        "flash_cmsis_nn_bytes": 14156,
+        "flash_registry_bytes": 4904,
+        "flash_validation_fixtures_bytes": 9246,
+        "flash_shared_merged_strings_bytes": 30183,
+        "runtime_static_bytes": 288,
+        "selected_operator_types": 5,
+        "registry_capacity": 5,
+        "selected_primitive_operators": 0
+      },
+      "vww": {
+        "pte": "mobilenet_v1_025.pte",
+        "bytes": 267848,
+        "sha256": "96a08cfe11bc319397c50b2f6472ab332cbe735d86d9c1ddf2dff9250dc89bf8",
+        "model_source": "examples/models/mlperf_tiny/mobilenet_v1_025.py",
+        "model_source_sha256": "8e5e568b3d175274e7e87be04af512b9372945f40409d6ac36431728e5b53922",
+        "initialized_state_sha256": "e996017c6eb8f6936579205e9abb5da510b673f605070aded3215b8c303fc7f0",
+        "input": {
+          "scale": 0.00783162284642458,
+          "zero_point": 0,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            96,
+            96,
+            3
+          ],
+          "dim_order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "layout": "NHWC"
+        },
+        "output": {
+          "scale": 0.00390625,
+          "zero_point": -128,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            2
+          ],
+          "dim_order": [
+            0,
+            1
+          ]
+        },
+        "quantized_softmax": true,
+        "runtime_operator_counts": {
+          "cortex_m::quantized_avg_pool2d_nhwc.out": 1,
+          "cortex_m::quantized_conv2d_nhwc.out": 14,
+          "cortex_m::quantized_depthwise_conv2d_nhwc.out": 13,
+          "cortex_m::quantized_linear.out": 1,
+          "cortex_m::softmax.out": 1
+        },
+        "runtime_kernel_calls": 30,
+        "graph_operator_counts": {
+          "aten::view_copy.default": 1,
+          "cortex_m::quantized_avg_pool2d_nhwc.default": 1,
+          "cortex_m::quantized_conv2d_nhwc.default": 14,
+          "cortex_m::quantized_depthwise_conv2d_nhwc.default": 13,
+          "cortex_m::quantized_linear.default": 1,
+          "cortex_m::softmax.default": 1,
+          "executorch.exir.memory.alloc": 28
+        },
+        "planned_nonconstant_buffer_sizes": [
+          0,
+          73728
+        ],
+        "validation": {
+          "pte_deserialization": true,
+          "serialized_int8_io": true,
+          "python_reference_max_error_steps": 0,
+          "python_reference_error_steps_per_sample": [
+            0,
+            0,
+            0
+          ],
+          "target_runtime_execution": false
+        },
+        "sample_output_origin": "Cortex-M Python operator reference",
+        "flash_total_bytes": 650316,
+        "flash_model_bytes": 267848,
+        "flash_non_model_bytes": 382468,
+        "firmware_sha256": "a2b55fe00d7c6b2add8ddd6bd8e9bcc8499e4772b357ff659f72750ad156afb8",
+        "elf_sha256": "a45cf8bde2af47e49ec1aba1aabdb31c91bc03d6f7f90a8894a139697399af55",
+        "arena_reserved_bytes": 262144,
+        "hardware_validated": false,
+        "planned_bytes": 73728,
+        "temp_reserved_bytes": 65536,
+        "validation_samples": 3,
+        "validation_fixture_bytes": 82950,
+        "flash_runtime_filtered_bytes": 70864,
+        "flash_model_plus_runtime_bytes": 338712,
+        "flash_executorch_core_bytes": 39188,
+        "flash_kernels_bytes": 6092,
+        "flash_cmsis_nn_bytes": 20228,
+        "flash_registry_bytes": 5356,
+        "flash_validation_fixtures_bytes": 82950,
+        "flash_shared_merged_strings_bytes": 30423,
+        "runtime_static_bytes": 288,
+        "selected_operator_types": 5,
+        "registry_capacity": 5,
+        "selected_primitive_operators": 0
+      },
+      "ad": {
+        "pte": "deep_autoencoder.pte",
+        "bytes": 279968,
+        "sha256": "3c05f548efda4eba60dbf9b5c8cf514fd46ef664ab10690f9893a63720e3ccb6",
+        "model_source": "examples/models/mlperf_tiny/deep_autoencoder.py",
+        "model_source_sha256": "a96572f0823b5f87b3292e3bde882a7f53a3ddf9de87a283a0145db28a9b4add",
+        "initialized_state_sha256": "e0930e3b028d434da9f9aa24f9603124b9f9da4e943d7e04433071ac77c4eccb",
+        "input": {
+          "scale": 0.007839247584342957,
+          "zero_point": 0,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            640
+          ],
+          "dim_order": [
+            0,
+            1
+          ],
+          "layout": "NC"
+        },
+        "output": {
+          "scale": 0.0010825407225638628,
+          "zero_point": -6,
+          "quant_min": -128,
+          "quant_max": 127,
+          "dtype": "int8",
+          "shape": [
+            1,
+            640
+          ],
+          "dim_order": [
+            0,
+            1
+          ]
+        },
+        "quantized_softmax": false,
+        "runtime_operator_counts": {
+          "cortex_m::quantized_linear.out": 10
+        },
+        "runtime_kernel_calls": 10,
+        "graph_operator_counts": {
+          "cortex_m::quantized_linear.default": 10
+        },
+        "planned_nonconstant_buffer_sizes": [
+          0,
+          768
+        ],
+        "validation": {
+          "pte_deserialization": true,
+          "serialized_int8_io": true,
+          "python_reference_max_error_steps": 1,
+          "python_reference_error_steps_per_sample": [
+            0,
+            1,
+            0
+          ],
+          "target_runtime_execution": false
+        },
+        "sample_output_origin": "Cortex-M Python operator reference",
+        "flash_total_bytes": 552820,
+        "flash_model_bytes": 279968,
+        "flash_non_model_bytes": 272852,
+        "firmware_sha256": "0475db4017bc88fb28036003554d448c07319197ec5e25eedadbe09e7fe226f4",
+        "elf_sha256": "ef16f5c758369b5294c1e6ce0969124811b7b2a236707378b2e0227f1ee65662",
+        "arena_reserved_bytes": 262144,
+        "hardware_validated": false,
+        "planned_bytes": 768,
+        "temp_reserved_bytes": 65536,
+        "validation_samples": 3,
+        "validation_fixture_bytes": 3840,
+        "flash_runtime_filtered_bytes": 44092,
+        "flash_model_plus_runtime_bytes": 324060,
+        "flash_executorch_core_bytes": 39188,
+        "flash_kernels_bytes": 584,
+        "flash_cmsis_nn_bytes": 1552,
+        "flash_registry_bytes": 2768,
+        "flash_validation_fixtures_bytes": 3840,
+        "flash_shared_merged_strings_bytes": 26863,
+        "runtime_static_bytes": 192,
+        "selected_operator_types": 1,
+        "registry_capacity": 1,
+        "selected_primitive_operators": 0
+      }
+    },
+    "bundle_revision": 2,
+    "fix": "Map ExecuTorch Char/Byte tensor storage to INT8/UINT8 in the MLEK adapter."
+  },
+  "validation": {
+    "kws": {
+      "model_sha256_unchanged": true,
+      "firmware_sha256_changed": true,
+      "operator_selection_verified": true,
+      "registry_capacity": 8
+    },
+    "ic": {
+      "model_sha256_unchanged": true,
+      "firmware_sha256_changed": true,
+      "operator_selection_verified": true,
+      "registry_capacity": 5
+    },
+    "vww": {
+      "model_sha256_unchanged": true,
+      "firmware_sha256_changed": true,
+      "operator_selection_verified": true,
+      "registry_capacity": 5
+    },
+    "ad": {
+      "model_sha256_unchanged": true,
+      "firmware_sha256_changed": true,
+      "operator_selection_verified": true,
+      "registry_capacity": 1
+    },
+    "native_int8": {
+      "benchmarks": 111,
+      "measured_samples": 100,
+      "output_checks": 3,
+      "stable_heap": true
+    },
+    "native_uint8": {
+      "benchmarks": 111,
+      "measured_samples": 100,
+      "output_checks": 0,
+      "stable_heap": true
+    }
+  },
+  "supersedes": "e8-et-tiny-build-2026-09-16.json",
+  "initial_e8_failure": {
+    "model": "kws",
+    "pte_bytes": 42800,
+    "planned_bytes": 40000,
+    "method_used_after_init_bytes": 49254,
+    "temporary_init_peak_bytes": 212,
+    "reason": "EtTensor::Type handled QInt8/QUInt8 but not ordinary Char/Byte storage",
+    "inference_started": false
+  }
+}

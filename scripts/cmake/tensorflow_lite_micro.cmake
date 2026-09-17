@@ -78,6 +78,10 @@ function(build_tflite_micro_cmake)
 
     include(${CMAKE_BINARY_DIR}/tflite_micro.cmake)
 
+    if (NOT MLEK_LOG_ENABLE)
+        target_compile_definitions(tflu PUBLIC TF_LITE_STRIP_ERROR_STRINGS)
+    endif()
+
     # For CMSIS-NN, define ARM_MATH_AUTOVECTORIZE if optimization level is 0.
     # From CMSIS-NN Readme:
     # > With only optimization level -O0, ARM_MATH_AUTOVECTORIZE needs to be defined

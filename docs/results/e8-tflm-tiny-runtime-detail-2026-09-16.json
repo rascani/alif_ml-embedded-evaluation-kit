@@ -1,0 +1,2033 @@
+{
+  "date": "2026-09-16",
+  "method": "Partition retained linker-map contributions using their archive member and Bloaty compile-unit source paths. All retained TFLM members have an unambiguous core/operator category in these images. Byte sizes remain linker-map sizes, including read-only data.",
+  "definitions": {
+    "tflm_core_bytes": "TFLM interpreter, allocation/planning, context, schema/type support; excludes dedicated logging objects and source paths under kernels/.",
+    "tflm_operator_bytes": "TFLM operator implementations, CMSIS-NN integration wrappers, reference paths and shared utilities under tensorflow/lite/**/kernels/.",
+    "cmsis_nn_bytes": "Linked CMSIS-NN implementation objects, including retained numeric variants.",
+    "selected_resolver_bytes": "Separately emitted selected operator registration and resolver methods/vtable.",
+    "total_bytes": "Core + TFLM operators + CMSIS-NN + selected resolver, excluding the embedded model and previously separated overhead."
+  },
+  "models": {
+    "kws": {
+      "selected_resolver_bytes": 1596,
+      "tflm_operator_bytes": 18508,
+      "tflm_core_bytes": 18032,
+      "cmsis_nn_bytes": 56776,
+      "total_bytes": 94912,
+      "elf_sha256": "d5bf4881707f14304ec04c721dd9ce9b1905a96c58ba64504e5d61a4524296c6",
+      "compileunits_csv_sha256": "436b80267e82cd7fb997d09ca51bab233f5cedf51173dd79cc85a3db5045b674",
+      "contributions_json_sha256": "30f581bd4541950d1a76e0ee4829c83fc8b5b8d0afe424a348a6ab30ae607881",
+      "objects": [
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s8.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s16.c.obj",
+          "bytes": 848,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s8.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s4.c.obj",
+          "bytes": 724,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s8.c.obj",
+          "bytes": 792,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4.c.obj",
+          "bytes": 256,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4_fast.c.obj",
+          "bytes": 116,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8.c.obj",
+          "bytes": 248,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8_fast.c.obj",
+          "bytes": 120,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_even_s4.c.obj",
+          "bytes": 908,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s16.c.obj",
+          "bytes": 128,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s4.c.obj",
+          "bytes": 868,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s8.c.obj",
+          "bytes": 1040,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s16.c.obj",
+          "bytes": 884,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s4.c.obj",
+          "bytes": 804,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s8.c.obj",
+          "bytes": 1572,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s16.c.obj",
+          "bytes": 4,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s4.c.obj",
+          "bytes": 364,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s8.c.obj",
+          "bytes": 276,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_get_buffer_sizes_s4.c.obj",
+          "bytes": 136,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_get_buffer_sizes_s8.c.obj",
+          "bytes": 508,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s16.c.obj",
+          "bytes": 1012,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s4.c.obj",
+          "bytes": 3828,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s4_opt.c.obj",
+          "bytes": 1608,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s8.c.obj",
+          "bytes": 1936,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s8_opt.c.obj",
+          "bytes": 1332,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_wrapper_s4.c.obj",
+          "bytes": 112,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_wrapper_s8.c.obj",
+          "bytes": 312,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s8.c.obj",
+          "bytes": 20,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_per_channel_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s16.c.obj",
+          "bytes": 124,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s4.c.obj",
+          "bytes": 100,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_wrapper_s8.c.obj",
+          "bytes": 108,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_depthwise_conv_nt_t_s4.c.obj",
+          "bytes": 960,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_depthwise_conv_nt_t_s8.c.obj",
+          "bytes": 568,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mul_core_1x_s4.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_interleaved_t_even_s4.c.obj",
+          "bytes": 3072,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s16.c.obj",
+          "bytes": 2204,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s4.c.obj",
+          "bytes": 3212,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s8.c.obj",
+          "bytes": 1728,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_softmax_common_s8.c.obj",
+          "bytes": 6752,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_per_ch_s8.c.obj",
+          "bytes": 1492,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s16.c.obj",
+          "bytes": 1260,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s4.c.obj",
+          "bytes": 2000,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s8.c.obj",
+          "bytes": 1420,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s16.c.obj",
+          "bytes": 832,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8.c.obj",
+          "bytes": 5392,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8_s16.c.obj",
+          "bytes": 32,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_transpose_s8.c.obj",
+          "bytes": 1752,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_vector_sum_s8.c.obj",
+          "bytes": 536,
+          "source_paths": []
+        },
+        {
+          "category": "selected_resolver",
+          "member": "MainLoop.cc.obj",
+          "bytes": 1596,
+          "source_paths": []
+        },
+        {
+          "category": "tflm_core",
+          "member": "common.cc.obj",
+          "bytes": 128,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/c/common.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions.cc.obj",
+          "bytes": 1704,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions_bridge.cc.obj",
+          "bytes": 64,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/tflite_bridge/flatbuffer_conversions_bridge.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_utils.cc.obj",
+          "bytes": 100,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/flatbuffer_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "greedy_memory_planner.cc.obj",
+          "bytes": 2196,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "linear_memory_planner.cc.obj",
+          "bytes": 208,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/linear_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "memory_helpers.cc.obj",
+          "bytes": 724,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_helpers.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocation_info.cc.obj",
+          "bytes": 2516,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocation_info.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocator.cc.obj",
+          "bytes": 3988,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_context.cc.obj",
+          "bytes": 292,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter.cc.obj",
+          "bytes": 2056,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_context.cc.obj",
+          "bytes": 316,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_graph.cc.obj",
+          "bytes": 2180,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_op_resolver.cc.obj",
+          "bytes": 152,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_op_resolver.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_resource_variable.cc.obj",
+          "bytes": 48,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_resource_variable.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_utils.cc.obj",
+          "bytes": 156,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "schema_utils.cc.obj",
+          "bytes": 56,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/compiler/mlir/lite/schema/schema_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "single_arena_buffer_allocator.cc.obj",
+          "bytes": 1148,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/arena_allocator/single_arena_buffer_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv.cc.obj",
+          "bytes": 3440,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv_common.cc.obj",
+          "bytes": 904,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/conv_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "depthwise_conv.cc.obj",
+          "bytes": 3052,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "depthwise_conv_common.cc.obj",
+          "bytes": 924,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/depthwise_conv_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected.cc.obj",
+          "bytes": 2916,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected_common.cc.obj",
+          "bytes": 504,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/fully_connected_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "kernel_util.cc.obj",
+          "bytes": 1608,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/kernel_util.cc",
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/kernel_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling.cc.obj",
+          "bytes": 532,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/pooling.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling_common.cc.obj",
+          "bytes": 1228,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/pooling_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "quantization_util.cc.obj",
+          "bytes": 384,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/quantization_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape.cc.obj",
+          "bytes": 120,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape_common.cc.obj",
+          "bytes": 656,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax.cc.obj",
+          "bytes": 944,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/softmax.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax_common.cc.obj",
+          "bytes": 1256,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/softmax_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "tensor_ctypes.cc.obj",
+          "bytes": 40,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/tensor_ctypes.cc"
+          ]
+        }
+      ]
+    },
+    "ic": {
+      "selected_resolver_bytes": 1600,
+      "tflm_operator_bytes": 31692,
+      "tflm_core_bytes": 17968,
+      "cmsis_nn_bytes": 43312,
+      "total_bytes": 94572,
+      "elf_sha256": "8549a14b747bcba38f3e1d630151051466df1ee4dbd347fc082e86a4ab8aa863",
+      "compileunits_csv_sha256": "636e3589a1c9bdbc68f43a37b017b309399826a08a2e0cecff223237262a1007",
+      "contributions_json_sha256": "49940c989cd3c752585259a7b3a1b9be0b2b8d768254a1ae095db9127ea51c26",
+      "objects": [
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s8.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s16.c.obj",
+          "bytes": 848,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s8.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s4.c.obj",
+          "bytes": 724,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s8.c.obj",
+          "bytes": 792,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4.c.obj",
+          "bytes": 256,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4_fast.c.obj",
+          "bytes": 116,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8.c.obj",
+          "bytes": 248,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8_fast.c.obj",
+          "bytes": 120,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_even_s4.c.obj",
+          "bytes": 908,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s16.c.obj",
+          "bytes": 128,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s4.c.obj",
+          "bytes": 868,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s8.c.obj",
+          "bytes": 1040,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s16.c.obj",
+          "bytes": 884,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s4.c.obj",
+          "bytes": 804,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s8.c.obj",
+          "bytes": 1572,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s16.c.obj",
+          "bytes": 4,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s4.c.obj",
+          "bytes": 364,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s8.c.obj",
+          "bytes": 276,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_elementwise_add_s16.c.obj",
+          "bytes": 264,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_elementwise_add_s8.c.obj",
+          "bytes": 336,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s8.c.obj",
+          "bytes": 20,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_per_channel_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s16.c.obj",
+          "bytes": 124,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s4.c.obj",
+          "bytes": 100,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_wrapper_s8.c.obj",
+          "bytes": 108,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mul_core_1x_s4.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_interleaved_t_even_s4.c.obj",
+          "bytes": 3072,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s16.c.obj",
+          "bytes": 2204,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s4.c.obj",
+          "bytes": 3212,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s8.c.obj",
+          "bytes": 1728,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_softmax_common_s8.c.obj",
+          "bytes": 6752,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_per_ch_s8.c.obj",
+          "bytes": 1492,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s16.c.obj",
+          "bytes": 1260,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s4.c.obj",
+          "bytes": 2000,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s8.c.obj",
+          "bytes": 1420,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s16.c.obj",
+          "bytes": 832,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8.c.obj",
+          "bytes": 5392,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8_s16.c.obj",
+          "bytes": 32,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_vector_sum_s8.c.obj",
+          "bytes": 536,
+          "source_paths": []
+        },
+        {
+          "category": "selected_resolver",
+          "member": "MainLoop.cc.obj",
+          "bytes": 1600,
+          "source_paths": []
+        },
+        {
+          "category": "tflm_core",
+          "member": "common.cc.obj",
+          "bytes": 180,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/c/common.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions.cc.obj",
+          "bytes": 1588,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions_bridge.cc.obj",
+          "bytes": 64,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/tflite_bridge/flatbuffer_conversions_bridge.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_utils.cc.obj",
+          "bytes": 100,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/flatbuffer_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "greedy_memory_planner.cc.obj",
+          "bytes": 2196,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "linear_memory_planner.cc.obj",
+          "bytes": 208,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/linear_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "memory_helpers.cc.obj",
+          "bytes": 724,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_helpers.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocation_info.cc.obj",
+          "bytes": 2516,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocation_info.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocator.cc.obj",
+          "bytes": 3988,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_context.cc.obj",
+          "bytes": 292,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter.cc.obj",
+          "bytes": 2056,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_context.cc.obj",
+          "bytes": 316,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_graph.cc.obj",
+          "bytes": 2180,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_op_resolver.cc.obj",
+          "bytes": 152,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_op_resolver.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_resource_variable.cc.obj",
+          "bytes": 48,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_resource_variable.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_utils.cc.obj",
+          "bytes": 156,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "schema_utils.cc.obj",
+          "bytes": 56,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/compiler/mlir/lite/schema/schema_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "single_arena_buffer_allocator.cc.obj",
+          "bytes": 1148,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/arena_allocator/single_arena_buffer_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "add.cc.obj",
+          "bytes": 17012,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/add.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv.cc.obj",
+          "bytes": 3440,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv_common.cc.obj",
+          "bytes": 904,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/conv_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected.cc.obj",
+          "bytes": 2916,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected_common.cc.obj",
+          "bytes": 504,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/fully_connected_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "kernel_util.cc.obj",
+          "bytes": 1628,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/kernel_util.cc",
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/kernel_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling.cc.obj",
+          "bytes": 532,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/pooling.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling_common.cc.obj",
+          "bytes": 1228,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/pooling_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "quantization_util.cc.obj",
+          "bytes": 512,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/quantization_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape.cc.obj",
+          "bytes": 120,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape_common.cc.obj",
+          "bytes": 656,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax.cc.obj",
+          "bytes": 944,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/softmax.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax_common.cc.obj",
+          "bytes": 1256,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/softmax_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "tensor_ctypes.cc.obj",
+          "bytes": 40,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/tensor_ctypes.cc"
+          ]
+        }
+      ]
+    },
+    "vww": {
+      "selected_resolver_bytes": 1596,
+      "tflm_operator_bytes": 18508,
+      "tflm_core_bytes": 18032,
+      "cmsis_nn_bytes": 56776,
+      "total_bytes": 94912,
+      "elf_sha256": "31b5d9b1fa36ec78a9f2dca6b2fc1b0009023d57e9aa6847528f4c7d612bc834",
+      "compileunits_csv_sha256": "06514aa1aaa2bdd68559a618875e33d97c4bf8f74a6aaf4d257003a20122a236",
+      "contributions_json_sha256": "5b5c142896cb7aafec42cb5436113e9bf8dc2c3651802195a8e02ee89e07d7ec",
+      "objects": [
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_get_buffer_sizes_s8.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s16.c.obj",
+          "bytes": 848,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_avgpool_s8.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s4.c.obj",
+          "bytes": 724,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1_x_n_s8.c.obj",
+          "bytes": 792,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4.c.obj",
+          "bytes": 256,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s4_fast.c.obj",
+          "bytes": 116,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8.c.obj",
+          "bytes": 248,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8_fast.c.obj",
+          "bytes": 120,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_even_s4.c.obj",
+          "bytes": 908,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s16.c.obj",
+          "bytes": 128,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s4.c.obj",
+          "bytes": 868,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s8.c.obj",
+          "bytes": 1040,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s16.c.obj",
+          "bytes": 884,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s4.c.obj",
+          "bytes": 804,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_s8.c.obj",
+          "bytes": 1572,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s16.c.obj",
+          "bytes": 4,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s4.c.obj",
+          "bytes": 364,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_wrapper_s8.c.obj",
+          "bytes": 276,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_get_buffer_sizes_s4.c.obj",
+          "bytes": 136,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_get_buffer_sizes_s8.c.obj",
+          "bytes": 508,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s16.c.obj",
+          "bytes": 1012,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s4.c.obj",
+          "bytes": 3828,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s4_opt.c.obj",
+          "bytes": 1608,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s8.c.obj",
+          "bytes": 1936,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_s8_opt.c.obj",
+          "bytes": 1332,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_wrapper_s4.c.obj",
+          "bytes": 112,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_depthwise_conv_wrapper_s8.c.obj",
+          "bytes": 312,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s8.c.obj",
+          "bytes": 20,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_per_channel_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s16.c.obj",
+          "bytes": 124,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s4.c.obj",
+          "bytes": 100,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_wrapper_s8.c.obj",
+          "bytes": 108,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_depthwise_conv_nt_t_s4.c.obj",
+          "bytes": 960,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_depthwise_conv_nt_t_s8.c.obj",
+          "bytes": 568,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mul_core_1x_s4.c.obj",
+          "bytes": 1088,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_interleaved_t_even_s4.c.obj",
+          "bytes": 3072,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s16.c.obj",
+          "bytes": 2204,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s4.c.obj",
+          "bytes": 3212,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s8.c.obj",
+          "bytes": 1728,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_softmax_common_s8.c.obj",
+          "bytes": 6752,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_per_ch_s8.c.obj",
+          "bytes": 1492,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s16.c.obj",
+          "bytes": 1260,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s4.c.obj",
+          "bytes": 2000,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s8.c.obj",
+          "bytes": 1420,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s16.c.obj",
+          "bytes": 832,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8.c.obj",
+          "bytes": 5392,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_softmax_s8_s16.c.obj",
+          "bytes": 32,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_transpose_s8.c.obj",
+          "bytes": 1752,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_vector_sum_s8.c.obj",
+          "bytes": 536,
+          "source_paths": []
+        },
+        {
+          "category": "selected_resolver",
+          "member": "MainLoop.cc.obj",
+          "bytes": 1596,
+          "source_paths": []
+        },
+        {
+          "category": "tflm_core",
+          "member": "common.cc.obj",
+          "bytes": 128,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/c/common.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions.cc.obj",
+          "bytes": 1704,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions_bridge.cc.obj",
+          "bytes": 64,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/tflite_bridge/flatbuffer_conversions_bridge.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_utils.cc.obj",
+          "bytes": 100,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/flatbuffer_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "greedy_memory_planner.cc.obj",
+          "bytes": 2196,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "linear_memory_planner.cc.obj",
+          "bytes": 208,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/linear_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "memory_helpers.cc.obj",
+          "bytes": 724,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_helpers.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocation_info.cc.obj",
+          "bytes": 2516,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocation_info.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocator.cc.obj",
+          "bytes": 3988,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_context.cc.obj",
+          "bytes": 292,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter.cc.obj",
+          "bytes": 2056,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_context.cc.obj",
+          "bytes": 316,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_graph.cc.obj",
+          "bytes": 2180,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_op_resolver.cc.obj",
+          "bytes": 152,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_op_resolver.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_resource_variable.cc.obj",
+          "bytes": 48,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_resource_variable.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_utils.cc.obj",
+          "bytes": 156,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "schema_utils.cc.obj",
+          "bytes": 56,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/compiler/mlir/lite/schema/schema_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "single_arena_buffer_allocator.cc.obj",
+          "bytes": 1148,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/arena_allocator/single_arena_buffer_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv.cc.obj",
+          "bytes": 3440,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "conv_common.cc.obj",
+          "bytes": 904,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/conv_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "depthwise_conv.cc.obj",
+          "bytes": 3052,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "depthwise_conv_common.cc.obj",
+          "bytes": 924,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/depthwise_conv_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected.cc.obj",
+          "bytes": 2916,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected_common.cc.obj",
+          "bytes": 504,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/fully_connected_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "kernel_util.cc.obj",
+          "bytes": 1608,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/kernel_util.cc",
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/kernel_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling.cc.obj",
+          "bytes": 532,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/pooling.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "pooling_common.cc.obj",
+          "bytes": 1228,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/pooling_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "quantization_util.cc.obj",
+          "bytes": 384,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/quantization_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape.cc.obj",
+          "bytes": 120,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "reshape_common.cc.obj",
+          "bytes": 656,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/reshape_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax.cc.obj",
+          "bytes": 944,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/softmax.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "softmax_common.cc.obj",
+          "bytes": 1256,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/softmax_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "tensor_ctypes.cc.obj",
+          "bytes": 40,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/tensor_ctypes.cc"
+          ]
+        }
+      ]
+    },
+    "ad": {
+      "selected_resolver_bytes": 272,
+      "tflm_operator_bytes": 4292,
+      "tflm_core_bytes": 16652,
+      "cmsis_nn_bytes": 10224,
+      "total_bytes": 31440,
+      "elf_sha256": "d5eb8c46cda00c83432abedd6245c413a30737eade2569b6c0ee5f469d8f7814",
+      "compileunits_csv_sha256": "6a172d6ec46b57ed0fa3ac2d576642a47d535a843feee3ca3372057a0e35ddf2",
+      "contributions_json_sha256": "27a17ab3f5b083ba9411810106a9d51a1b793e2c8baca0b56da1be91e3ed342a",
+      "objects": [
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_1x1_s8_fast.c.obj",
+          "bytes": 120,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_convolve_get_buffer_sizes_s8.c.obj",
+          "bytes": 1040,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s16.c.obj",
+          "bytes": 12,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_get_buffer_sizes_s8.c.obj",
+          "bytes": 20,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_per_channel_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s16.c.obj",
+          "bytes": 124,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s4.c.obj",
+          "bytes": 100,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_s8.c.obj",
+          "bytes": 132,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_fully_connected_wrapper_s8.c.obj",
+          "bytes": 108,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_mat_mult_nt_t_s8.c.obj",
+          "bytes": 1728,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_per_ch_s8.c.obj",
+          "bytes": 1492,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s16.c.obj",
+          "bytes": 1260,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s4.c.obj",
+          "bytes": 2000,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_nn_vec_mat_mult_t_s8.c.obj",
+          "bytes": 1420,
+          "source_paths": []
+        },
+        {
+          "category": "cmsis_nn",
+          "member": "arm_vector_sum_s8.c.obj",
+          "bytes": 536,
+          "source_paths": []
+        },
+        {
+          "category": "selected_resolver",
+          "member": "MainLoop.cc.obj",
+          "bytes": 272,
+          "source_paths": []
+        },
+        {
+          "category": "tflm_core",
+          "member": "common.cc.obj",
+          "bytes": 128,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/c/common.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions.cc.obj",
+          "bytes": 480,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_conversions_bridge.cc.obj",
+          "bytes": 64,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/tflite_bridge/flatbuffer_conversions_bridge.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "flatbuffer_utils.cc.obj",
+          "bytes": 100,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/flatbuffer_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "greedy_memory_planner.cc.obj",
+          "bytes": 2196,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "linear_memory_planner.cc.obj",
+          "bytes": 208,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_planner/linear_memory_planner.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "memory_helpers.cc.obj",
+          "bytes": 724,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/memory_helpers.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocation_info.cc.obj",
+          "bytes": 2516,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocation_info.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_allocator.cc.obj",
+          "bytes": 3988,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_context.cc.obj",
+          "bytes": 292,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter.cc.obj",
+          "bytes": 2056,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_context.cc.obj",
+          "bytes": 316,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_context.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_interpreter_graph.cc.obj",
+          "bytes": 2180,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_op_resolver.cc.obj",
+          "bytes": 152,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_op_resolver.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "micro_resource_variable.cc.obj",
+          "bytes": 48,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/micro_resource_variable.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "schema_utils.cc.obj",
+          "bytes": 56,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/compiler/mlir/lite/schema/schema_utils.cc"
+          ]
+        },
+        {
+          "category": "tflm_core",
+          "member": "single_arena_buffer_allocator.cc.obj",
+          "bytes": 1148,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/arena_allocator/single_arena_buffer_allocator.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected.cc.obj",
+          "bytes": 2916,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "fully_connected_common.cc.obj",
+          "bytes": 504,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/fully_connected_common.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "kernel_util.cc.obj",
+          "bytes": 712,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/kernel_util.cc",
+            "dependencies/tensorflow/tensorflow/lite/micro/kernels/kernel_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "quantization_util.cc.obj",
+          "bytes": 120,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/quantization_util.cc"
+          ]
+        },
+        {
+          "category": "tflm_operator",
+          "member": "tensor_ctypes.cc.obj",
+          "bytes": 40,
+          "source_paths": [
+            "dependencies/tensorflow/tensorflow/lite/kernels/internal/tensor_ctypes.cc"
+          ]
+        }
+      ]
+    }
+  }
+}

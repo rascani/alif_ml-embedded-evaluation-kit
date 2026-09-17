@@ -1,0 +1,4 @@
+variant,runtime_optimization,function_sections,core_text_bytes,core_other_data_bytes,core_total_bytes,core_kib,model_bytes,operators_and_registry_bytes,filtered_model_runtime_bytes,full_mram_bytes
+published_v4,-O3,False,38544,644,39188,38.26953125,95896,24652,159736,396876
+function_sections,-O3,True,31532,644,32176,31.421875,95896,24564,152636,387260
+function_sections_size,-Os,True,23570,348,23918,23.357421875,95896,24352,144166,379292

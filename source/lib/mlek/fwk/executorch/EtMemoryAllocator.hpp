@@ -1,5 +1,5 @@
 /**
- * SPDX-FileCopyrightText: Copyright 2025 Arm Limited and/or its affiliates
+ * SPDX-FileCopyrightText: Copyright 2025-2026 Arm Limited and/or its affiliates
  * <open-source-office@arm.com> SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,6 +45,9 @@ public:
      * @return  Number of bytes as `size_t`
      */
     size_t UsedSizePeak() const;
+
+    /** @brief Start a new high-water measurement at the current allocation cursor. */
+    void ResetPeak();
 
     /**
      * @brief   Gets the total numbers of free space in this allocator's buffer.

@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-16",
+  "archive": "build-artifacts/build-e8-et-tiny-artifacts.tar.gz",
+  "archive_bytes": 14847944,
+  "archive_sha256": "73b43cd72bf52fdf82b8351cdc1aaada21974737a666beaf3f98529a0d6a9678",
+  "checksummed_files": 216,
+  "archive_members_verified": true,
+  "extracted_python39_cli_verify_passed": true,
+  "native_et_adapter_allocator_tests_passed": true,
+  "native_tflm_regression_tests_passed": true,
+  "python312_tests_passed": 22,
+  "python39_tests_passed": 11,
+  "pylint_338_score": 10.0,
+  "clang_format_passed": true,
+  "git_diff_check_passed": true,
+  "e8_execution_pending": true
+}

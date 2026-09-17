@@ -1,0 +1,5 @@
+model,selected_resolver_bytes,tflm_operator_bytes,tflm_core_bytes,cmsis_nn_bytes,total_bytes
+kws,1596,18508,18032,56776,94912
+ic,1600,31692,17968,43312,94572
+vww,1596,18508,18032,56776,94912
+ad,272,4292,16652,10224,31440

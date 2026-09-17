@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+SPDX-License-Identifier: Apache-2.0 -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ExecuTorch vs TFLM — Alif E8 results, 16 September 2026</title>
+<style>
+:root{color-scheme:light;--ink:#172b3a;--muted:#526572;--line:#dce5ea;--accent:#08786c}
+*{box-sizing:border-box}body{margin:0;background:#eef3f6;color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1440px;margin:32px auto;padding:38px 42px;background:#fff;border-radius:16px;box-shadow:0 8px 36px #1b344210}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:34px;letter-spacing:-.025em;line-height:1.15;margin:9px 0}p{margin:8px 0}.subtitle{color:var(--muted);font-size:17px}
+.config{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.config span{padding:5px 10px;background:#f0f5f7;border-radius:5px;font-size:12px;font-weight:600}
+.notice{background:#fff7e7;border-left:3px solid #c2923b;padding:11px 15px;font-size:13px;margin:16px 0 22px}
+.legend{font-size:12px;color:var(--muted);margin:8px 0}.legend strong{color:var(--accent)}
+.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+thead{background:#183848;color:white}thead th{padding:13px 16px;font-size:12px;font-weight:600;text-align:right;vertical-align:bottom}
+thead tr:first-child th:first-child,thead tr:first-child th:nth-child(2){text-align:left}thead small{display:block;color:#c3d8e1;font-weight:400;font-size:11px}
+tbody th,tbody td{padding:10px 16px}tbody th{text-align:left}th[scope=rowgroup]{width:17%;font-size:15px;vertical-align:middle}
+small{display:block}th[scope=rowgroup] small{font-size:11px;font-weight:400;color:var(--muted);margin-top:4px}
+.runtime{font-size:12px;font-weight:500;white-space:nowrap}.group-start{border-top:1px solid var(--line)}.et{background:#f7fafb}
+.numeric{text-align:right;font-size:16px;line-height:1.25}.numeric small{font-size:10px;font-weight:400;color:var(--muted);margin-top:4px}
+.best span{font-weight:750;color:var(--accent)}tbody{border-bottom:1px solid var(--line)}
+.flash-group{text-align:center;background:#234b5e}.flash-subhead th{background:#234b5e;border-top:1px solid #416375}.flash-note{font-size:12px;color:var(--muted);margin-top:15px;padding:12px 15px;background:#f0f5f7;border-radius:5px}.flash-note p{margin:3px 0}.flash-note strong{color:var(--ink)}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px;font-size:12px;color:var(--muted)}
+.notes h2{font-size:12px;color:var(--ink);margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em}
+.status{font-size:12px;padding-top:15px;margin-top:17px;border-top:1px solid var(--line);color:var(--muted)}
+footer{font-size:10px;color:var(--muted);margin-top:16px}
+@media(max-width:760px){main{margin:0;padding:24px 16px;border-radius:0}.notes{grid-template-columns:1fr;gap:14px}h1{font-size:28px}table{min-width:1040px}}
+@page{size:A4 landscape;margin:10mm}
+@media print{body{background:#fff}main{max-width:none;margin:0;padding:0;box-shadow:none;border-radius:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}h1{font-size:26px}.config{margin:12px 0}.notice{margin:10px 0 12px}thead th{padding:9px 12px}tbody th,tbody td{padding:7px 12px}.numeric{font-size:15px}.notes{margin-top:14px;font-size:11px}.status{margin-top:12px;padding-top:10px}table,tr,.notes{break-inside:avoid}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Alif E8 · measured on hardware · 16 September 2026</div>
+<h1>ExecuTorch vs TFLM</h1>
+<p class="subtitle">Current MLPerf Tiny model results · ExecuTorch v4</p>
+<div class="config"><span>Cortex-M55-HP · 400 MHz</span><span>CPU-only</span><span>GCC 15.2.1 · -O3</span><span>CMSIS-NN 8.0.0</span><span>Logging enabled</span><span>Selected operators</span></div>
+<div class="notice"><strong>Preliminary model comparison.</strong> ExecuTorch uses untrained seed-23 weights with synthetic calibration; TFLM uses trained reference weights. These are not matched-weight comparisons or MLPerf accuracy results.</div>
+<p class="legend"><strong>Bold teal = lower value.</strong> Lower is better. Percentages show ExecuTorch relative to TFLM. KiB = 1,024 bytes.</p>
+<div class="table-scroll"><table aria-label="Latency, mean cycles, separate model, operators and core runtime flash, and accounted inference RAM for TFLM and ExecuTorch on four Tiny models">
+<thead><tr><th scope="col" rowspan="2">Model</th><th scope="col" rowspan="2">Framework</th><th scope="col" rowspan="2">Mean latency<small>milliseconds</small></th><th scope="col" rowspan="2">Mean cycles<small>nearest whole cycle</small></th><th scope="colgroup" colspan="3" class="flash-group">Flash · KiB<small>filtered component costs</small></th><th scope="col" rowspan="2">Accounted inference RAM<small>KiB · scoped peak usage</small></th></tr><tr class="flash-subhead"><th scope="col">Model</th><th scope="col">Operators<small>includes CMSIS-NN + registry</small></th><th scope="col">Core runtime</th></tr></thead>
+<tbody><tr class="group-start"><th scope="rowgroup" rowspan="2">DS-CNN<small>Keyword spotting</small></th><th scope="row" class="runtime">TFLM</th><td class="numeric best"><span>6.037</span></td><td class="numeric best"><span>2,414,760</span></td><td class="numeric"><span>52.67</span></td><td class="numeric"><span>75.08</span></td><td class="numeric best"><span>17.61</span></td><td class="numeric best"><span>27.48</span></td></tr>
+<tr class="et"><th scope="row" class="runtime">ExecuTorch v4</th><td class="numeric"><span>6.340</span><small>5.01% higher</small></td><td class="numeric"><span>2,535,821</span></td><td class="numeric best"><span>41.80</span><small>20.65% lower</small></td><td class="numeric best"><span>35.09</span><small>53.26% lower</small></td><td class="numeric"><span>38.27</span><small>117.32% higher</small></td><td class="numeric"><span>48.75</span><small>77.41% higher</small></td></tr>
+<tr class="group-start"><th scope="rowgroup" rowspan="2">ResNet8<small>Image classification</small></th><th scope="row" class="runtime">TFLM</th><td class="numeric"><span>15.720</span></td><td class="numeric"><span>6,288,159</span></td><td class="numeric"><span>96.19</span></td><td class="numeric"><span>74.81</span></td><td class="numeric best"><span>17.55</span></td><td class="numeric best"><span>54.51</span></td></tr>
+<tr class="et"><th scope="row" class="runtime">ExecuTorch v4</th><td class="numeric best"><span>15.172</span><small>3.49% lower</small></td><td class="numeric best"><span>6,068,978</span></td><td class="numeric best"><span>93.65</span><small>2.64% lower</small></td><td class="numeric best"><span>24.07</span><small>67.82% lower</small></td><td class="numeric"><span>38.27</span><small>118.10% higher</small></td><td class="numeric"><span>58.34</span><small>7.04% higher</small></td></tr>
+<tr class="group-start"><th scope="rowgroup" rowspan="2">MobileNetV1 0.25<small>Visual wake words</small></th><th scope="row" class="runtime">TFLM</th><td class="numeric"><span>23.902</span></td><td class="numeric"><span>9,560,690</span></td><td class="numeric"><span>325.48</span></td><td class="numeric"><span>75.08</span></td><td class="numeric best"><span>17.61</span></td><td class="numeric"><span>99.18</span></td></tr>
+<tr class="et"><th scope="row" class="runtime">ExecuTorch v4</th><td class="numeric best"><span>21.427</span><small>10.35% lower</small></td><td class="numeric best"><span>8,570,705</span></td><td class="numeric best"><span>261.57</span><small>19.63% lower</small></td><td class="numeric best"><span>30.93</span><small>58.80% lower</small></td><td class="numeric"><span>38.27</span><small>117.32% higher</small></td><td class="numeric best"><span>94.15</span><small>5.07% lower</small></td></tr>
+<tr class="group-start"><th scope="rowgroup" rowspan="2">Deep autoencoder<small>Anomaly detection</small></th><th scope="row" class="runtime">TFLM</th><td class="numeric best"><span>1.203</span></td><td class="numeric best"><span>481,121</span></td><td class="numeric best"><span>270.48</span></td><td class="numeric"><span>14.44</span></td><td class="numeric best"><span>16.26</span></td><td class="numeric"><span>9.64</span></td></tr>
+<tr class="et"><th scope="row" class="runtime">ExecuTorch v4</th><td class="numeric"><span>1.209</span><small>0.50% higher</small></td><td class="numeric"><span>483,520</span></td><td class="numeric"><span>273.41</span><small>1.08% higher</small></td><td class="numeric best"><span>4.79</span><small>66.84% lower</small></td><td class="numeric"><span>38.27</span><small>135.34% higher</small></td><td class="numeric best"><span>6.10</span><small>36.74% lower</small></td></tr></tbody></table></div>
+<div class="flash-note"><p><strong>Model:</strong> serialized graph, weights and constants. <strong>Operators:</strong> selected implementations/utilities, CMSIS-NN kernels and resolver/registry/dispatch bindings. <strong>Core runtime:</strong> interpreter/executor, allocation, planning and schema support.</p><p>Operator costs depend on the selected operator set and numeric variants; code can be shared across models. Core runtime is largely shared overhead, with some linker-dependent variation. The three columns sum to the previous flash subtotal before rounding.</p><p><strong>Build-size caveat:</strong> the measured GCC builds disable function sections, retaining otherwise-unused functions. An isolated ET ResNet8 audit gives 31.42 KiB core with function sections, or 23.36 KiB with runtime-only -Os; logging stays on and kernels stay at -O3. These alternatives have no E8 timing results. TFLM uses the same function-section setting and needs an equivalent audit.</p></div>
+<div class="notes">
+<section><h2>Measurement</h2><p>Latency and cycles average 300 measured inferences per model/runtime across three boots. Cycles are averaged from raw measurements and rounded to the nearest whole cycle. Each boot: one separately timed first call, ten warm-ups, then 100 measured calls. Input preparation and UART reporting are outside timing; caches are not flushed.</p><p>The complete second ET pass passed all 36 saved-output checks. Earlier interrupted captures are retained separately. Independent hardware timer verification remains pending.</p></section>
+<section><h2>Memory scope</h2><p>Flash: the three disjoint model, operators and core-runtime categories above. Excludes runner, diagnostics, fixtures, platform, adapter, shared support/strings and padding.</p><p>RAM: inference pools and persistent allocations; ET also includes attributed runtime static storage. Excludes unused reservations, stack high water, benchmark/platform state, diagnostics, initialization workspace and transient heap peaks. These are component costs, not whole-device requirements.</p></section>
+</div>
+<p class="status"><strong>Current state:</strong> ET redundant input staging/copy removed; selective operators and primitives enabled (zero primitive registrations). DS-CNN still retains two DQ-to-Q pairs pending cleanup. Code/models: MRAM. Inference pools: SRAM. Globals/heap/stack: DTCM.</p>
+<footer>Source: e8-tiny-flash-components-2026-09-16-v4.csv · e8-et-tiny-2026-09-16-v4.json · e8-tflm-tiny-2026-09-16.json · e8-tflm-tiny-runtime-detail-2026-09-16.json<br>Measurements: 16 September 2026 · Flash grouping updated: 17 September 2026</footer>
+</main></body></html>

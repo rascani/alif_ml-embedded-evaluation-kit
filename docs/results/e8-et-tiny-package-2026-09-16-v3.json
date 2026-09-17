@@ -1,0 +1,8 @@
+{
+  "archive": "build-artifacts/build-e8-et-tiny-artifacts-v3.tar.gz",
+  "bytes": 15212887,
+  "sha256": "a4f777dad62ad36ef95d9028e14507749b8cb204cca85004bbb40a0180786f0a",
+  "verification": "All archive file checksums verified; fresh extraction run.py verify and --help pass with Python 3.9; packaged parser accepts all four actual runner FVP memory records and three output checks per model.",
+  "build_record": "e8-et-tiny-build-2026-09-16-v3.json",
+  "board_status": "v3 awaits E8 capture; v2 KWS inference and output checks passed but legacy RAM scope rejected newlib report formatting allocation."
+}

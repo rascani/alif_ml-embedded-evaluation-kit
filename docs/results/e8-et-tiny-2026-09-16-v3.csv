@@ -1,0 +1,5 @@
+model,boots,measured_samples,latency_mean_ms,latency_median_ms,latency_p95_ms,latency_min_ms,latency_max_ms,ram_accounted_peak_bytes,method_planned_bytes,method_runtime_and_inputs_bytes,temp_inference_peak_bytes,outside_persistent_bytes,runtime_static_bytes,inference_heap_growth_bytes,diagnostic_heap_growth_bytes,flash_model_bytes,flash_runtime_filtered_bytes,flash_model_plus_runtime_bytes,flash_total_bytes
+kws,3,300,6.3519295,6.352115,6.35745,6.3419375,6.35969,50462,40000,9254,0,860,348,0,200,42800,75120,117920,350020
+ic,3,300,15.24094885,15.240805,15.26084,15.20739,15.27743,62872,49728,11996,0,860,288,0,200,95896,63840,159736,397516
+vww,3,300,21.492133941666665,21.49227,21.513465,21.464865,21.52218,124116,73728,49240,0,860,288,0,200,267848,70864,338712,650444
+ad,3,300,1.2180624833333333,1.218085,1.219725,1.2141475,1.2202225,6944,768,5124,0,860,192,0,200,279968,44092,324060,552948

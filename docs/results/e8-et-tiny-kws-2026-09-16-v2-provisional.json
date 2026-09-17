@@ -1,0 +1,43 @@
+{
+  "status": "Provisional single E8 boot; benchmark and output checks completed, legacy host RAM validation rejected reporting allocation.",
+  "source": "User-provided UART transcript in this session; raw log remains on the Mac.",
+  "source_log": "/Users/rja/alif/build-e8-et-tiny-artifacts-v2/logs/kws-20260916-144927-166515.log",
+  "model": "kws",
+  "bundle_revision": 2,
+  "board": "DevKit-e8",
+  "core": "M55-HP",
+  "clock_hz": 400000000,
+  "pte_sha256": "c17e6b1755d07723478a2f998498903188e47ae11727bb195f4f35519c106596",
+  "benchmark": {
+    "first_cycles": 2585004,
+    "warmups": 10,
+    "measured": 100,
+    "min_cycles": 2537991,
+    "mean_cycles": 2541336.22,
+    "median_cycles": 2541506,
+    "max_cycles": 2544213,
+    "p95_cycles": 2543019,
+    "mean_ms": 6.35334055
+  },
+  "validation_samples": 3,
+  "validation_status": "PASS",
+  "validation_reference": "lowered_python_int8",
+  "reported_memory": {
+    "method_peak_bytes": 49254,
+    "planned_bytes": 40000,
+    "runtime_and_inputs_bytes": 9254,
+    "temp_peak_bytes": 0,
+    "outside_persistent_bytes": 860,
+    "pools_plus_persistent_bytes": 50114,
+    "linked_runtime_static_bytes": 348,
+    "accounted_bytes": 50462,
+    "handler_heap_before": 2976,
+    "handler_heap_after": 3176
+  },
+  "heap_failure": {
+    "reason": "Legacy heap snapshots enclosed benchmark reporting. First newlib floating-point printf retains 200 bytes.",
+    "evidence": "Same GCC/newlib M55 printf reproduction, and corrected E8 runner archives relinked for Corstone M55 reproduce diagnostic +200 bytes with zero inference heap growth.",
+    "fix": "v3 scopes inference heap before statistics/printing, reports diagnostic delta separately, and keeps strict inference heap checks.",
+    "limitation": "v2 transcript cannot independently isolate transient or retained inference heap changes; v3 E8 capture required for accepted RAM results."
+  }
+}

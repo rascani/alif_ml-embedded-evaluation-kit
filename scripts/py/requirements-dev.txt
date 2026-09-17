@@ -4,3 +4,4 @@
 # Lint/tooling-only dependencies (not runtime requirements).
 -r requirements-common.txt
 pylint==3.3.8
+pyserial==3.5

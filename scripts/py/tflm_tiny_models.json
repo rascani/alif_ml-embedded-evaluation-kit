@@ -1,0 +1,92 @@
+{
+  "repository": "https://github.com/mlcommons/tiny",
+  "revision": "4addd0fa08d216e20637637874e084895f289da4",
+  "models": {
+    "ic": {
+      "source_path": "benchmark/training/image_classification/trained_models/pretrainedResnet_quant.tflite",
+      "filename": "pretrainedResnet_quant.tflite",
+      "bytes": 98496,
+      "sha256": "3c002613d1b2475eb51dd78dfb85a546c8ae658dee71cf6ade43b022fe205415",
+      "input": {
+        "shape": [
+          1,
+          32,
+          32,
+          3
+        ],
+        "type": "INT8"
+      },
+      "output": {
+        "shape": [
+          1,
+          10
+        ],
+        "type": "INT8"
+      }
+    },
+    "vww": {
+      "source_path": "benchmark/training/visual_wake_words/trained_models/vww_96_int8.tflite",
+      "filename": "vww_96_int8.tflite",
+      "bytes": 333288,
+      "sha256": "597a384c8c2c8a1276f04702f25013b7838f2f814f1ca7c174d295b73e3d6b7b",
+      "input": {
+        "shape": [
+          1,
+          96,
+          96,
+          3
+        ],
+        "type": "INT8"
+      },
+      "output": {
+        "shape": [
+          1,
+          2
+        ],
+        "type": "INT8"
+      }
+    },
+    "kws": {
+      "source_path": "benchmark/training/keyword_spotting/trained_models/kws_ref_model.tflite",
+      "filename": "kws_ref_model.tflite",
+      "bytes": 53936,
+      "sha256": "aeea436800704fce17b17292e4412630ad856e9d777c044c64ef748a880bd0ae",
+      "input": {
+        "shape": [
+          1,
+          49,
+          10,
+          1
+        ],
+        "type": "INT8"
+      },
+      "output": {
+        "shape": [
+          1,
+          12
+        ],
+        "type": "INT8"
+      }
+    },
+    "ad": {
+      "source_path": "benchmark/training/anomaly_detection/trained_models/ad01_int8.tflite",
+      "filename": "ad01_int8.tflite",
+      "bytes": 276976,
+      "sha256": "87cf24194ef93d1d9b11a591d805526b98008e351655d29883c825c9c106ba24",
+      "input": {
+        "shape": [
+          1,
+          640
+        ],
+        "type": "INT8"
+      },
+      "output": {
+        "shape": [
+          1,
+          640
+        ],
+        "type": "INT8"
+      }
+    }
+  }
+}

@@ -20,9 +20,9 @@
 #include "mlek/fwk/iface/Model.hpp"
 #include "mlek/log/log_macros.h"
 
-#include <executorch/schema/program_generated.h>
 #include <cctype>
 #include <cstring>
+#include <executorch/schema/program_generated.h>
 #include <memory>
 #include <string>
 
@@ -34,28 +34,28 @@ constexpr size_t sTmpAllocationPoolSz = ML_FWK_TMP_MEM_SIZE; /**< Temp allocatio
 
 #if !(defined(ML_FWK_TMP_MEM_BASE))
 static uint8_t __attribute__((aligned(16), section(".bss.NoInit.temp_buf_sram")))
-    sTmpAllocationPool[sTmpAllocationPoolSz]; /**< temp allocation buffer */
-#else /* !(defined(ML_FWK_TMP_MEM_BASE)) */
-static uint8_t* sTmpAllocationPool = reinterpret_cast<uint8_t *>(ML_FWK_TMP_MEM_BASE);
-#endif /* !(defined(ML_FWK_TMP_MEM_BASE)) */
+sTmpAllocationPool[sTmpAllocationPoolSz]; /**< temp allocation buffer */
+#else                                     /* !(defined(ML_FWK_TMP_MEM_BASE)) */
+static uint8_t* sTmpAllocationPool = reinterpret_cast<uint8_t*>(ML_FWK_TMP_MEM_BASE);
+#endif                                    /* !(defined(ML_FWK_TMP_MEM_BASE)) */
 
 namespace arm::app::fwk::et {
 
 /* Internal helper functions for pte models. */
 namespace {
-/**
- * @brief   Return true if a substring exists in the input string.
- * @param[in] str       Input string.
- * @param[in] substr    String to look for.
- * @return true if substr is found, false otherwise.
- */
-bool ContainsSubstring(const char* str, const char* substr)
-{
-    if (!str || !substr) {
-        return false;
+    /**
+     * @brief   Return true if a substring exists in the input string.
+     * @param[in] str       Input string.
+     * @param[in] substr    String to look for.
+     * @return true if substr is found, false otherwise.
+     */
+    bool ContainsSubstring(const char* str, const char* substr)
+    {
+        if (!str || !substr) {
+            return false;
+        }
+        return std::strstr(str, substr) != nullptr;
     }
-    return std::strstr(str, substr) != nullptr;
-}
 
 /**
  * @brief   Parse the Arm Ethos-U NPU memory mode embedded in a PTE buffer.
@@ -64,40 +64,40 @@ bool ContainsSubstring(const char* str, const char* substr)
  * @return Memory mode string if found, or empty string otherwise.
  */
 #if defined(MLEK_LOG_ENABLE)
-std::string ParsePteMemoryMode(const uint8_t* data, size_t size)
-{
-    if (!data || size == 0) {
-        return {};
-    }
-
-    constexpr const char kFlag[] = "--memory-mode=";
-    constexpr size_t kFlagLen = sizeof(kFlag) - 1;
-    constexpr size_t kMaxValueLen = 32;
-
-    if (size < kFlagLen) {
-        return {};
-    }
-
-    for (size_t i = 0; i + kFlagLen < size; ++i) {
-        if (std::memcmp(data + i, kFlag, kFlagLen) != 0) {
-            continue;
+    std::string ParsePteMemoryMode(const uint8_t* data, size_t size)
+    {
+        if (!data || size == 0) {
+            return {};
         }
-        std::string value;
-        value.reserve(kMaxValueLen);
-        size_t j = i + kFlagLen;
-        while (j < size && value.size() + 1 < kMaxValueLen) {
-            const char c = static_cast<char>(data[j]);
-            if (!(std::isalpha(static_cast<unsigned char>(c)) || c == '_')) {
-                break;
+
+        constexpr const char kFlag[]  = "--memory-mode=";
+        constexpr size_t kFlagLen     = sizeof(kFlag) - 1;
+        constexpr size_t kMaxValueLen = 32;
+
+        if (size < kFlagLen) {
+            return {};
+        }
+
+        for (size_t i = 0; i + kFlagLen < size; ++i) {
+            if (std::memcmp(data + i, kFlag, kFlagLen) != 0) {
+                continue;
             }
-            value.push_back(c);
-            ++j;
+            std::string value;
+            value.reserve(kMaxValueLen);
+            size_t j = i + kFlagLen;
+            while (j < size && value.size() + 1 < kMaxValueLen) {
+                const char c = static_cast<char>(data[j]);
+                if (!(std::isalpha(static_cast<unsigned char>(c)) || c == '_')) {
+                    break;
+                }
+                value.push_back(c);
+                ++j;
+            }
+            return value;
         }
-        return value;
-    }
 
-    return {};
-}
+        return {};
+    }
 #endif /* defined(MLEK_LOG_ENABLE) */
 } /* anonymous namespace */
 
@@ -122,16 +122,17 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     debug("model size: %" PRIu32 " bytes.\n", nnModel.size);
 
     this->m_computeBuffer = computeBuffer;
-    this->m_modelBuffer = nnModel;
+    this->m_modelBuffer   = nnModel;
 
     if (backendData) {
         this->m_backendData = *static_cast<const EtBackendData*>(backendData);
     }
 
     info("Model PTE file loaded. Size: %zu bytes.\n", nnModel.size);
-    auto loader = executorch::extension::BufferDataLoader(nnModel.data, nnModel.size);
-
-    this->m_backendData.m_program = std::make_shared<Result<Program>>(Program::load(&loader));
+    this->m_backendData.m_loader =
+        std::make_shared<executorch::extension::BufferDataLoader>(nnModel.data, nnModel.size);
+    this->m_backendData.m_program =
+        std::make_shared<Result<Program>>(Program::load(this->m_backendData.m_loader.get()));
 
     if (!this->m_backendData.m_program->ok()) {
         printf_err("Program loading failed @ 0x%p: 0x%" PRIx32 "\n",
@@ -160,14 +161,15 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     }
 
     info("Setting up method allocator pool. Base: %p, size: %zu bytes.\n",
-         computeBuffer.data, computeBuffer.size);
+         computeBuffer.data,
+         computeBuffer.size);
 
     if (!this->m_backendData.m_methodAllocPtr) {
         this->m_backendData.m_methodAllocPtr =
             std::make_shared<EtMemoryAllocator>(computeBuffer.size, computeBuffer.data);
     }
 
-    std::vector<executorch::runtime::Span<uint8_t>> plannedSpans; // Passed to the allocator
+    auto& plannedSpans                   = this->m_backendData.m_plannedSpans;
     const size_t numMemoryPlannedBuffers = methodMeta->num_memory_planned_buffers();
     size_t plannedMemBeforeMark          = this->m_backendData.m_methodAllocPtr->UsedSizeCurrent();
 
@@ -181,7 +183,8 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
 
         if (!buffer) {
             printf_err("Failed to allocate %zu bytes. Allocator has %zu bytes left\n",
-                       bufferSize, this->m_backendData.m_methodAllocPtr->FreeSize());
+                       bufferSize,
+                       this->m_backendData.m_methodAllocPtr->FreeSize());
             return false;
         }
 
@@ -197,8 +200,9 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     }
 
     if (!this->m_backendData.m_tmpAllocPtr) {
-         info("Setting up temporary allocator pool. Base: %p, size: %zu bytes.\n",
-            sTmpAllocationPool, sTmpAllocationPoolSz);
+        info("Setting up temporary allocator pool. Base: %p, size: %zu bytes.\n",
+             sTmpAllocationPool,
+             sTmpAllocationPoolSz);
 
         this->m_backendData.m_tmpAllocPtr =
             std::make_shared<EtMemoryAllocator>(sTmpAllocationPoolSz, sTmpAllocationPool);
@@ -214,10 +218,11 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     size_t methodMemBeforeMark = this->m_backendData.m_methodAllocPtr->UsedSizeCurrent();
 
     executorch::runtime::EventTracer* eventTracerPtr = nullptr;
-    static auto method =
+    this->m_method = std::make_unique<Result<executorch::runtime::Method>>(
         this->m_backendData.m_program->get().load_method(this->m_backendData.m_methodName.c_str(),
                                                          this->m_backendData.m_memMgrPtr.get(),
-                                                         eventTracerPtr);
+                                                         eventTracerPtr));
+    auto& method = *this->m_method;
 
     if (!method.ok()) {
         info("Loading of method \"%s\" failed with status 0x%" PRIx32 "\n",
@@ -226,14 +231,6 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
         return false;
     }
 
-    /**
-     * Bypass the method class restrictions by creating a lambda
-     * function to get reference. This function can then be used
-     * by other member functions to get a reference to the method
-     * (static/bss) we created above
-     **/
-    this->m_fnGetMethod = [&]() { return std::ref(method.get()); };
-
     info("Method memory allocated: %zu bytes\n",
          this->m_backendData.m_methodAllocPtr->UsedSizeCurrent() - methodMemBeforeMark);
     info("Method %s loaded.\n", this->m_backendData.m_methodName.c_str());
@@ -241,7 +238,6 @@ bool EtModel::Init(iface::MemoryRegion& computeBuffer,
     info("Preparing inputs...\n");
     size_t input_membase = this->m_backendData.m_methodAllocPtr->UsedSizeCurrent();
 
-    std::vector<std::pair<char*, size_t>> inputBuffers;
     if (!this->PrepareInputTensors()) {
         printf_err("Failed to prepare inputs\n");
         return false;
@@ -325,15 +321,15 @@ void EtModel::LogMemoryUsage() const
 {
     if (this->m_backendData.m_methodAllocPtr) {
         info("\tMethod memory: Used: %zu; Peak: %zu; Available: %" PRId32 "\n",
-            this->m_backendData.m_methodAllocPtr->UsedSizeCurrent(),
-            this->m_backendData.m_methodAllocPtr->UsedSizePeak(),
-            this->m_backendData.m_methodAllocPtr->size());
+             this->m_backendData.m_methodAllocPtr->UsedSizeCurrent(),
+             this->m_backendData.m_methodAllocPtr->UsedSizePeak(),
+             this->m_backendData.m_methodAllocPtr->size());
     }
     if (this->m_backendData.m_tmpAllocPtr) {
         info("\tTemp memory: Used: %zu; Peak: %zu; Available: %" PRId32 "\n",
-            this->m_backendData.m_tmpAllocPtr->UsedSizeCurrent(),
-            this->m_backendData.m_tmpAllocPtr->UsedSizePeak(),
-            this->m_backendData.m_tmpAllocPtr->size());
+             this->m_backendData.m_tmpAllocPtr->UsedSizeCurrent(),
+             this->m_backendData.m_tmpAllocPtr->UsedSizePeak(),
+             this->m_backendData.m_tmpAllocPtr->size());
     }
 }
 
@@ -353,14 +349,14 @@ void EtModel::LogOperatorInfo()
     }
 
     const auto* program = executorch_flatbuffer::GetProgram(data);
-    const auto* plans = program->execution_plan();
+    const auto* plans   = program->execution_plan();
     if (!plans || plans->size() == 0) {
         info("No execution plans found in ExecuTorch program.\n");
         return;
     }
 
     const auto* plan = plans->Get(0);
-    const auto* ops = plan->operators();
+    const auto* ops  = plan->operators();
     if (!ops) {
         info("No operators found in ExecuTorch execution plan.\n");
         return;
@@ -368,8 +364,8 @@ void EtModel::LogOperatorInfo()
 
     info("Number of operators: %" PRIu32 "\n", ops->size());
     for (uint32_t i = 0; i < ops->size(); ++i) {
-        const auto* op = ops->Get(i);
-        const auto* name = op->name();
+        const auto* op       = ops->Get(i);
+        const auto* name     = op->name();
         const auto* overload = op->overload();
         if (name == nullptr) {
             info("\tOperator %" PRIu32 ": <unknown>\n", i);
@@ -393,7 +389,7 @@ void EtModel::LogOperatorInfo()
     info("Delegate calls:\n");
     uint32_t delegateCalls = 0;
     for (uint32_t i = 0; i < instructions->size(); ++i) {
-        const auto* instr = instructions->Get(i);
+        const auto* instr        = instructions->Get(i);
         const auto* delegateCall = instr->instr_args_as_DelegateCall();
         if (!delegateCall) {
             continue;
@@ -420,7 +416,7 @@ void EtModel::LogOperatorInfo()
     if (this->m_hasEthosUDelegate) {
 #if defined(MLEK_LOG_ENABLE)
         // Scans the whole PTE (in slow XIP flash); only worth it when the result is logged.
-        const auto* data = static_cast<const uint8_t*>(this->m_modelBuffer.data);
+        const auto* data       = static_cast<const uint8_t*>(this->m_modelBuffer.data);
         const std::string mode = ParsePteMemoryMode(data, this->m_modelBuffer.size);
         if (!mode.empty()) {
             info("NPU memory mode: %s\n", mode.c_str());
@@ -432,9 +428,7 @@ void EtModel::LogOperatorInfo()
 }
 
 bool EtModel::IsInited() const
-{
-    return this->m_inited;
-}
+{ return this->m_inited; }
 
 bool EtModel::IsDataSigned() const
 {
@@ -463,21 +457,7 @@ bool EtModel::RunInference()
 {
     assert(this->m_inited);
     trace("Running inference\n");
-    auto& method = this->m_fnGetMethod();
-    executorch::runtime::Error err = executorch::runtime::Error::Ok;
-
-    /** Populate input tensors */
-    for (size_t i = 0; i < this->m_inputTensorImplMap.size(); ++i) {
-        executorch::aten::Tensor t(&this->m_inputTensorImplMap[i].first);
-        err = method.set_input(t, this->m_inputTensorImplMap[i].second);
-        if (executorch::runtime::Error::Ok != err) {
-            printf_err("Failed to set input tensor. Error: %d\n", static_cast<int>(err));
-            return false;
-        }
-        trace("Input tensor %zu registered with the model; address: %p\n",
-            i, t.const_data_ptr());
-    }
-    err = method.execute();
+    const auto err = this->m_method->get().execute();
     trace("Inference done; status = %d\n", static_cast<int>(err));
     return err == executorch::runtime::Error::Ok;
 }
@@ -495,9 +475,7 @@ size_t EtModel::GetNumOutputs() const
 }
 
 iface::TensorType EtModel::GetType() const
-{
-    return this->m_type;
-}
+{ return this->m_type; }
 
 std::vector<size_t> EtModel::GetInputShape(size_t index) const
 {
@@ -512,31 +490,19 @@ std::vector<size_t> EtModel::GetOutputShape(size_t index) const
 }
 
 const iface::MemoryRegion& EtModel::GetComputeBuffer() const
-{
-    return std::ref(this->m_computeBuffer);
-}
+{ return std::ref(this->m_computeBuffer); }
 
 const iface::MemoryRegion& EtModel::GetModelBuffer() const
-{
-    return std::ref(this->m_modelBuffer);
-}
+{ return std::ref(this->m_modelBuffer); }
 
 const EtBackendData& EtModel::GetBackendData() const
-{
-    return std::ref(this->m_backendData);
-}
+{ return std::ref(this->m_backendData); }
 
 bool EtModel::PrepareInputTensors()
 {
-    auto& method        = this->m_fnGetMethod();
-    auto methodMeta     = method.method_meta();
-    size_t numInputs    = methodMeta.num_inputs();
-    size_t numAllocated = 0;
-
-    void** inputs = static_cast<void**>(
-        this->m_backendData.m_methodAllocPtr->allocate(numInputs * sizeof(void*)));
-
-    ET_CHECK_MSG(inputs != nullptr, "Could not allocate memory for pointers to input buffers.");
+    auto& method           = this->m_method->get();
+    const auto methodMeta  = method.method_meta();
+    const size_t numInputs = methodMeta.num_inputs();
 
     for (size_t i = 0; i < numInputs; i++) {
         auto tag = methodMeta.input_tag(i);
@@ -544,8 +510,16 @@ bool EtModel::PrepareInputTensors()
             printf_err("Failed to retrieve tag\n");
             return false;
         }
+        // MethodMeta has no data-pointer API. get_input is deprecated but exposes the
+        // loaded value; retain tensor handles without changing their metadata.
+        const auto& methodInput = method.get_input(i);
         if (tag.get() != executorch::runtime::Tag::Tensor) {
-            debug("Skipping non-tensor input %zu", i);
+            // Scalar inputs are specialized constants in the exported program.
+            const auto status = method.set_input(methodInput, i);
+            if (status != executorch::runtime::Error::Ok) {
+                printf_err("Failed to bind constant input %zu: %d\n", i, static_cast<int>(status));
+                return false;
+            }
             continue;
         }
         auto tensorMeta = methodMeta.input_tensor_meta(i);
@@ -554,26 +528,30 @@ bool EtModel::PrepareInputTensors()
             return false;
         }
 
-        // Input is a tensor. Allocate a buffer for it.
-        void* dataPtr = this->m_backendData.m_methodAllocPtr->allocate(tensorMeta->nbytes());
-        ET_CHECK_MSG(dataPtr != nullptr, "Could not allocate memory for input buffers.");
-        inputs[numAllocated++] = dataPtr;
+        if (!tensorMeta->is_memory_planned()) {
+            // set_input aliases unplanned data, so bind this model-lifetime buffer once.
+            void* dataPtr = this->m_backendData.m_methodAllocPtr->allocate(tensorMeta->nbytes());
+            if (dataPtr == nullptr) {
+                printf_err("Could not allocate input buffer %zu\n", i);
+                return false;
+            }
+            executorch::aten::TensorImpl tensorImpl(
+                tensorMeta->scalar_type(),
+                tensorMeta->sizes().size(),
+                const_cast<executorch::aten::TensorImpl::SizesType*>(tensorMeta->sizes().data()),
+                dataPtr,
+                const_cast<executorch::aten::TensorImpl::DimOrderType*>(
+                    tensorMeta->dim_order().data()));
+            const executorch::aten::Tensor tensor(&tensorImpl);
+            const auto status = method.set_input(tensor, i);
+            if (status != executorch::runtime::Error::Ok) {
+                printf_err("Failed to bind input %zu: %d\n", i, static_cast<int>(status));
+                return false;
+            }
+        }
 
-        auto p = std::make_pair(executorch::runtime::etensor::TensorImpl(
-            tensorMeta.get().scalar_type(),
-            tensorMeta.get().sizes().size(),
-            const_cast<executorch::aten::TensorImpl::SizesType*>(tensorMeta.get().sizes().data()),
-            dataPtr,
-            const_cast<executorch::aten::TensorImpl::DimOrderType*>(
-                tensorMeta.get().dim_order().data())), i);
-        this->m_inputTensorImplMap.push_back(p);
-    }
-
-    this->m_input = std::vector<std::shared_ptr<iface::TensorIface>>(
-        this->m_inputTensorImplMap.size(), nullptr);
-    for (size_t i = 0; i < this->m_inputTensorImplMap.size(); i++) {
-        this->m_input[this->m_inputTensorImplMap[i].second] =
-            std::make_shared<EtTensor>(&this->m_inputTensorImplMap[i].first);
+        auto tensor = methodInput.toTensor();
+        this->m_input.emplace_back(std::make_shared<EtTensor>(tensor));
     }
     return true;
 }

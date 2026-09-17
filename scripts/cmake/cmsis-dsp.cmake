@@ -9,7 +9,7 @@
 #  contact@alifsemi.com, or visit: https://alifsemi.com/license
 
 #----------------------------------------------------------------------------
-#  SPDX-FileCopyrightText: Copyright 2021, 2025 Arm Limited and/or its
+#  SPDX-FileCopyrightText: Copyright 2021, 2025-2026 Arm Limited and/or its
 #  affiliates <open-source-office@arm.com>
 #  SPDX-License-Identifier: Apache-2.0
 #
@@ -92,6 +92,9 @@ endif()
 
 # Enable fast-math option
 target_compile_options(CMSISDSP PRIVATE -ffast-math)
+if (DEFINED CMSIS_DSP_OPTIMIZATION_LEVEL)
+    target_compile_options(CMSISDSP PRIVATE ${CMSIS_DSP_OPTIMIZATION_LEVEL})
+endif()
 
 # Create alias to use for linking with other libs.
 add_library(arm::cmsis-dsp ALIAS CMSISDSP)

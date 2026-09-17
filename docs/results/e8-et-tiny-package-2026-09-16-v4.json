@@ -1,0 +1,8 @@
+{
+  "archive": "build-artifacts/build-e8-et-tiny-artifacts-v4.tar.gz",
+  "bytes": 17532285,
+  "sha256": "f333ced02c8dd2149d219f5493d38b3d28887913e560ed2091a872f8b0254a86",
+  "verification": "Archive checksums verified; freshly extracted run.py verify/--help passed with Python 3.9. Packaged parser accepts all four FVP memory/output records and rejects all four v3 staging logs.",
+  "build_record": "e8-et-tiny-build-2026-09-16-v4.json",
+  "board_status": "Awaiting v4 E8 capture; simulator validates expected accounted RAM savings, not E8 latency."
+}

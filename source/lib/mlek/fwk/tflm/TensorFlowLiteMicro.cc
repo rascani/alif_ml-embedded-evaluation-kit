@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: Copyright 2021, 2024-2025 Arm Limited and/or its
+ * SPDX-FileCopyrightText: Copyright 2021, 2024-2026 Arm Limited and/or its
  * affiliates <open-source-office@arm.com>
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -20,27 +20,24 @@
 
 /* If target is arm-none-eabi and arch profile is 'M', wire the logging for
  * TensorFlow Lite Micro */
-#if defined(__arm__) && (__ARM_ARCH_PROFILE == 77) && !defined(TFLM_EXTERNAL_TARGET)
+#if defined(__arm__) && (__ARM_ARCH_PROFILE == 77) && !defined(TFLM_EXTERNAL_TARGET) && \
+    !defined(TF_LITE_STRIP_ERROR_STRINGS)
 #include "tensorflow/lite/micro/cortex_m_generic/debug_log_callback.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
 static void TFLMLog(const char* s)
-{
-    printf("TFLM - %s\n", s);
-}
+{ printf("TFLM - %s\n", s); }
 #ifdef __cplusplus
 }
 #endif // __cplusplus
 
 void arm::app::fwk::tflm::EnableTFLMLog()
-{
-    RegisterDebugLogCallback(TFLMLog);
-}
+{ RegisterDebugLogCallback(TFLMLog); }
 
-#else /* defined(__arm__) && (__ARM_ARCH_PROFILE == 77) && !defined(TFLM_EXTERNAL_TARGET) */
+#else /* Cortex-M logging disabled or unavailable */
 
 void arm::app::fwk::tflm::EnableTFLMLog() {}
 
-#endif /* defined(__arm__) && (__ARM_ARCH_PROFILE == 77) && !defined(TFLM_EXTERNAL_TARGET) */
+#endif /* Cortex-M logging enabled */

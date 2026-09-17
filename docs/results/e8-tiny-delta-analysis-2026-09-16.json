@@ -1,0 +1,2603 @@
+{
+  "date": "2026-09-16",
+  "method": "Deserialize frozen PTE/TFLite graphs, compare convolution/linear shapes and weights, inspect input allocation and invocation source, reconcile board RAM and linker-map component deltas. No binaries, exports or source runtimes changed.",
+  "latency_limitation": "No per-operator timings collected. Whole-model deltas cannot assign time to dispatch, copies, quantization parameters, kernel selection or cache/layout.",
+  "models": {
+    "kws": {
+      "inspection": {
+        "et_weight_bytes": 22016,
+        "tflm_weight_bytes": 22016,
+        "et_quant_parameter_constant_bytes": 3840,
+        "et_kernel_sum_constant_bytes": 48,
+        "tflm_conv_channel_quant_parameter_payload_bytes": 4608,
+        "tflm_fc_kernel_sum_payload_bytes": 48,
+        "input_bytes": 490,
+        "et_input_is_planned": true,
+        "float_planned_tensors": [
+          {
+            "shape": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "bytes": 32000,
+            "offset": 0
+          },
+          {
+            "shape": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "bytes": 32000,
+            "offset": 0
+          }
+        ],
+        "et_linear_conv_ops": [
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              49,
+              10,
+              1
+            ],
+            "weight": [
+              64,
+              10,
+              4,
+              1
+            ],
+            "weight_bytes": 2560,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              64
+            ],
+            "weight": [
+              12,
+              64
+            ],
+            "weight_bytes": 768,
+            "output": [
+              1,
+              12
+            ]
+          }
+        ],
+        "tflm_linear_conv_ops": [
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              49,
+              10,
+              1
+            ],
+            "weight": [
+              64,
+              10,
+              4,
+              1
+            ],
+            "weight_bytes": 2560,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              25,
+              5,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              25,
+              5,
+              64
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              64
+            ],
+            "weight": [
+              12,
+              64
+            ],
+            "weight_bytes": 768,
+            "output": [
+              1,
+              12
+            ]
+          }
+        ],
+        "tflm_op_counts": {
+          "CONV_2D": 5,
+          "DEPTHWISE_CONV_2D": 4,
+          "AVERAGE_POOL_2D": 1,
+          "RESHAPE": 1,
+          "FULLY_CONNECTED": 1,
+          "SOFTMAX": 1
+        },
+        "matching_conv_linear_shapes_and_weight_counts": true,
+        "et_constant_buffer_bytes": 28208,
+        "tflm_buffer_bytes": 24392
+      },
+      "flash_et_minus_tflm_bytes": {
+        "model_bytes": -11136,
+        "core_bytes": 21156,
+        "operators_bytes": -8768,
+        "cmsis_nn_bytes": -36548,
+        "registry_bytes": 4368,
+        "total_bytes": -30928
+      },
+      "ram": {
+        "et_metadata_bytes": 8760,
+        "et_staging_input_and_pointer_bytes": 494,
+        "et_input_copy_per_inference_bytes": 490,
+        "tflm_persistent_arena_bytes": 6884,
+        "planned_et_minus_tflm_bytes": 19536,
+        "total_et_minus_tflm_bytes": 22326
+      }
+    },
+    "ic": {
+      "inspection": {
+        "et_weight_bytes": 77360,
+        "tflm_weight_bytes": 77360,
+        "et_quant_parameter_constant_bytes": 2432,
+        "et_kernel_sum_constant_bytes": 40,
+        "tflm_conv_channel_quant_parameter_payload_bytes": 2688,
+        "tflm_fc_kernel_sum_payload_bytes": 40,
+        "input_bytes": 3072,
+        "et_input_is_planned": true,
+        "float_planned_tensors": [],
+        "et_linear_conv_ops": [
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              32,
+              32,
+              3
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              3
+            ],
+            "weight_bytes": 432,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              32,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 4608,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              32,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 9216,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              16
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              64,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 18432,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              8,
+              8,
+              64
+            ],
+            "weight": [
+              64,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 36864,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 2048,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              64
+            ],
+            "weight": [
+              10,
+              64
+            ],
+            "weight_bytes": 640,
+            "output": [
+              1,
+              10
+            ]
+          }
+        ],
+        "tflm_linear_conv_ops": [
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              32,
+              32,
+              3
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              3
+            ],
+            "weight_bytes": 432,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              16,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              32,
+              32,
+              16
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              32,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 4608,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              32,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 9216,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              32,
+              32,
+              16
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              16
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              16,
+              16,
+              32
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              64,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 18432,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              8,
+              8,
+              64
+            ],
+            "weight": [
+              64,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 36864,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              16,
+              16,
+              32
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 2048,
+            "output": [
+              1,
+              8,
+              8,
+              64
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              64
+            ],
+            "weight": [
+              10,
+              64
+            ],
+            "weight_bytes": 640,
+            "output": [
+              1,
+              10
+            ]
+          }
+        ],
+        "tflm_op_counts": {
+          "CONV_2D": 9,
+          "ADD": 3,
+          "AVERAGE_POOL_2D": 1,
+          "RESHAPE": 1,
+          "FULLY_CONNECTED": 1,
+          "SOFTMAX": 1
+        },
+        "matching_conv_linear_shapes_and_weight_counts": true,
+        "et_constant_buffer_bytes": 81176,
+        "tflm_buffer_bytes": 78768
+      },
+      "flash_et_minus_tflm_bytes": {
+        "model_bytes": -2600,
+        "core_bytes": 21220,
+        "operators_bytes": -26100,
+        "cmsis_nn_bytes": -29156,
+        "registry_bytes": 3304,
+        "total_bytes": -33332
+      },
+      "ram": {
+        "et_metadata_bytes": 8920,
+        "et_staging_input_and_pointer_bytes": 3076,
+        "et_input_copy_per_inference_bytes": 3072,
+        "tflm_persistent_arena_bytes": 5300,
+        "planned_et_minus_tflm_bytes": 0,
+        "total_et_minus_tflm_bytes": 7056
+      }
+    },
+    "vww": {
+      "inspection": {
+        "et_weight_bytes": 208112,
+        "tflm_weight_bytes": 208112,
+        "et_quant_parameter_constant_bytes": 19072,
+        "et_kernel_sum_constant_bytes": 8,
+        "tflm_conv_channel_quant_parameter_payload_bytes": 21888,
+        "tflm_fc_kernel_sum_payload_bytes": 8,
+        "input_bytes": 27648,
+        "et_input_is_planned": true,
+        "float_planned_tensors": [],
+        "et_linear_conv_ops": [
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              96,
+              96,
+              3
+            ],
+            "weight": [
+              8,
+              3,
+              3,
+              3
+            ],
+            "weight_bytes": 216,
+            "output": [
+              1,
+              48,
+              48,
+              8
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              48,
+              48,
+              8
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              8
+            ],
+            "weight_bytes": 72,
+            "output": [
+              1,
+              48,
+              48,
+              8
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              48,
+              48,
+              8
+            ],
+            "weight": [
+              16,
+              1,
+              1,
+              8
+            ],
+            "weight_bytes": 128,
+            "output": [
+              1,
+              48,
+              48,
+              16
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              48,
+              48,
+              16
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 144,
+            "output": [
+              1,
+              24,
+              24,
+              16
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              24,
+              24,
+              16
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              16
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 288,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 288,
+            "output": [
+              1,
+              12,
+              12,
+              32
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              12,
+              12,
+              32
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 2048,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              6,
+              6,
+              64
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              64
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 8192,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              3,
+              3,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight": [
+              256,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 32768,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_depthwise_conv2d_nhwc",
+            "input": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_conv2d_nhwc",
+            "input": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight": [
+              256,
+              1,
+              1,
+              256
+            ],
+            "weight_bytes": 65536,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              256
+            ],
+            "weight": [
+              2,
+              256
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              2
+            ]
+          }
+        ],
+        "tflm_linear_conv_ops": [
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              96,
+              96,
+              3
+            ],
+            "weight": [
+              8,
+              3,
+              3,
+              3
+            ],
+            "weight_bytes": 216,
+            "output": [
+              1,
+              48,
+              48,
+              8
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              48,
+              48,
+              8
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              8
+            ],
+            "weight_bytes": 72,
+            "output": [
+              1,
+              48,
+              48,
+              8
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              48,
+              48,
+              8
+            ],
+            "weight": [
+              16,
+              1,
+              1,
+              8
+            ],
+            "weight_bytes": 128,
+            "output": [
+              1,
+              48,
+              48,
+              16
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              48,
+              48,
+              16
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              16
+            ],
+            "weight_bytes": 144,
+            "output": [
+              1,
+              24,
+              24,
+              16
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              24,
+              24,
+              16
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              16
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 288,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              32,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              24,
+              24,
+              32
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              24,
+              24,
+              32
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              32
+            ],
+            "weight_bytes": 288,
+            "output": [
+              1,
+              12,
+              12,
+              32
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              12,
+              12,
+              32
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              32
+            ],
+            "weight_bytes": 2048,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              64,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 4096,
+            "output": [
+              1,
+              12,
+              12,
+              64
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              12,
+              12,
+              64
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              64
+            ],
+            "weight_bytes": 576,
+            "output": [
+              1,
+              6,
+              6,
+              64
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              64
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              64
+            ],
+            "weight_bytes": 8192,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              128,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              6,
+              6,
+              128
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              6,
+              6,
+              128
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight_bytes": 1152,
+            "output": [
+              1,
+              3,
+              3,
+              128
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              3,
+              3,
+              128
+            ],
+            "weight": [
+              256,
+              1,
+              1,
+              128
+            ],
+            "weight_bytes": 32768,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "DEPTHWISE_CONV_2D",
+            "input": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight_bytes": 2304,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "CONV_2D",
+            "input": [
+              1,
+              3,
+              3,
+              256
+            ],
+            "weight": [
+              256,
+              1,
+              1,
+              256
+            ],
+            "weight_bytes": 65536,
+            "output": [
+              1,
+              3,
+              3,
+              256
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              256
+            ],
+            "weight": [
+              2,
+              256
+            ],
+            "weight_bytes": 512,
+            "output": [
+              1,
+              2
+            ]
+          }
+        ],
+        "tflm_op_counts": {
+          "CONV_2D": 14,
+          "DEPTHWISE_CONV_2D": 13,
+          "AVERAGE_POOL_2D": 1,
+          "RESHAPE": 1,
+          "FULLY_CONNECTED": 1,
+          "SOFTMAX": 1
+        },
+        "matching_conv_linear_shapes_and_weight_counts": true,
+        "et_constant_buffer_bytes": 238152,
+        "tflm_buffer_bytes": 219088
+      },
+      "flash_et_minus_tflm_bytes": {
+        "model_bytes": -65440,
+        "core_bytes": 21156,
+        "operators_bytes": -12416,
+        "cmsis_nn_bytes": -36548,
+        "registry_bytes": 3760,
+        "total_bytes": -89488
+      },
+      "ram": {
+        "et_metadata_bytes": 21588,
+        "et_staging_input_and_pointer_bytes": 27652,
+        "et_input_copy_per_inference_bytes": 27648,
+        "tflm_persistent_arena_bytes": 27044,
+        "planned_et_minus_tflm_bytes": 0,
+        "total_et_minus_tflm_bytes": 22556
+      }
+    },
+    "ad": {
+      "inspection": {
+        "et_weight_bytes": 264192,
+        "tflm_weight_bytes": 264192,
+        "et_quant_parameter_constant_bytes": 0,
+        "et_kernel_sum_constant_bytes": 6688,
+        "tflm_conv_channel_quant_parameter_payload_bytes": 0,
+        "tflm_fc_kernel_sum_payload_bytes": 6688,
+        "input_bytes": 640,
+        "et_input_is_planned": true,
+        "float_planned_tensors": [],
+        "et_linear_conv_ops": [
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              640
+            ],
+            "weight": [
+              128,
+              640
+            ],
+            "weight_bytes": 81920,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              8,
+              128
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              8
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              8
+            ],
+            "weight": [
+              128,
+              8
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "cortex_m::quantized_linear",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              640,
+              128
+            ],
+            "weight_bytes": 81920,
+            "output": [
+              1,
+              640
+            ]
+          }
+        ],
+        "tflm_linear_conv_ops": [
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              640
+            ],
+            "weight": [
+              128,
+              640
+            ],
+            "weight_bytes": 81920,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              8,
+              128
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              8
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              8
+            ],
+            "weight": [
+              128,
+              8
+            ],
+            "weight_bytes": 1024,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              128,
+              128
+            ],
+            "weight_bytes": 16384,
+            "output": [
+              1,
+              128
+            ]
+          },
+          {
+            "name": "FULLY_CONNECTED",
+            "input": [
+              1,
+              128
+            ],
+            "weight": [
+              640,
+              128
+            ],
+            "weight_bytes": 81920,
+            "output": [
+              1,
+              640
+            ]
+          }
+        ],
+        "tflm_op_counts": {
+          "FULLY_CONNECTED": 10
+        },
+        "matching_conv_linear_shapes_and_weight_counts": true,
+        "et_constant_buffer_bytes": 270880,
+        "tflm_buffer_bytes": 270896
+      },
+      "flash_et_minus_tflm_bytes": {
+        "model_bytes": 2992,
+        "core_bytes": 22536,
+        "operators_bytes": -3708,
+        "cmsis_nn_bytes": -8672,
+        "registry_bytes": 2496,
+        "total_bytes": 15644
+      },
+      "ram": {
+        "et_metadata_bytes": 4480,
+        "et_staging_input_and_pointer_bytes": 644,
+        "et_input_copy_per_inference_bytes": 640,
+        "tflm_persistent_arena_bytes": 8500,
+        "planned_et_minus_tflm_bytes": 0,
+        "total_et_minus_tflm_bytes": -2932
+      }
+    }
+  },
+  "source_evidence": {
+    "input_allocation": "source/lib/mlek/fwk/executorch/EtModel.cc:525",
+    "input_registration_inside_timed_invocation": "source/lib/mlek/fwk/executorch/EtModel.cc:458",
+    "planned_input_copy": "resources_downloaded/et_tiny/executorch/runtime/executor/method.cpp:1248",
+    "tflm_persistent_fc_sums": "dependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:151",
+    "et_flash_fc_sums": "resources_downloaded/et_tiny/executorch/backends/cortex_m/ops/op_quantized_linear.cpp:36",
+    "tflm_persistent_conv_qparams": "dependencies/tensorflow/tensorflow/lite/micro/kernels/conv_common.cc:174"
+  }
+}
