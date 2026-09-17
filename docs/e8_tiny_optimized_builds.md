@@ -7,12 +7,14 @@ SPDX-License-Identifier: Apache-2.0
 
 **TFLM update:** [v3 INT8 registration results](e8_tflm_int8_registration_results.md)
 supersede the TFLM v2 sizes below. This page preserves the generic-registration
-baseline; the current TFLM builder enables INT8 selection. ET v5 is unchanged.
+and ET v5 baselines; the current TFLM builder enables INT8 selection. The subsequent
+[ET v6/TFLM v3 board collection](e8_tiny_board_results_2026_09_17.md) is complete, with
+the [current measured comparison](e8_tiny_current_summary.md) recorded separately.
 
-The new bundles are **ExecuTorch v5** and **TFLM v2**. Each contains all four models
+This historical build snapshot covers **ExecuTorch v5** and **TFLM v2**. Each contains all four models
 in two profiles: logging disabled for flash accounting, and logging enabled for
-new E8 latency/RAM measurements. No new board timings have been collected yet.
-The [previous measured table](e8_tiny_current_summary.md) remains the historical
+new E8 latency/RAM measurements. Neither of these intermediate bundles was timed on E8.
+The [previous measured report](e8_et_tiny_v4_results.md) remains the historical
 `-O3` result; its timings do not describe these new binaries.
 
 ## Compiler settings
@@ -137,7 +139,7 @@ hash, so old firmware with identical model weights is rejected. `results.csv` an
 `flash_size_build_*` fields for the separate silent image. Each model's nested
 `size_build` manifest records its own hashes, sizes and artifact path.
 
-New board latency and accounted inference RAM will be recorded after the rerun.
+Board latency and accounted inference RAM were subsequently recorded for ET v6/TFLM v3.
 Initialization timing and TCM placement are outside this change. Accounted RAM
 continues to exclude unused reservations, stack high-water usage, platform state
 and transient initialization workspace; it is not a deployment-minimum RAM claim.
@@ -184,4 +186,5 @@ passed Corstone-300 execution with 111 benchmark invocations each. All 12 ET
 reference-output comparisons passed. TFLM's four native unit-test/inference runs
 passed. The 26 Python tests and PyLint 3.3.8 checks passed. The result-collection
 archive was checked for expected contents and refusal to overwrite an existing file.
-E8 hardware reruns remain pending; no simulator timing is included in the flash table.
+No simulator timing is included in the flash table. Subsequent E8 measurements use
+ET v6/TFLM v3, as linked at the top of this report.

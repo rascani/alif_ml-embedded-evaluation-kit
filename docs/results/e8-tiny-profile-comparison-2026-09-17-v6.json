@@ -6,7 +6,7 @@
     "excluded_support_bytes": "Platform, runner, diagnostics, fixtures, MLEK adapter, shared toolchain/string pools, linker tables and padding.",
     "full_mram_bytes": "Complete deployable MRAM payload, including the excluded support."
   },
-  "current_status": "Flash: TFLM v3 and ExecuTorch v6 trained Q/DQ-cleanup PTEs. Current E8 latency/RAM pending.",
+  "current_status": "TFLM v3 and ExecuTorch v6: logged E8 latency/RAM validated from three boots and 300 measured calls per model/framework on 2026-09-17. Silent profiles have flash measurements only.",
   "historical_status": "E8 Cortex-M55-HP CPU-only 400 MHz, GCC O3, logging on, 300 measured inferences per model/runtime; not measurements of current images.",
   "ram_scope": "Accounted inference arena/pools, runtime/kernel persistent allocations, outside persistent state and ET runtime static storage. Excludes unused reservations, stack high water, initialization workspace and benchmark/platform/reporting memory.",
   "rows": [
@@ -29,10 +29,14 @@
       "elf_sha256": "d65f9d405c428f22da5826956f0068868873be641347182edaf85242e7eb0c7d",
       "bundle": "build-e8-tflm-tiny-artifacts-v3",
       "registration_policy": "cmsis_nn_int8_when_compatible",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 6.037758641666667,
+      "mean_cycles": 2415103.4566666665,
+      "accounted_inference_ram_bytes": 28136,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "results_file": "e8-tflm-tiny-2026-09-17-v3.json"
     },
     {
       "framework": "TFLM",
@@ -56,7 +60,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "ExecuTorch",
@@ -77,10 +81,14 @@
       "elf_sha256": "12a9b8afa5d4097074a9cffa49a6114b26d2a68849fbea70b20106178122b411",
       "bundle": "build-e8-et-tiny-artifacts-v6",
       "registration_policy": "export_selected_cortex_m",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 5.823768883333333,
+      "mean_cycles": 2329507.553333333,
+      "accounted_inference_ram_bytes": 29580,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-et-tiny-artifacts-v6-latency",
+      "results_file": "e8-et-tiny-2026-09-17-v6.json"
     },
     {
       "framework": "ExecuTorch",
@@ -104,7 +112,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "TFLM",
@@ -125,10 +133,14 @@
       "elf_sha256": "0bfb6e4a3f99ea93ee4232afbb904c09a5c295a21de7e7f3fe39c20a5c14280d",
       "bundle": "build-e8-tflm-tiny-artifacts-v3",
       "registration_policy": "cmsis_nn_int8_when_compatible",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 15.652873183333334,
+      "mean_cycles": 6261149.273333333,
+      "accounted_inference_ram_bytes": 55816,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "results_file": "e8-tflm-tiny-2026-09-17-v3.json"
     },
     {
       "framework": "TFLM",
@@ -152,7 +164,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "ExecuTorch",
@@ -173,10 +185,14 @@
       "elf_sha256": "385a2180324f1c12cda9a26d056b83727455111930c96e5f616cd2a6419b5d76",
       "bundle": "build-e8-et-tiny-artifacts-v6",
       "registration_policy": "export_selected_cortex_m",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 15.231395800000001,
+      "mean_cycles": 6092558.32,
+      "accounted_inference_ram_bytes": 59744,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-et-tiny-artifacts-v6-latency",
+      "results_file": "e8-et-tiny-2026-09-17-v6.json"
     },
     {
       "framework": "ExecuTorch",
@@ -200,7 +216,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "TFLM",
@@ -221,10 +237,14 @@
       "elf_sha256": "1c5a53c725426ce84915a35048a5fb0b37be20edca9460803ee7002a90df214b",
       "bundle": "build-e8-tflm-tiny-artifacts-v3",
       "registration_policy": "cmsis_nn_int8_when_compatible",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 23.994316866666665,
+      "mean_cycles": 9597726.746666666,
+      "accounted_inference_ram_bytes": 101560,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "results_file": "e8-tflm-tiny-2026-09-17-v3.json"
     },
     {
       "framework": "TFLM",
@@ -248,7 +268,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "ExecuTorch",
@@ -269,10 +289,14 @@
       "elf_sha256": "e9222210212166455a32e0d3b66f323434b2695f9a4c847dae3615c5eebd72c2",
       "bundle": "build-e8-et-tiny-artifacts-v6",
       "registration_policy": "export_selected_cortex_m",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 21.748096941666667,
+      "mean_cycles": 8699238.776666667,
+      "accounted_inference_ram_bytes": 96412,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-et-tiny-artifacts-v6-latency",
+      "results_file": "e8-et-tiny-2026-09-17-v6.json"
     },
     {
       "framework": "ExecuTorch",
@@ -296,7 +320,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "TFLM",
@@ -317,10 +341,14 @@
       "elf_sha256": "ab9ab99e15fe5853ff6f53de3c4991262d6b7a19311851f842e032df6511b65a",
       "bundle": "build-e8-tflm-tiny-artifacts-v3",
       "registration_policy": "cmsis_nn_int8_when_compatible",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 1.2046501833333332,
+      "mean_cycles": 481860.0733333333,
+      "accounted_inference_ram_bytes": 9876,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "results_file": "e8-tflm-tiny-2026-09-17-v3.json"
     },
     {
       "framework": "TFLM",
@@ -344,7 +372,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "ExecuTorch",
@@ -365,10 +393,14 @@
       "elf_sha256": "2776d46f11a40afe1dbf9b01f12b260d7ab5bdf2179b60d952a018a4df27a9a5",
       "bundle": "build-e8-et-tiny-artifacts-v6",
       "registration_policy": "export_selected_cortex_m",
-      "mean_latency_ms": null,
-      "mean_cycles": null,
-      "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "mean_latency_ms": 1.2074888000000001,
+      "mean_cycles": 482995.52,
+      "accounted_inference_ram_bytes": 6248,
+      "measurement_scope": "current_e8_400mhz_logging_on",
+      "boots": 3,
+      "measured_inferences": 300,
+      "build_id": "build-e8-et-tiny-artifacts-v6-latency",
+      "results_file": "e8-et-tiny-2026-09-17-v6.json"
     },
     {
       "framework": "ExecuTorch",
@@ -392,7 +424,7 @@
       "mean_latency_ms": null,
       "mean_cycles": null,
       "accounted_inference_ram_bytes": null,
-      "measurement_scope": "current_flash_e8_rerun_pending"
+      "measurement_scope": "current_flash_only_logging_off_no_e8_measurement"
     },
     {
       "framework": "TFLM",
@@ -586,5 +618,6 @@
       "mean_cycles": 483520.24,
       "accounted_inference_ram_bytes": 6248
     }
-  ]
+  ],
+  "board_results": "e8-tiny-board-2026-09-17-v6-v3.json"
 }

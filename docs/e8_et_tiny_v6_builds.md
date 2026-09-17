@@ -10,6 +10,10 @@ on 17 September 2026. All four PTEs use trained reference weights and differ fro
 the untrained PTEs used in our v5 firmware. Both redundant internal Q/DQ pairs are
 removed from DS-CNN. The comparison partner remains **TFLM v3 with INT8 selection**.
 
+**Board collection completed on 17 September:** all 12 ET boots and 12 saved-output
+checks passed. The [current comparison](e8_tiny_current_summary.md) and
+[collection report](e8_tiny_board_results_2026_09_17.md) record measured E8 latency and RAM.
+
 The package contains four silent size images and four logged latency images,
 using GCC 15.2.1, runtime/operator wrappers at `-Oz`, CMSIS-NN 8.0.0 at `-O3`,
 function/data sections and linker garbage collection. Code/models remain in MRAM;
@@ -102,14 +106,15 @@ not these runtime files. No ET source-tree edit was needed. Operator and primiti
 selection remain enabled; the primitive set is empty and inputs use planned storage
 directly. The full incoming ZIP and provenance are preserved under `export/`.
 
-New E8 latency and accounted RAM remain pending. Simulator RAM is functional
-evidence, not a board result. Accounted inference RAM includes used method/planned
+E8 collection now confirms all four simulator RAM totals below, with stable values
+across three boots per model. Accounted inference RAM includes used method/planned
 storage, temporary inference peak, outside persistent objects/heap and attributed
 runtime static storage. It excludes unused reservations, stack high water,
-initialization workspace and benchmark/platform/reporting memory. Original board
-timings remain attached to the earlier untrained ET and generic TFLM builds.
+initialization workspace and benchmark/platform/reporting memory. The new measured
+timings are in the linked collection report; original timings remain attached to
+the earlier untrained ET and generic TFLM builds.
 
-The current simulator accounts for ET inference RAM as follows (bytes):
+ET inference RAM confirmed on both simulator and E8 (bytes):
 
 | Model | Planned tensors | Method metadata | Temporary invoke peak | Outside persistent | Runtime static | Accounted total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -121,7 +126,7 @@ The current simulator accounts for ET inference RAM as follows (bytes):
 The prior v5 simulator total for DS-CNN was 49,916 bytes. The new result is 20,336
 bytes lower: 19,536 from planned tensors, 752 from method metadata and 48 from
 runtime static storage. The other models' accounted totals are unchanged. These
-values must still be confirmed on E8; they are not inserted into the board-result table.
+values are now confirmed on E8 and included in the current board-result table.
 
 ## Run on the Mac
 

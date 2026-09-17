@@ -11,8 +11,9 @@ TFLM v3 is unchanged; the ET v5 columns below preserve the pre-update comparison
 **TFLM v3** selects the upstream CMSIS-NN INT8 registrations for all numerical
 operators in the four Tiny models. This reduces operator flash by **35–54%** versus
 the generic registrations in v2. All eight E8 images build: four silent size
-images and four logging-enabled latency images. Hardware measurements remain
-deferred until the cleaned ExecuTorch DS-CNN export arrives.
+images and four logging-enabled latency images. The combined E8 collection with
+ET v6 completed on 17 September; see the [current measured comparison](e8_tiny_current_summary.md)
+and [collection validation](e8_tiny_board_results_2026_09_17.md).
 
 ## Operator flash before and after
 
@@ -60,8 +61,9 @@ toolchain/string pools, linker tables and padding. These attributed totals are
 not standalone deployable firmware sizes; some excluded support is necessary.
 Merged-string and COMDAT ownership retain the earlier attribution limitations.
 
-TFLM models use trained reference weights. ET models use untrained seed-23 weights
-and synthetic calibration, and DS-CNN still contains the pending DQ/Q pairs.
+TFLM models use trained reference weights. The ET v5 models in the historical tables
+above use untrained seed-23 weights and synthetic calibration, with DS-CNN DQ/Q pairs.
+The current ET v6 comparison uses trained weights and removes those pairs.
 The model-byte differences are therefore not matched-weight format comparisons.
 Historical E8 latency/RAM values remain associated with their original binaries.
 
@@ -129,8 +131,8 @@ Silent images receive static checks; execution validation uses the logged profil
 The archive is `build-e8-tflm-tiny-artifacts-v3.tar.gz`, with a separate `.sha256`
 file. It includes the binaries, models, linker maps, ELF symbols, compiler audits,
 selection manifests, validation evidence and all capture/collection scripts.
-The earlier bundles remain intact. Run the following when ready for the combined
-board rerun after the cleaned ET DS-CNN export:
+The earlier bundles remain intact. The completed board collection used these commands;
+they are retained here for reproduction:
 
 ```bash
 cd ~/alif

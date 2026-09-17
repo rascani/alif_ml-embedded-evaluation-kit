@@ -183,7 +183,7 @@ It excludes runner, diagnostics, validation fixtures, platform/startup, adapter,
 C/C++ support/merged strings, and linker padding. It is component attribution, not
 standalone deployable size. See the [component breakdown](e8_et_tiny.md#recorded-static-footprint-v4).
 
-The [shareable summary](e8_tiny_current_summary.md) splits this subtotal into model,
+The [historical shareable summary](results/e8-tiny-comparison-2026-09-16-v4.html) splits this subtotal into model,
 operators, and core runtime. Operators include selected implementations, CMSIS-NN and
 resolver/registry bindings; core runtime excludes all three. The
 [exact component CSV](results/e8-tiny-flash-components-2026-09-16-v4.csv) preserves the

@@ -5,33 +5,31 @@ SPDX-License-Identifier: Apache-2.0
 
 # Complete E8 Tiny profile comparison — 17 September 2026
 
-Current flash uses **TFLM v3 INT8 registrations** and **ExecuTorch v6 with trained PTEs**, GCC 15.2.1
-`-Oz` runtime/wrappers, CMSIS-NN 8.0.0 `-O3`, and function/data sections. The
-current E8 latency/RAM fields are pending for both logging profiles. The last measured
-board results below belong to earlier logging-enabled `-O3` images. No logging-disabled
-latency or RAM has been measured on E8. The cleaned ET DS-CNN export is integrated;
-ET v6 and TFLM v3 are ready for the E8 rerun. KiB means 1,024 bytes.
+Current flash uses **TFLM v3 INT8 registrations** and **ExecuTorch v6 trained PTEs**,
+GCC 15.2.1 `-Oz` runtime/wrappers, CMSIS-NN 8.0.0 `-O3`, and function/data sections.
+The logged images were measured on E8 on 17 September: three boots and 300 measured
+inferences per model/framework. Silent images have flash measurements only. KiB = 1,024 bytes.
 
-## Current flash and measurement status
+## Current flash and board measurements
 
-| Model | Framework | Logging | Model KiB | Operators KiB | Core KiB | Total KiB | E8 latency | E8 RAM |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| DS-CNN | TFLM | On | 52.67 | 33.35 | 11.59 | 97.62 | Pending | Pending |
-| DS-CNN | TFLM | Off | 52.67 | 30.58 | 10.30 | 93.55 | Pending | Pending |
-| DS-CNN | ExecuTorch | On | 41.42 | 27.56 | 23.25 | 92.23 | Pending | Pending |
-| DS-CNN | ExecuTorch | Off | 41.42 | 23.92 | 12.11 | 77.45 | Pending | Pending |
-| ResNet8 | TFLM | On | 96.19 | 28.08 | 11.58 | 135.85 | Pending | Pending |
-| ResNet8 | TFLM | Off | 96.19 | 25.46 | 10.29 | 131.94 | Pending | Pending |
-| ResNet8 | ExecuTorch | On | 93.90 | 21.28 | 23.25 | 138.43 | Pending | Pending |
-| ResNet8 | ExecuTorch | Off | 93.90 | 17.71 | 12.11 | 123.71 | Pending | Pending |
-| MobileNetV1 0.25 | TFLM | On | 325.48 | 33.35 | 11.59 | 370.42 | Pending | Pending |
-| MobileNetV1 0.25 | TFLM | Off | 325.48 | 30.58 | 10.30 | 366.36 | Pending | Pending |
-| MobileNetV1 0.25 | ExecuTorch | On | 264.45 | 27.56 | 23.25 | 315.26 | Pending | Pending |
-| MobileNetV1 0.25 | ExecuTorch | Off | 264.45 | 23.92 | 12.11 | 300.47 | Pending | Pending |
-| Deep autoencoder | TFLM | On | 270.48 | 8.49 | 10.77 | 289.75 | Pending | Pending |
-| Deep autoencoder | TFLM | Off | 270.48 | 7.79 | 9.52 | 287.79 | Pending | Pending |
-| Deep autoencoder | ExecuTorch | On | 273.41 | 3.95 | 23.25 | 300.60 | Pending | Pending |
-| Deep autoencoder | ExecuTorch | Off | 273.41 | 2.86 | 12.11 | 288.37 | Pending | Pending |
+| Model | Framework | Logging | Model KiB | Operators KiB | Core KiB | Total KiB | E8 latency ms | Mean cycles | E8 RAM KiB |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| DS-CNN | TFLM | On | 52.67 | 33.35 | 11.59 | 97.62 | 6.038 | 2,415,103 | 27.48 |
+| DS-CNN | TFLM | Off | 52.67 | 30.58 | 10.30 | 93.55 | Unmeasured | — | Unmeasured |
+| DS-CNN | ExecuTorch | On | 41.42 | 27.56 | 23.25 | 92.23 | 5.824 | 2,329,508 | 28.89 |
+| DS-CNN | ExecuTorch | Off | 41.42 | 23.92 | 12.11 | 77.45 | Unmeasured | — | Unmeasured |
+| ResNet8 | TFLM | On | 96.19 | 28.08 | 11.58 | 135.85 | 15.653 | 6,261,149 | 54.51 |
+| ResNet8 | TFLM | Off | 96.19 | 25.46 | 10.29 | 131.94 | Unmeasured | — | Unmeasured |
+| ResNet8 | ExecuTorch | On | 93.90 | 21.28 | 23.25 | 138.43 | 15.231 | 6,092,558 | 58.34 |
+| ResNet8 | ExecuTorch | Off | 93.90 | 17.71 | 12.11 | 123.71 | Unmeasured | — | Unmeasured |
+| MobileNetV1 0.25 | TFLM | On | 325.48 | 33.35 | 11.59 | 370.42 | 23.994 | 9,597,727 | 99.18 |
+| MobileNetV1 0.25 | TFLM | Off | 325.48 | 30.58 | 10.30 | 366.36 | Unmeasured | — | Unmeasured |
+| MobileNetV1 0.25 | ExecuTorch | On | 264.45 | 27.56 | 23.25 | 315.26 | 21.748 | 8,699,239 | 94.15 |
+| MobileNetV1 0.25 | ExecuTorch | Off | 264.45 | 23.92 | 12.11 | 300.47 | Unmeasured | — | Unmeasured |
+| Deep autoencoder | TFLM | On | 270.48 | 8.49 | 10.77 | 289.75 | 1.205 | 481,860 | 9.64 |
+| Deep autoencoder | TFLM | Off | 270.48 | 7.79 | 9.52 | 287.79 | Unmeasured | — | Unmeasured |
+| Deep autoencoder | ExecuTorch | On | 273.41 | 3.95 | 23.25 | 300.60 | 1.207 | 482,996 | 6.10 |
+| Deep autoencoder | ExecuTorch | Off | 273.41 | 2.86 | 12.11 | 288.37 | Unmeasured | — | Unmeasured |
 
 Operators include framework kernels/utilities, CMSIS-NN and resolver/registry.
 Core runtime includes execution, allocation and planning. Total sums model + operators + core;
@@ -60,7 +58,7 @@ Exact totals are computed before rounding; merged-string and COMDAT attribution 
 | Deep autoencoder | ExecuTorch | On | 0.45 | 1.52 | 1.98 |
 | Deep autoencoder | ExecuTorch | Off | 0.27 | 1.52 | 1.07 |
 
-## Last measured E8 latency and RAM — historical reference
+## Earlier E8 latency and RAM — historical reference
 
 These measurements used the original generic TFLM bundle and ET v4, with logging on,
 GCC `-O3` and CPU-only Cortex-M55-HP at 400 MHz. Each row averages 300 inferences
@@ -92,4 +90,6 @@ They include the older images' flash components alongside their actual measured 
 
 [ET v6 build report and Mac workflow](e8_et_tiny_v6_builds.md) ·
 [INT8 registration report](e8_tflm_int8_registration_results.md) ·
-[Historical measured report](e8_tiny_current_summary.md)
+[Current measured summary](e8_tiny_current_summary.md) ·
+[Collection validation and detailed RAM](e8_tiny_board_results_2026_09_17.md) ·
+[Historical measured report](e8_et_tiny_v4_results.md)
