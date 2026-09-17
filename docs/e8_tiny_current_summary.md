@@ -12,6 +12,10 @@ with function/data sections. Both frameworks select model-specific operators;
 TFLM uses compatible INT8 registrations and ET has zero selected primitive registrations.
 Code/models use MRAM; inference pools use SRAM; globals/heap/stack use DTCM.
 
+The next [DTCM inference-pool experiment](e8_tiny_dtcm.md) has separate ET v7 and
+TFLM v4 bundles. Its board measurements are pending; the table below remains the
+measured SRAM baseline.
+
 **Flash columns use the separate logging-disabled size builds. Latency, cycles and RAM
 come from the logging-enabled board builds.** No latency or RAM is claimed for the silent
 builds. KiB = 1,024 bytes; bold marks the lower value in each pair.
