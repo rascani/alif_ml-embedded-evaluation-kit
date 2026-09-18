@@ -1,0 +1,3278 @@
+{
+  "scope": "Persistent TFLM arena tail versus ET method metadata; excludes planned buffers, outside persistent state, static storage, transient allocations and stack.",
+  "method": "TFLM: instrumented TrackedArenaAllocator using E8 M55 runtime/kernel archives on Corstone; exact payload and alignment per call. ET: existing source/target-ABI reconstruction. Both totals checked against E8 board data.",
+  "board_report": "docs/results/e8-tiny-board-2026-09-17-sram-v8-v3.json",
+  "board_report_sha256": "acf2c6adab121d920bdba0b8a47c51418bf395f5ab7d09141e5b8d5d10de4ebd",
+  "et_reconstruction_sha256": "4c029f51b2347264324d782867b985bfe84fd36325b738d22534db1a769c966d",
+  "mlek_commit": "98762f2f57d61c3b68ed55884bae22f64e8150fa",
+  "library_sha256": {
+    "libtflu.a": "2e1cde4ac86f5c70edee5146b79d97105fdfbff052c1a2d393fabe598e0c6255",
+    "libcmsis-nn.a": "624ac00c175c50249806a1ca1baf92c329efdc9c0cf22f0c8738f7c315bec445",
+    "libml_framework_tflm.a": "b404b928f5094de2f5df518e7c398440e0b5d82041d4498314c336c8320b7b72"
+  },
+  "models": {
+    "ic": {
+      "name": "resnet8",
+      "tflm_model_sha256": "3c002613d1b2475eb51dd78dfb85a546c8ae658dee71cf6ade43b022fe205415",
+      "et_model_sha256": "e91b8d270ade7c017c298bcc6d4cee26c487c0e6500367c91fbc17606e3c10b2",
+      "tflm": {
+        "persistent_bytes": 5300,
+        "payload_bytes": {
+          "arena_allocator": 36,
+          "greedy_planner": 44,
+          "micro_allocator": 36,
+          "builtin_data_allocator": 8,
+          "subgraph_record": 8,
+          "eval_tensor_descriptors": 456,
+          "node_and_registration_records": 512,
+          "parsed_operator_options": 343,
+          "kernel_op_data": 892,
+          "conv_multipliers": 1344,
+          "conv_shifts": 1344,
+          "fully_connected_kernel_sums": 40,
+          "scratch_buffer_handles": 28,
+          "input_output_pointer_arrays": 8,
+          "input_output_tensor_descriptors": 64,
+          "input_output_quantization_structs": 24,
+          "input_output_zero_point_arrays": 16
+        },
+        "padding_bytes": 97,
+        "raw_tail_bytes": 5332,
+        "removed_audit_overhead_bytes": 32,
+        "planned_head_bytes": 49728,
+        "invoke_allocation_calls": 0,
+        "allocations": [
+          {
+            "requested": 68,
+            "alignment": 4,
+            "consumed": 68,
+            "caller": "10000e59",
+            "initial": false,
+            "source": "arm::app::inference_runner::TrackedArenaAllocator::Create(unsigned char*, unsigned int)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:26",
+            "category": "arena_allocator",
+            "audit_overhead_bytes": 32
+          },
+          {
+            "requested": 44,
+            "alignment": 4,
+            "consumed": 44,
+            "caller": "10000efd",
+            "initial": false,
+            "source": "arm::app::inference_runner::CreateAuditedMicroAllocator(arm::app::inference_runner::TrackedArenaAllocator&)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:92",
+            "category": "greedy_planner",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10003bd5",
+            "initial": false,
+            "source": "tflite::MicroAllocator::Create(tflite::SingleArenaBufferAllocator*, tflite::MicroMemoryPlanner*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:575",
+            "category": "micro_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003cef",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:638",
+            "category": "builtin_data_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003d19",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:650",
+            "category": "subgraph_record",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 456,
+            "alignment": 4,
+            "consumed": 456,
+            "caller": "10003b57",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateTfLiteEvalTensors(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1048",
+            "category": "eval_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 4,
+            "consumed": 512,
+            "caller": "10003873",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateNodeAndRegistrations(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:784",
+            "category": "node_and_registration_records",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 2,
+            "alignment": 1,
+            "consumed": 2,
+            "caller": "100066b9",
+            "initial": false,
+            "source": "TfLiteAddParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteAddParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteAddParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseAdd(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1132",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 30,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 2,
+            "alignment": 1,
+            "consumed": 2,
+            "caller": "100066b9",
+            "initial": false,
+            "source": "TfLiteAddParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteAddParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteAddParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseAdd(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1132",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 30,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10006719",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 2,
+            "alignment": 1,
+            "consumed": 2,
+            "caller": "100066b9",
+            "initial": false,
+            "source": "TfLiteAddParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteAddParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteAddParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseAdd(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1132",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 40,
+            "alignment": 4,
+            "consumed": 42,
+            "caller": "10006887",
+            "initial": false,
+            "source": "TfLitePoolParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLitePoolParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLitePoolParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParsePool(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1962",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10006989",
+            "initial": false,
+            "source": "TfLiteReshapeParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteReshapeParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteReshapeParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseReshape(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2068",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "100067d5",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 4,
+            "consumed": 7,
+            "caller": "10006937",
+            "initial": false,
+            "source": "TfLiteSoftmaxParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteSoftmaxParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteSoftmaxParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseSoftmax(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2605",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 68,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 16,
+            "consumed": 48,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "100047f9",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002935",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000293f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 40,
+            "alignment": 16,
+            "consumed": 48,
+            "caller": "10002e79",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "10003755",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1226\ntflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1214",
+            "category": "scratch_buffer_handles",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 4,
+            "caller": "10004557",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:234",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "10003677",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "100039b9",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "100039d5",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 12,
+            "caller": "100045db",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:256",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "10003677",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "100039b9",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "100039d5",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          }
+        ],
+        "probe_elf_sha256": "ed596bd66fe1f0a7aa100e6ddd2447840a6366e47c513f8fa70ac5fe2a42a61a",
+        "probe_log_sha256": "a38c5004392ce326a63b21475fc10d907f0418eafe8d08c8d8e0772dbd15467b",
+        "zero_input_output_fnv1a": "84611fe7",
+        "output_matches_previous_m55_validation": true
+      },
+      "executorch": {
+        "scope": "Target-ABI/source reconstruction; verify against FVP allocator counters",
+        "metadata_bytes": 5640,
+        "payload_bytes": {
+          "EValues": 1680,
+          "Input flags": 1,
+          "Tensor strides": 556,
+          "TensorImpl": 2080,
+          "IntList pointers": 56,
+          "IntList unboxed": 112,
+          "IntList objects": 84,
+          "Delegate list": 0,
+          "Chains": 16,
+          "Kernel pointers": 60,
+          "Argument spans": 120,
+          "Argument pointers": 852
+        },
+        "padding_bytes": 23
+      },
+      "both_persistent_totals_match_board": true
+    },
+    "kws": {
+      "name": "ds_cnn",
+      "tflm_model_sha256": "aeea436800704fce17b17292e4412630ad856e9d777c044c64ef748a880bd0ae",
+      "et_model_sha256": "206dc7a286bad78bf60d4671e6a8ca329fc46800b1aae9b81ba4ef8f22e6b1d1",
+      "tflm": {
+        "persistent_bytes": 6884,
+        "payload_bytes": {
+          "arena_allocator": 36,
+          "greedy_planner": 44,
+          "micro_allocator": 36,
+          "builtin_data_allocator": 8,
+          "subgraph_record": 8,
+          "eval_tensor_descriptors": 420,
+          "node_and_registration_records": 416,
+          "parsed_operator_options": 337,
+          "kernel_op_data": 712,
+          "conv_multipliers": 1280,
+          "conv_shifts": 1280,
+          "depthwise_multipliers": 1024,
+          "depthwise_shifts": 1024,
+          "fully_connected_kernel_sums": 48,
+          "scratch_buffer_handles": 20,
+          "input_output_pointer_arrays": 8,
+          "input_output_tensor_descriptors": 64,
+          "input_output_quantization_structs": 24,
+          "input_output_zero_point_arrays": 16
+        },
+        "padding_bytes": 79,
+        "raw_tail_bytes": 6916,
+        "removed_audit_overhead_bytes": 32,
+        "planned_head_bytes": 20464,
+        "invoke_allocation_calls": 0,
+        "allocations": [
+          {
+            "requested": 68,
+            "alignment": 4,
+            "consumed": 68,
+            "caller": "10000e59",
+            "initial": false,
+            "source": "arm::app::inference_runner::TrackedArenaAllocator::Create(unsigned char*, unsigned int)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:26",
+            "category": "arena_allocator",
+            "audit_overhead_bytes": 32
+          },
+          {
+            "requested": 44,
+            "alignment": 4,
+            "consumed": 44,
+            "caller": "10000efd",
+            "initial": false,
+            "source": "arm::app::inference_runner::CreateAuditedMicroAllocator(arm::app::inference_runner::TrackedArenaAllocator&)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:92",
+            "category": "greedy_planner",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10003721",
+            "initial": false,
+            "source": "tflite::MicroAllocator::Create(tflite::SingleArenaBufferAllocator*, tflite::MicroMemoryPlanner*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:575",
+            "category": "micro_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "1000383b",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:638",
+            "category": "builtin_data_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003865",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:650",
+            "category": "subgraph_record",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 420,
+            "alignment": 4,
+            "consumed": 420,
+            "caller": "100036a3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateTfLiteEvalTensors(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1048",
+            "category": "eval_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 416,
+            "alignment": 4,
+            "consumed": 416,
+            "caller": "100033bf",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateNodeAndRegistrations(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:784",
+            "category": "node_and_registration_records",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 40,
+            "alignment": 4,
+            "consumed": 40,
+            "caller": "10006633",
+            "initial": false,
+            "source": "TfLitePoolParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLitePoolParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLitePoolParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParsePool(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1962",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10006735",
+            "initial": false,
+            "source": "TfLiteReshapeParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteReshapeParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteReshapeParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseReshape(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2068",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "10006581",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 4,
+            "consumed": 7,
+            "caller": "100066e3",
+            "initial": false,
+            "source": "TfLiteSoftmaxParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteSoftmaxParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteSoftmaxParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseSoftmax(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2605",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 68,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 16,
+            "consumed": 48,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 48,
+            "alignment": 16,
+            "consumed": 48,
+            "caller": "100029c5",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 20,
+            "alignment": 4,
+            "consumed": 20,
+            "caller": "100032a1",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1226\ntflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1214",
+            "category": "scratch_buffer_handles",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 12,
+            "caller": "100040a3",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:234",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100031c3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10003505",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003521",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 12,
+            "caller": "10004127",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:256",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100031c3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10003505",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003521",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          }
+        ],
+        "probe_elf_sha256": "b74fac3142178fb23322f4cccbe99d7c79be7024ddb92cc6bb9d69ab0a9e6b3b",
+        "probe_log_sha256": "3eca8d35bd3532fdc38c7a6ef56869e6d1b431f49d651b81af3464d984b9f425",
+        "zero_input_output_fnv1a": "88525258",
+        "output_matches_previous_m55_validation": true
+      },
+      "executorch": {
+        "scope": "Target-ABI/source reconstruction; verify against FVP allocator counters",
+        "metadata_bytes": 5056,
+        "payload_bytes": {
+          "EValues": 1440,
+          "Input flags": 1,
+          "Tensor strides": 508,
+          "TensorImpl": 1984,
+          "IntList pointers": 56,
+          "IntList unboxed": 112,
+          "IntList objects": 84,
+          "Delegate list": 0,
+          "Chains": 16,
+          "Kernel pointers": 48,
+          "Argument spans": 96,
+          "Argument pointers": 688
+        },
+        "padding_bytes": 23
+      },
+      "both_persistent_totals_match_board": true
+    },
+    "vww": {
+      "name": "mobilenet_v1_025",
+      "tflm_model_sha256": "597a384c8c2c8a1276f04702f25013b7838f2f814f1ca7c174d295b73e3d6b7b",
+      "et_model_sha256": "15fc83830bddb65f8966103d735a4058f8c1284e3159b551549b40df92280b65",
+      "tflm": {
+        "persistent_bytes": 27044,
+        "payload_bytes": {
+          "arena_allocator": 36,
+          "greedy_planner": 44,
+          "micro_allocator": 36,
+          "builtin_data_allocator": 8,
+          "subgraph_record": 8,
+          "eval_tensor_descriptors": 1068,
+          "node_and_registration_records": 992,
+          "parsed_operator_options": 841,
+          "kernel_op_data": 1792,
+          "conv_multipliers": 5984,
+          "conv_shifts": 5984,
+          "depthwise_multipliers": 4960,
+          "depthwise_shifts": 4960,
+          "fully_connected_kernel_sums": 8,
+          "scratch_buffer_handles": 56,
+          "input_output_pointer_arrays": 8,
+          "input_output_tensor_descriptors": 64,
+          "input_output_quantization_structs": 24,
+          "input_output_zero_point_arrays": 16
+        },
+        "padding_bytes": 155,
+        "raw_tail_bytes": 27076,
+        "removed_audit_overhead_bytes": 32,
+        "planned_head_bytes": 73728,
+        "invoke_allocation_calls": 0,
+        "allocations": [
+          {
+            "requested": 68,
+            "alignment": 4,
+            "consumed": 68,
+            "caller": "10000e59",
+            "initial": false,
+            "source": "arm::app::inference_runner::TrackedArenaAllocator::Create(unsigned char*, unsigned int)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:26",
+            "category": "arena_allocator",
+            "audit_overhead_bytes": 32
+          },
+          {
+            "requested": 44,
+            "alignment": 4,
+            "consumed": 44,
+            "caller": "10000efd",
+            "initial": false,
+            "source": "arm::app::inference_runner::CreateAuditedMicroAllocator(arm::app::inference_runner::TrackedArenaAllocator&)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:92",
+            "category": "greedy_planner",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10003721",
+            "initial": false,
+            "source": "tflite::MicroAllocator::Create(tflite::SingleArenaBufferAllocator*, tflite::MicroMemoryPlanner*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:575",
+            "category": "micro_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "1000383b",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:638",
+            "category": "builtin_data_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003865",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:650",
+            "category": "subgraph_record",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1068,
+            "alignment": 4,
+            "consumed": 1068,
+            "caller": "100036a3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateTfLiteEvalTensors(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1048",
+            "category": "eval_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 992,
+            "alignment": 4,
+            "consumed": 992,
+            "caller": "100033bf",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateNodeAndRegistrations(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:784",
+            "category": "node_and_registration_records",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "100064e5",
+            "initial": false,
+            "source": "TfLiteDepthwiseConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteDepthwiseConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteDepthwiseConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseDepthwiseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1439",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 28,
+            "alignment": 4,
+            "consumed": 28,
+            "caller": "1000642f",
+            "initial": false,
+            "source": "TfLiteConvParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteConvParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteConvParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseConv2D(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1351",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 40,
+            "alignment": 4,
+            "consumed": 40,
+            "caller": "10006633",
+            "initial": false,
+            "source": "TfLitePoolParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLitePoolParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLitePoolParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParsePool(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1962",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "10006735",
+            "initial": false,
+            "source": "TfLiteReshapeParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteReshapeParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteReshapeParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseReshape(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2068",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "10006581",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 4,
+            "consumed": 7,
+            "caller": "100066e3",
+            "initial": false,
+            "source": "TfLiteSoftmaxParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteSoftmaxParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteSoftmaxParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseSoftmax(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:2605",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 68,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 60,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 16,
+            "consumed": 48,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10004345",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 16,
+            "consumed": 32,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 16,
+            "consumed": 32,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 16,
+            "consumed": 32,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 16,
+            "consumed": 32,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 64,
+            "alignment": 16,
+            "consumed": 64,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 128,
+            "alignment": 16,
+            "consumed": 128,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 256,
+            "alignment": 16,
+            "consumed": 256,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "10002453",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:128",
+            "category": "depthwise_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "1000245f",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/depthwise_conv.cc:131",
+            "category": "depthwise_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "10001f89",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:125",
+            "category": "conv_multipliers",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 1024,
+            "alignment": 16,
+            "consumed": 1024,
+            "caller": "10001f93",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/conv.cc:128",
+            "category": "conv_shifts",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 16,
+            "consumed": 16,
+            "caller": "100029c5",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 56,
+            "alignment": 4,
+            "consumed": 56,
+            "caller": "100032a1",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1226\ntflite::MicroAllocator::AllocateScratchBufferHandles(tflite::ScratchBufferHandle**, unsigned int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1214",
+            "category": "scratch_buffer_handles",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 8,
+            "caller": "100040a3",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:234",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100031c3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10003505",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003521",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 12,
+            "caller": "10004127",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:256",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100031c3",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10003505",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10003521",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          }
+        ],
+        "probe_elf_sha256": "fda8f6d5725ec8a06a4be9f9843e446bce0afa7b49f0fbebb6c45c1ef209aee1",
+        "probe_log_sha256": "6cfab7d73afc1be5bdf6d3453c90d6f002aa18f10dec9d42117c872076353950",
+        "zero_input_output_fnv1a": "a54450fd",
+        "output_matches_previous_m55_validation": true
+      },
+      "executorch": {
+        "scope": "Target-ABI/source reconstruction; verify against FVP allocator counters",
+        "metadata_bytes": 12372,
+        "payload_bytes": {
+          "EValues": 3104,
+          "Input flags": 1,
+          "Tensor strides": 1372,
+          "TensorImpl": 5440,
+          "IntList pointers": 56,
+          "IntList unboxed": 112,
+          "IntList objects": 84,
+          "Delegate list": 0,
+          "Chains": 16,
+          "Kernel pointers": 120,
+          "Argument spans": 240,
+          "Argument pointers": 1804
+        },
+        "padding_bytes": 23
+      },
+      "both_persistent_totals_match_board": true
+    },
+    "ad": {
+      "name": "deep_autoencoder",
+      "tflm_model_sha256": "87cf24194ef93d1d9b11a591d805526b98008e351655d29883c825c9c106ba24",
+      "et_model_sha256": "ced0e14f92f39f467ddad0312de5856574414b2c99cf05be957db01921a07d5e",
+      "tflm": {
+        "persistent_bytes": 8500,
+        "payload_bytes": {
+          "arena_allocator": 36,
+          "greedy_planner": 44,
+          "micro_allocator": 36,
+          "builtin_data_allocator": 8,
+          "subgraph_record": 8,
+          "eval_tensor_descriptors": 372,
+          "node_and_registration_records": 320,
+          "parsed_operator_options": 50,
+          "kernel_op_data": 720,
+          "fully_connected_kernel_sums": 6688,
+          "input_output_pointer_arrays": 8,
+          "input_output_tensor_descriptors": 64,
+          "input_output_quantization_structs": 24,
+          "input_output_zero_point_arrays": 16
+        },
+        "padding_bytes": 106,
+        "raw_tail_bytes": 8532,
+        "removed_audit_overhead_bytes": 32,
+        "planned_head_bytes": 768,
+        "invoke_allocation_calls": 0,
+        "allocations": [
+          {
+            "requested": 68,
+            "alignment": 4,
+            "consumed": 68,
+            "caller": "10000d45",
+            "initial": false,
+            "source": "arm::app::inference_runner::TrackedArenaAllocator::Create(unsigned char*, unsigned int)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:26",
+            "category": "arena_allocator",
+            "audit_overhead_bytes": 32
+          },
+          {
+            "requested": 44,
+            "alignment": 4,
+            "consumed": 44,
+            "caller": "10000de9",
+            "initial": false,
+            "source": "arm::app::inference_runner::CreateAuditedMicroAllocator(arm::app::inference_runner::TrackedArenaAllocator&)\nbuild-artifacts/tiny-persistent-audit/TflmMemoryAudit.cc:92",
+            "category": "greedy_planner",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 36,
+            "alignment": 4,
+            "consumed": 36,
+            "caller": "1000282d",
+            "initial": false,
+            "source": "tflite::MicroAllocator::Create(tflite::SingleArenaBufferAllocator*, tflite::MicroMemoryPlanner*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:575",
+            "category": "micro_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10002947",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:638",
+            "category": "builtin_data_allocator",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "10002971",
+            "initial": false,
+            "source": "tflite::MicroAllocator::StartModelAllocation(tflite::Model const*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:650",
+            "category": "subgraph_record",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 372,
+            "alignment": 4,
+            "consumed": 372,
+            "caller": "100027af",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateTfLiteEvalTensors(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:1048",
+            "category": "eval_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 320,
+            "alignment": 4,
+            "consumed": 320,
+            "caller": "100024cb",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocateNodeAndRegistrations(tflite::Model const*, tflite::SubgraphAllocations*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:784",
+            "category": "node_and_registration_records",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 5,
+            "alignment": 1,
+            "consumed": 5,
+            "caller": "1000454d",
+            "initial": false,
+            "source": "TfLiteFullyConnectedParams* tflite::BuiltinDataAllocator::AllocatePOD<TfLiteFullyConnectedParams>()\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.h:47\nAllocate<TfLiteFullyConnectedParams>\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:62\ntflite::ParseFullyConnected(tflite::Operator const*, tflite::ErrorReporter*, tflite::BuiltinDataAllocator*, void**)\ndependencies/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc:1578",
+            "category": "parsed_operator_options",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 86,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 72,
+            "alignment": 16,
+            "consumed": 80,
+            "caller": "10003451",
+            "initial": false,
+            "source": "tflite::MicroInterpreterGraph::InitSubgraphs()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter_graph.cc:126",
+            "category": "kernel_op_data",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 16,
+            "consumed": 32,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 512,
+            "alignment": 16,
+            "consumed": 512,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 2560,
+            "alignment": 16,
+            "consumed": 2560,
+            "caller": "10001ea1",
+            "initial": false,
+            "source": "tflite::(anonymous namespace)::Prepare(TfLiteContext*, TfLiteNode*)\ndependencies/tensorflow/tensorflow/lite/micro/kernels/cmsis_nn/fully_connected.cc:162",
+            "category": "fully_connected_kernel_sums",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 16,
+            "caller": "100031af",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:234",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100022cf",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10002611",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "1000262d",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 4,
+            "alignment": 16,
+            "consumed": 12,
+            "caller": "10003233",
+            "initial": false,
+            "source": "tflite::MicroInterpreter::AllocateTensors()\ndependencies/tensorflow/tensorflow/lite/micro/micro_interpreter.cc:256",
+            "category": "input_output_pointer_arrays",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 32,
+            "alignment": 4,
+            "consumed": 32,
+            "caller": "100022cf",
+            "initial": false,
+            "source": "tflite::MicroAllocator::AllocatePersistentTfLiteTensor(tflite::Model const*, tflite::SubgraphAllocations const*, int, int)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:804",
+            "category": "input_output_tensor_descriptors",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 12,
+            "alignment": 4,
+            "consumed": 12,
+            "caller": "10002611",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:297\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225",
+            "category": "input_output_quantization_structs",
+            "audit_overhead_bytes": 0
+          },
+          {
+            "requested": 8,
+            "alignment": 4,
+            "consumed": 8,
+            "caller": "1000262d",
+            "initial": false,
+            "source": "tflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:315 (discriminator 1)\ntflite::internal::InitializeTfLiteTensorFromFlatbuffer(tflite::IPersistentBufferAllocator*, tflite::INonPersistentBufferAllocator*, bool, tflite::Tensor const&, flatbuffers::Vector<flatbuffers::Offset<tflite::Buffer>, unsigned long> const*, TfLiteTensor*)\ndependencies/tensorflow/tensorflow/lite/micro/micro_allocator.cc:225 (discriminator 1)",
+            "category": "input_output_zero_point_arrays",
+            "audit_overhead_bytes": 0
+          }
+        ],
+        "probe_elf_sha256": "21b750775b17a74f5dcdde7b5a6adf9aed41327b00f51fcc759f9f6052c21f35",
+        "probe_log_sha256": "23d65056f187e94cf182296b8de259b3c73a7798ed0c0505ceec7c4535ffc9d6",
+        "zero_input_output_fnv1a": "55e8cd75",
+        "output_matches_previous_m55_validation": true
+      },
+      "executorch": {
+        "scope": "Target-ABI/source reconstruction; verify against FVP allocator counters",
+        "metadata_bytes": 3552,
+        "payload_bytes": {
+          "EValues": 1264,
+          "Input flags": 1,
+          "Tensor strides": 248,
+          "TensorImpl": 992,
+          "IntList pointers": 64,
+          "IntList unboxed": 128,
+          "IntList objects": 192,
+          "Delegate list": 0,
+          "Chains": 16,
+          "Kernel pointers": 40,
+          "Argument spans": 80,
+          "Argument pointers": 520
+        },
+        "padding_bytes": 7
+      },
+      "both_persistent_totals_match_board": true
+    }
+  }
+}

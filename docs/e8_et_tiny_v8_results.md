@@ -124,6 +124,12 @@ persistent bytes and 288 runtime-static bytes, totaling 648 bytes. ET filtered f
 is now smaller for all four models, including the autoencoder, whose PTE itself is
 still larger than TFLM's model.
 
+The [persistent-allocation comparison](e8_tiny_persistent_allocations.md) now traces
+every TFLM arena-tail allocation and compares it with ET's method reconstruction.
+For ResNet8, ET's larger tensor/value representation offsets savings from keeping
+prepared kernel constants in the PTE. Both persistent totals reconcile exactly with
+these board measurements.
+
 Both frameworks derive from trained reference weights, but their quantization and
 calibration differ.
 

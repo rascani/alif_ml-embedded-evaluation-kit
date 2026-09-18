@@ -40,6 +40,12 @@ All 24 selected boots passed identity, timing and memory checks, and all 12 ET s
 checks passed. The final complete ET pass and prior final TFLM pass are used;
 earlier captures remain preserved.
 
+The [physical E8 timer cross-check](e8_timer_validation.md) passed on 18 September:
+three boots and 72 intervals, including pending SysTick and DWT rollovers and 12-second
+tests. Both production counters agree with DWT within endpoint read bounds; no extra
+tolerance or timing correction is needed. This validates shared cycle accounting,
+not the absolute frequency of the common CPU clock. The reported inference results are unchanged.
+
 ET latency is 3.52% lower for DS-CNN, 2.32% lower for ResNet8 and 10.60% lower for
 MobileNetV1. Autoencoder latency is close: ET is 0.27% higher, about 3.31 microseconds.
 Integer pooling reduces ET RAM by 928–9,216 bytes versus v6. ET now uses less RAM
@@ -62,7 +68,7 @@ counted twice. These component costs are not whole-device deployment requirement
 **Model scope:** Both derive from trained reference weights; ET v8 retains DS-CNN's
 Q/DQ cleanup and adds integer/list constant pooling. Quantization/calibration and
 potentially preprocessing contracts differ. These are runtime/model measurements, not a dataset accuracy evaluation
-or an official MLPerf result. Independent hardware timer cross-checking remains pending.
+or an official MLPerf result.
 
 [Shareable SRAM HTML](results/e8-tiny-board-2026-09-17-sram-v8-v3.html) ·
 [Exact CSV](results/e8-tiny-board-2026-09-17-sram-v8-v3.csv) · [JSON and collection provenance](results/e8-tiny-board-2026-09-17-sram-v8-v3.json) ·
