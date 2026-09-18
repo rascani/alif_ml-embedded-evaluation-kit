@@ -159,8 +159,7 @@ method/temp numbers should not be treated as an equally precise RAM baseline.
 
 Both pools remain in SRAM for comparison with TFLM: method pool reserves 262,144 B at
 `0x02000000`; temporary pool reserves 65,536 B at `0x02040000`. Normal writable globals,
-heap and stack are in DTCM. Code/model/constants execute/read from MRAM. A later TCM or
-multi-segment experiment can use the measured sizes to choose safe reservations.
+heap and stack are in DTCM. Code/model/constants execute/read from MRAM.
 
 ## Recorded static footprint (v4)
 

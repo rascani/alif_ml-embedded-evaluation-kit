@@ -11,11 +11,7 @@ ET v8 uses the new E8 collection; TFLM v3 reuses its measured SRAM baseline. Eac
 logged row has three boots and 300 measured inferences. Silent images have flash
 measurements only. KiB = 1,024 bytes.
 
-These primary tables use SRAM inference pools and MRAM models/code. The separately
-measured [DTCM profiles](results/e8-tiny-profile-comparison-2026-09-17-dtcm-v7-v4.json)
-remain preserved. That earlier DTCM experiment, before ET integer pooling, improves
-both frameworks and gives TFLM the lower mean in all four pairs. Pooled ET has not been measured
-in DTCM; see the [placement comparison](e8_tiny_dtcm_results_2026_09_17.md).
+These tables use SRAM inference pools and MRAM models/code.
 
 ## Current flash and board measurements
 

@@ -21,7 +21,7 @@ the existing deterministic synthetic input, one separately timed first invocatio
 official MLPerf accuracy or end-to-end preprocessing measurement. Board results were
 collected on the Mac on 2026-09-16; native timings and pointer sizes are kept separate.
 The arena starts at `0x02000000`; persistent heap allocations and the model wrapper live
-in DTCM, with the wrapper on the stack. TCM arena placement remains a separate experiment.
+in DTCM, with the wrapper on the stack.
 
 ## Run on the Mac
 

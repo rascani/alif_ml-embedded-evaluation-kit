@@ -125,8 +125,7 @@ is now smaller for all four models, including the autoencoder, whose PTE itself 
 still larger than TFLM's model.
 
 Both frameworks derive from trained reference weights, but their quantization and
-calibration differ. The earlier DTCM experiment used ET v7 before integer pooling;
-it is preserved separately and does not measure the new pooled exports in DTCM.
+calibration differ.
 
 ## First inference after initialization
 
@@ -146,5 +145,4 @@ miss costs. The first-call numbers also exclude model loading and initialization
 [Per-boot samples](results/e8-et-tiny-2026-09-17-v8-sram.json) ·
 [Both logging profiles](e8_tiny_profile_comparison.md) ·
 [Build report](e8_et_tiny_v8_integer_pooling.md) ·
-[Previous SRAM results](e8_tiny_board_results_2026_09_17.md) ·
-[Earlier DTCM experiment](e8_tiny_dtcm_results_2026_09_17.md)
+[Previous SRAM results](e8_tiny_board_results_2026_09_17.md)

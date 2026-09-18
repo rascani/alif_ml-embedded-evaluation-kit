@@ -59,14 +59,6 @@ def package_profile_docs(root: Path, bundle: Path, manifest: dict):
     reference.mkdir()
     shutil.copy2(root / "dependencies/cmsis-nn/README.md", reference / "CMSIS-NN-README.md")
     shutil.copy2(root / "docs/e8_tiny_current_summary.md", reference)
-    if manifest.get("inference_memory") == "dtcm":
-        shutil.copy2(root / "docs/e8_tiny_dtcm.md", bundle / "README.md")
-        results = bundle / "results"
-        results.mkdir()
-        for suffix in ("csv", "json"):
-            shutil.copy2(root / f"docs/results/e8-tiny-board-2026-09-17-v6-v3.{suffix}", reference)
-            shutil.copy2(root / f"docs/results/e8-tiny-dtcm-builds-2026-09-17.{suffix}", results)
-        return
     results = bundle / "results"
     results.mkdir()
     report = "e8-tiny-oz-profiles-2026-09-17"

@@ -149,7 +149,7 @@ resources_downloaded/env/bin/python scripts/py/import_et_tiny_bundle.py \
   --archive "$EXPORT_ZIP" \
   --output resources_downloaded/et_tiny/mlperf-tiny-trained-integer-pooling
 resources_downloaded/env/bin/python scripts/py/build_et_tiny.py \
-  --gcc-bin "$GCC_BIN" --jobs 8 --paired-profiles --inference-memory sram \
+  --gcc-bin "$GCC_BIN" --jobs 8 --paired-profiles \
   --export-dir resources_downloaded/et_tiny/mlperf-tiny-trained-integer-pooling \
   --bundle-name build-e8-et-tiny-artifacts-v8-sram-integer-pooling --no-package
 resources_downloaded/env/bin/python scripts/py/validate_tiny_fvp.py \
@@ -160,4 +160,4 @@ resources_downloaded/env/bin/python scripts/py/validate_tiny_fvp.py \
 The published archive adds this report, exact CSV/JSON, the PTE comparison, final
 validation evidence and host scripts after those checks. Its manifest records
 the export ZIP SHA256, firmware source revision, runtime tree, dependencies and
-compiler/placement audits. The original v6 SRAM and v7 DTCM artifacts are preserved.
+compiler/placement audits. The original v6 SRAM artifacts are preserved.

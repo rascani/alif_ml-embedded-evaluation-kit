@@ -15,7 +15,7 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
-from tiny_inference_memory import audit_memory, memory_options
+from tiny_inference_memory import audit_memory
 from tiny_build_profiles import (
     audit_flags, audit_int8_registrations, package_profile_docs,
     prepare_bundle, profile_manifest, profile_options,
@@ -301,12 +301,9 @@ def build_e8_pair(
         logging = profile == "latency"
         print(f"Building e8 {model_id} {profile}", flush=True)
         build = root / f"build-e8-tflm-tiny-oz-{profile}"
-        if args.inference_memory == "dtcm":
-            build = build.with_name(f"{build.name}-dtcm")
         prefix = bundle / "validation" / f"e8-{model_id}-{profile}"
         configure_build(
             build, configure_args(root, "e8", model_id, model_path)
-            + memory_options(args.inference_memory)
             + profile_options(logging, f"{bundle.name}-{profile}"),
             env, Path(str(prefix) + "-configure.log"),
         )
@@ -314,9 +311,7 @@ def build_e8_pair(
                       Path(str(prefix) + "-build.log"))
         folder = (bundle if logging else bundle / "size") / model_id
         metadata = dict(model, **snapshot_model(build, folder, model_path, args.gcc_bin, logging))
-        metadata["inference_memory"] = audit_memory(
-            folder, args.inference_memory, args.gcc_bin, False
-        )
+        metadata["inference_memory"] = audit_memory(folder, args.gcc_bin, False)
         metadata["compiler_audit"] = audit_flags(build, folder, logging)
         metadata.update(audit_int8_registrations(folder))
         metadata.update(tflm_attribution(build, folder, metadata))
@@ -332,7 +327,6 @@ def main():
     parser.add_argument("--jobs", type=int, default=8)
     parser.add_argument("--bundle-name", default="build-e8-tflm-tiny-artifacts")
     parser.add_argument("--no-package", action="store_true", help="Leave a build for final review")
-    parser.add_argument("--inference-memory", choices=("sram", "dtcm"), default="sram")
     parser.add_argument("--paired-profiles", action="store_true",
                         help="Oz runtime/O3 CMSIS: silent size images plus logged latency images")
     args = parser.parse_args()
@@ -348,7 +342,7 @@ def main():
         "board": "DevKit-e8",
         "core": "M55-HP",
         "npu": False,
-        "inference_memory": args.inference_memory,
+        "inference_memory": "sram",
         "tflm_int8_selection": True,
         **build_identity(root, args.gcc_bin),
         "dependencies": {},
@@ -374,10 +368,6 @@ def main():
             print(f"Building {platform} {model_id}", flush=True)
             build = root / f"build-{platform}-tflm-tiny"
             options = configure_args(root, platform, model_id, model_path)
-            if platform == "e8":
-                options += memory_options(args.inference_memory)
-                if args.inference_memory == "dtcm":
-                    build = build.with_name(f"{build.name}-dtcm")
             prefix = bundle / "validation" / f"{platform}-{model_id}"
             configure_build(
                 build,
@@ -411,7 +401,7 @@ def main():
                     model, **snapshot_model(build, bundle / model_id, model_path, args.gcc_bin)
                 )
                 manifest["models"][model_id]["inference_memory"] = audit_memory(
-                    bundle / model_id, args.inference_memory, args.gcc_bin, False
+                    bundle / model_id, args.gcc_bin, False
                 )
     (bundle / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     if not args.no_package:

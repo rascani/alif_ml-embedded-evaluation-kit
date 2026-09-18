@@ -7,10 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 
 Compare TensorFlow Lite for Microcontrollers (TFLM) and ExecuTorch (ET) using MLPerf Tiny
 models with CPU-only execution on one Cortex-M55 of the Alif E8 Ensemble DevKit.
-Use the latest upstream frameworks with the same CMSIS-NN 8.0.0, use the same GCC toolchain for both,
-and evaluate TCM placement where the model's memory requirements allow it. Implement a
-reproducible inference runner, establish model correctness, and measure latency and memory
-use on the board. Include ET planning across TCM and SRAM as a bonus experiment.
+Use the latest upstream frameworks with the same CMSIS-NN 8.0.0 and GCC toolchain for both.
+Keep inference pools in SRAM. Implement a reproducible inference runner, establish model
+correctness, and measure latency and memory use on the board.
 
 Status: implementation started on `feat/e8-cpu-inference-runner`; both TFLM and ExecuTorch
 board smoke inference and readable UART capture now pass. At 400 MHz, the first runs
@@ -26,8 +25,8 @@ completed three boots with 100 measured samples each. All 600 samples reproduce 
 reported summaries. At 400 MHz, ET's mean times span 11.37–11.44 µs and TFLM's span
 374.16–374.38 µs for different smoke networks. ET's allocator peaks are unchanged; TFLM
 reports 4,160 bytes of arena usage on every boot. See [the board results](e8_cpu_benchmark.md).
-Matched-weight Tiny models, dataset accuracy checks, independent hardware timer checks,
-and TCM experiments remain pending.
+Matched-weight Tiny models, dataset accuracy checks, and independent hardware timer checks
+remain pending.
 Updated ET Tiny model preparation is proceeding separately.
 
 The initial optimized ET Tiny export is now integrated as a separate
@@ -88,7 +87,7 @@ The immediate remaining work is:
 1. Integrate each matched Tiny pair and validate known-input outputs.
 2. Complete independent timer checks over long intervals; repeat the SRAM comparison
    when the matched ET exports and DS-CNN DQ-to-Q cleanup are ready.
-3. Measure DTCM arena placement; evaluate split TCM/SRAM planning for ET afterward.
+3. Audit used and reserved SRAM pool sizes alongside persistent runtime allocations.
 
 Research baseline: repository commit `91de84c8`, with ET runner changes examined from
 [rascani/add-et-inference-runner](https://github.com/rascani/alif_ml-embedded-evaluation-kit/tree/e2a504e0d6a6b4a1d9812fe8cea205d639cae023).
@@ -109,7 +108,7 @@ following proposed baseline for both frameworks:
 | CMSIS-NN | Exactly `v8.0.0` for both frameworks and applicable export-side bindings |
 | Compiler | Arm GNU Toolchain 15.2.Rel1 for both frameworks; armclang deferred |
 | Optimization | Release, explicitly normalize relevant C/C++ and kernel builds to `-O3` |
-| Memory | Internal MRAM for model/code; SRAM control and DTCM arena experiments |
+| Memory | Internal MRAM for model/code; SRAM inference pools |
 | Console | UART4, 115200 baud, 8N1 |
 | Timing | `CPU_PROFILE_ENABLED=ON`, verified against the actual CPU clock |
 | Peripherals | Disable display and camera use; keep the other application core inactive |
@@ -117,9 +116,8 @@ following proposed baseline for both frameworks:
 
 The initial objective is comparison using MLPerf Tiny models. Official MLPerf submission
 integration, power measurement, NPU comparisons, and a second-core comparison are separate
-follow-up work. Establish an SRAM control first, then measure DTCM placement for models that
-fit. Keep compiler and placement visible as separate experiment dimensions. Defer armclang to
-a later experiment. Treat the reported
+follow-up work. Use SRAM inference pools for both frameworks and keep their placement
+explicit in every result. Defer armclang to a later experiment. Treat the reported
 armclang performance advantage as a hypothesis to measure on these models.
 
 **1. Establish a pinned build environment**
@@ -304,68 +302,12 @@ different experiment.
 Completion check: repeated runs of the same binary produce valid outputs and stable statistics,
 with enough recorded configuration to explain any variance.
 
-**5. Measure DTCM placement and optionally split ET planned memory**
-
-- [ ] Verify the E8 SKU's physical and configured TCM banks against the device documentation,
-  CMSIS device pack, and board initialization. The DFP declares 1 MiB of HP DTCM; the GNU
-  runner linker script now matches the scatter file and DFP. On-board accessibility and
-  initialization still need validation before allocating a TCM arena.
-- [ ] Budget usable DTCM after stack, heap, static data, alignment, and guard space. Keep ITCM
-  code placement constant while testing DTCM data placement. Do not treat instruction and data
-  TCM as interchangeable without verifying the platform configuration.
-- [ ] Measure each model's TFLM arena requirements and ET planned buffers, method allocations,
-  temporary/scratch allocations, and input storage separately. The existing 2 MiB defaults are
-  reservations, not requirements, and cannot simply be moved wholesale into TCM.
-- [ ] Add explicit, selectable SRAM and DTCM pool placement at the application/linker boundary.
-  Supply consistent regions in armclang scatter files and any retained GNU linker scripts.
-  Add size/alignment checks so invalid layouts fail clearly rather than silently spill into SRAM.
-- [ ] For models that fit, place the TFLM contiguous tensor arena and the corresponding ET
-  inference buffers in DTCM. Keep allocator metadata or other ET pools in SRAM if required,
-  but record the exact placement and account for the same total DTCM budget.
-- [ ] Revalidate outputs and repeat the latency measurements for every placement variant. Report
-  framework ratios for matched layouts and within-framework speedups from SRAM to DTCM.
-  If only one framework fits, label that result as a memory-capacity advantage.
-
-The optional ET experiment uses multiple planned-memory regions, with a fixed fast-memory
-budget in DTCM and additional capacity in SRAM:
-
-- [ ] Use ET's memory-planning extension points to assign whole tensors/alias groups to memory IDs
-  for DTCM or SRAM before allocating offsets. Reuse an upstream capacity-aware planner if available;
-  otherwise begin with a simple explicit placement policy informed by tensor sizes and lifetimes.
-- [ ] Ensure each planned region fits its capacity, tensor storage remains contiguous, aliases
-  stay consistent, and lifetime-based reuse is valid. A single oversized contiguous tensor cannot
-  be split merely by providing two physical buffers. Save the memory IDs, sizes, and policy with
-  the exported model and regenerate the `.pte` when the planning policy changes.
-- [ ] Extend the framework-neutral memory configuration accepted by `EtModel` so the application
-  can supply the physical spans for those planned-memory IDs. The current wrapper already builds
-  a `HierarchicalAllocator`, but allocates every planned buffer from one method allocator; it does
-  not currently distribute them across physical memory banks.
-- [ ] Validate the updated ET metadata-to-buffer-ID convention, region sizes, and alignment.
-  Ensure both the physical buffers and the span table outlive the loaded method. Keep model
-  metadata allocations and temporary/scratch pools separately budgeted; they do not automatically
-  participate in graph memory planning.
-- [ ] Keep Alif addresses and section attributes outside `source/lib/`. Test undersized/missing
-  regions, multiple IDs, aliases, and repeated execution before measuring on the board.
-- [ ] Compare ET's SRAM and TCM/SRAM plans for the same graph and DTCM budget. Report the split
-  plan as a distinct configuration alongside TFLM's best validated placement under that budget.
-
-| Memory variant | TFLM | ET | Purpose |
-| --- | --- | --- | --- |
-| SRAM control | Arena in SRAM | Planned/method/temp pools in SRAM | Matched baseline |
-| DTCM where it fits | Contiguous arena in DTCM | Explicitly budgeted inference buffers in DTCM | Fast-memory comparison |
-| TCM/SRAM split, bonus | Best supported placement under the same budget | Multiple planned-memory IDs | ET planning benefit |
-
-Completion check: every reported layout has a verified memory budget, linker map, passing
-correctness checks, and repeatable timing. Complete the SRAM and fitting-DTCM comparisons even
-if the optional multi-region planner requires further work.
-
-**6. Publish reproducible build configurations**
+**5. Publish reproducible build configurations**
 
 Add two build configurations with the same CPU settings and distinct build directories. The
 following is the intended armclang SRAM-control interface after dependency updates, compiler
 enablement, and the ET CPU-only fixes are implemented; the paths are placeholders for model
-artifacts. Define the TCM placement options during the memory work rather than assuming they
-already exist. Use separate directories per framework, compiler, model, and memory layout.
+artifacts. Use separate directories per framework, compiler, and model, with SRAM inference pools.
 
 ```bash
 common=(
@@ -413,7 +355,7 @@ cmake --build build-e8-et-armclang-sram --target mlek_inference_runner -j8
   Check the programming configuration against HP's linker start address, `0x80008000`, and
   use a device configuration appropriate to the E8. Capture UART output from reset.
 
-**7. Validate and record results**
+**6. Validate and record results**
 
 - [ ] Add focused tests for framework selection, missing model paths, CPU-only operator
   registration, fixed-input inference, and correctness failures where those behaviors change.
@@ -431,9 +373,8 @@ cmake --build build-e8-et-armclang-sram --target mlek_inference_runner -j8
   compiler commands, raw cycle counts, and serial logs.
 - [ ] Produce a table per workload, compiler, and memory layout with accuracy/AUC, latency
   statistics, ET/TFLM latency ratio for matched conditions, model size, firmware footprint,
-  per-bank memory use, and SRAM-to-DTCM speedups. Explain kernel fallbacks and any remaining
-  differences in quantization, I/O conversion, or placement alongside the numbers. Include
-  planning policy/model hashes for the optional ET multi-region results.
+  per-bank memory use. Explain kernel fallbacks and any remaining differences in quantization,
+  I/O conversion, or placement alongside the numbers. Include the planning policy and model hashes.
 - [ ] Update the inference-runner documentation with CPU-only E8 instructions and the current
   `inference_runner_MODEL_PATH` option name.
 
@@ -443,14 +384,14 @@ from the recorded revisions, model artifacts, commands, and board setup.
 **Execution order and decisions**
 
 Update frameworks and enforce CMSIS-NN 8.0.0 parity first. Resolve armclang feasibility and
-the TCM map during runtime bring-up. Validate one model pair through export, on-board correctness,
-and repeated SRAM timing next; then measure DTCM placement where it fits. Expand to the selected
-Tiny suite after that path works. Add ET planning across TCM/SRAM as a bonus with its own results.
+the SRAM pool budget during runtime bring-up. Validate one model pair through export,
+on-board correctness, and repeated SRAM timing next. Expand to the selected Tiny suite
+after that path works.
 Keep model-specific failures visible rather than hiding them behind suite averages.
 
 Before model preparation, pin the Tiny revision and trained artifacts. Before hardware runs,
 confirm the Arm Compiler installation, programming/reset interface, UART device, and usable
-TCM banks. Start with M55-HP and the proposed measurement counts unless the first experiment
+SRAM capacity. Start with M55-HP and the proposed measurement counts unless the first experiment
 provides a reason to adjust them. A failure to build latest ET with armclang or CMSIS-NN 8.0.0
 is an explicit implementation finding, not a reason to silently downgrade a dependency.
 

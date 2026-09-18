@@ -48,10 +48,6 @@ MEMORY
 {
   ITCM  (rwx)     : ORIGIN = 0x01000000, LENGTH = 0x00040000
   DTCM  (rwx)     : ORIGIN = 0x20000000, LENGTH = 0x00100000
-#ifdef MLEK_INFERENCE_DTCM
-  /* Leave globals/heap and the top-of-DTCM stack at their SRAM-build addresses. */
-  INFERENCE_DTCM (rw) : ORIGIN = 0x20020000, LENGTH = 0x00050000
-#endif
   SRAM  (rwx)     : ORIGIN = ALIF_SRAM_BASE, LENGTH = ALIF_SRAM_SIZE
   UNSTRIPED (rwx) : ORIGIN = UNSTRIPED_BASE, LENGTH = UNSTRIPED_SIZE
   MRAM  (rx)      : ORIGIN = __ROM_BASE,     LENGTH = __ROM_SIZE
@@ -101,14 +97,8 @@ SECTIONS
   .zero.table.at_mram : ALIGN(4)
   {
     __zero_table_start__ = .;
-#ifdef MLEK_INFERENCE_DTCM
-    /* Reuse the empty ITCM BSS entry so MRAM code alignment stays unchanged. */
-    LONG (ADDR(.bss.inference))
-    LONG (SIZEOF(.bss.inference)/4)
-#else
     LONG (ADDR(.bss.itcm))
     LONG (SIZEOF(.bss.itcm)/4)
-#endif
     LONG (ADDR(.bss))
     LONG (SIZEOF(.bss)/4)
     LONG (ADDR(.bss.sram))
@@ -152,20 +142,9 @@ SECTIONS
     * (.bss.camera_frame_buf)              /* Camera Frame Buffer */
     * (.bss.camera_frame_bayer_to_rgb_buf) /* (Optional) Camera Frame Buffer for Bayer to RGB Convertion.*/
     * (.bss.NoInit.ethos_u_cache)
-#ifndef MLEK_INFERENCE_DTCM
     * (.bss.NoInit.activation_buf_sram)
     * (.bss.NoInit.temp_buf_sram)
-#endif
   } > SRAM
-
-#ifdef MLEK_INFERENCE_DTCM
-  /* Consume these input sections before the general .bss wildcard. */
-  .bss.inference (NOLOAD) : ALIGN(16)
-  {
-    * (.bss.NoInit.activation_buf_sram)
-    * (.bss.NoInit.temp_buf_sram)
-  } > INFERENCE_DTCM
-#endif
 
   .bss.unstriped (NOLOAD) :
   {
@@ -211,14 +190,7 @@ SECTIONS
   } > DTCM
   PROVIDE(__stack = __StackTop);
 
-#ifdef MLEK_INFERENCE_DTCM
-  ASSERT(SIZEOF(.bss.itcm) == 0, "DTCM inference zero table requires empty ITCM BSS")
-  ASSERT(__HeapLimit <= ORIGIN(INFERENCE_DTCM), "DTCM heap overlaps inference pools")
-  ASSERT(ORIGIN(INFERENCE_DTCM) + LENGTH(INFERENCE_DTCM) <= __StackLimit,
-         "DTCM inference pools overlap stack")
-#else
   ASSERT(__HeapLimit <= __StackLimit, "DTCM heap overlaps stack")
-#endif
 
   .readonly.at_mram : ALIGN(8)
   {

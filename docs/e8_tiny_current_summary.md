@@ -12,11 +12,7 @@ with function/data sections. Both frameworks select model-specific operators;
 TFLM uses compatible INT8 registrations and ET has zero selected primitive registrations.
 Code/models use MRAM; inference pools use SRAM; globals/heap/stack use DTCM.
 
-SRAM is the selected baseline for continued comparisons. The earlier
-[DTCM experiment](e8_tiny_dtcm_results_2026_09_17.md), using ET v7 before integer
-pooling, reduced latency for both frameworks and gave TFLM the lower mean on all
-four models. The new pooled exports have not been measured in DTCM. The
-[DTCM table](results/e8-tiny-board-2026-09-17-dtcm-v7-v4.html) remains available.
+SRAM inference pools are the supported configuration for these comparisons.
 
 The new ET v8 collection confirms the integer-pooling RAM savings on E8. TFLM v3
 uses its previous measured SRAM collection. See the
@@ -73,5 +69,4 @@ or an official MLPerf result. Independent hardware timer cross-checking remains 
 [Both logging profiles](e8_tiny_profile_comparison.md) ·
 [Integer-pooling RAM, latency and first-call deltas](e8_et_tiny_v8_results.md) ·
 [Previous SRAM results](e8_tiny_board_results_2026_09_17.md) ·
-[SRAM versus DTCM analysis](e8_tiny_dtcm_results_2026_09_17.md) ·
 [Previous ET v4 results](e8_et_tiny_v4_results.md)

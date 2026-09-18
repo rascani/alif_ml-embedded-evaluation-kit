@@ -141,8 +141,8 @@ the application payload for Alif SETOOLS. The linker maps confirm:
 | Stack top | `0x20100000` (end of HP DTCM) | 32 KiB stack |
 
 HP DTCM is 1 MiB in the E8 DFP's `soc_features.h` and `app_mem_regions.h`. The GNU runner
-linker script has been corrected to match. DTCM arenas and ET memory spanning multiple banks
-remain separate experiments. Increase the two pool sizes as needed for future models.
+linker script has been corrected to match. Inference pools use SRAM. Increase the two pool
+sizes as needed for future models.
 
 ## ExecuTorch selective build
 

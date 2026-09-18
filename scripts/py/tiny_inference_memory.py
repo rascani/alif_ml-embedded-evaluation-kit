@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright 2026 Arm Limited and/or its affiliates
 # <open-source-office@arm.com>
 # SPDX-License-Identifier: Apache-2.0
-"""Select and verify E8 HP inference-pool placement without changing pool sizes."""
+"""Verify E8 HP SRAM inference pools and the standard heap/stack memory budget."""
 
 import json
 from pathlib import Path
@@ -9,16 +9,6 @@ import re
 import struct
 import subprocess
 import tempfile
-
-
-def memory_options(placement: str) -> list[str]:
-    """Select the GCC linker script for the requested inference memory.
-
-    :param placement:   SRAM or DTCM placement.
-    :returns:           CMake linker override.
-    """
-    suffix = "-dtcm" if placement == "dtcm" else ""
-    return [f"-DLINKER_SCRIPT_NAME=RTSS-HP-infrun{suffix}"]
 
 
 def pool_symbols(folder: Path, base: int, executorch: bool) -> dict:
@@ -65,36 +55,32 @@ def verify_zero_table(folder: Path, gcc_bin: Path, base: int, size: int):
         raise ValueError("Inference pools are absent from the startup zero table")
 
 
-def audit_memory(folder: Path, placement: str, gcc_bin: Path, executorch: bool) -> dict:
-    """Check pool symbols, zero initialization, and DTCM heap/stack separation.
+def audit_memory(folder: Path, gcc_bin: Path, executorch: bool) -> dict:
+    """Check SRAM pool symbols, zero initialization, and the heap/stack budget.
 
     :param folder:      Snapshot containing ELF, section sizes, and symbols.
-    :param placement:   Expected SRAM or DTCM placement.
     :param gcc_bin:     Toolchain directory containing objcopy.
     :param executorch:  Whether the temporary pool is also required.
-    :returns:           Per-image placement and total reserved DTCM accounting.
-    :raises ValueError: If the linked layout differs from the experiment.
+    :returns:           SRAM pool placement and standard DTCM data accounting.
+    :raises ValueError: If the linked layout differs from the SRAM benchmark layout.
     """
     sections = json.loads((folder / "sections.json").read_text(encoding="utf-8"))
-    base = 0x20020000 if placement == "dtcm" else 0x02000000
+    base = 0x02000000
     expected = pool_symbols(folder, base, executorch)
     total = sum(size for _, size in expected.values())
-    pool_section = ".bss.inference" if placement == "dtcm" else ".bss.sram"
-    if sections[pool_section] != {"bytes": total, "address": hex(base)}:
+    if sections[".bss.sram"] != {"bytes": total, "address": hex(base)}:
         raise ValueError("Unexpected inference output section")
     verify_zero_table(folder, gcc_bin, base, total)
     heap = sections[".heap"]
     stack = sections[".stack"]
     heap_end = int(heap["address"], 16) + heap["bytes"]
     stack_base = int(stack["address"], 16)
-    if placement == "dtcm" and not heap_end <= base < base + total <= stack_base:
-        raise ValueError("Inference pools overlap the heap or stack")
     dtcm = sum(
         section["bytes"] for section in sections.values()
         if 0x20000000 <= int(section["address"], 16) < 0x20100000
     )
     report = {
-        "placement": placement,
+        "placement": "sram",
         "pools": {name: {"address": hex(address), "bytes": size}
                   for name, (address, size) in expected.items()},
         "pool_reserved_bytes": total,

@@ -23,7 +23,7 @@ from build_tflm_tiny import (
     snapshot_model,
 )
 from et_tiny_flash import analyze_model
-from tiny_inference_memory import audit_memory, memory_options
+from tiny_inference_memory import audit_memory
 from tiny_build_profiles import (
     audit_flags, prepare_bundle, profile_manifest, profile_options, record_pair,
 )
@@ -123,9 +123,7 @@ def compile_model(
     build = root / (
         f"build-e8-et-tiny-oz-{profile}" if args.paired_profiles else "build-e8-et-tiny"
     )
-    if args.inference_memory == "dtcm":
-        build = build.with_name(f"{build.name}-dtcm")
-    options = et_options(root, model_id, model_path, header) + memory_options(args.inference_memory)
+    options = et_options(root, model_id, model_path, header)
     if args.paired_profiles:
         options += profile_options(logging, f"{bundle.name}-{profile}", "ExecuTorch")
     prefix = header.with_name(f"{model_id}-{profile}")
@@ -160,7 +158,7 @@ def build_model(
     build, validation = compile_model(bundle, args, model_id, model_path, logging)
     folder = (bundle if logging else bundle / "size") / model_id
     metadata = dict(model, **snapshot_model(build, folder, model_path, args.gcc_bin, logging))
-    metadata["inference_memory"] = audit_memory(folder, args.inference_memory, args.gcc_bin, True)
+    metadata["inference_memory"] = audit_memory(folder, args.gcc_bin, True)
     if args.paired_profiles:
         metadata["compiler_audit"] = audit_flags(build, folder, logging)
     metadata.update(
@@ -182,7 +180,6 @@ def main():
     parser.add_argument("--jobs", type=int, default=8)
     parser.add_argument("--bundle-name", default="build-e8-et-tiny-artifacts")
     parser.add_argument("--no-package", action="store_true")
-    parser.add_argument("--inference-memory", choices=("sram", "dtcm"), default="sram")
     parser.add_argument(
         "--export-dir", type=Path,
         help="Verified normalized export directory; defaults to the original export",
@@ -216,7 +213,7 @@ def main():
         "core": "M55-HP",
         "npu": False,
         "runtime_checks": True,
-        "inference_memory": args.inference_memory,
+        "inference_memory": "sram",
         **build_identity(root, args.gcc_bin),
         "dependencies": {
             name: subprocess.check_output(
