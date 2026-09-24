@@ -11,7 +11,7 @@
  */
 
 /*
- * Copyright (c) 2021 Arm Limited. All rights reserved.
+ * SPDX-FileCopyrightText: Copyright 2021, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,7 @@ __OSPI_RAM_SIZE = BOARD_OSPI_RAM_SIZE;
 MEMORY
 {
   ITCM  (rwx)     : ORIGIN = 0x01000000, LENGTH = 0x00040000
-  DTCM  (rwx)     : ORIGIN = 0x20000000, LENGTH = 0x00040000
+  DTCM  (rwx)     : ORIGIN = 0x20000000, LENGTH = 0x00100000
   SRAM  (rwx)     : ORIGIN = ALIF_SRAM_BASE, LENGTH = ALIF_SRAM_SIZE
   UNSTRIPED (rwx) : ORIGIN = UNSTRIPED_BASE, LENGTH = UNSTRIPED_SIZE
   MRAM  (rx)      : ORIGIN = __ROM_BASE,     LENGTH = __ROM_SIZE
@@ -189,6 +189,8 @@ SECTIONS
     __StackTop = .;
   } > DTCM
   PROVIDE(__stack = __StackTop);
+
+  ASSERT(__HeapLimit <= __StackLimit, "DTCM heap overlaps stack")
 
   .readonly.at_mram : ALIGN(8)
   {

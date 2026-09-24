@@ -1,5 +1,6 @@
 /*
- * SPDX-FileCopyrightText: Copyright 2021 Arm Limited and/or its affiliates <open-source-office@arm.com>
+ * SPDX-FileCopyrightText: Copyright 2021, 2026 Arm Limited and/or its affiliates
+ * <open-source-office@arm.com>
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,12 @@
 
 #include <stdint.h>
 #include <time.h>
+
+/** @brief Initialises the counters. */
+void platform_init_counters(void);
+
+/** @brief Finalises the counters. */
+void platform_final_counters(void);
 
 /**
  * @brief   Resets the counters.

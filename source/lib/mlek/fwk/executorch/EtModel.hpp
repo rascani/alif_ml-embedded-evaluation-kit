@@ -20,7 +20,7 @@
 #include "mlek/fwk/executorch/EtMemoryAllocator.hpp"
 #include "mlek/fwk/executorch/ExecuTorch.hpp"
 #include "mlek/fwk/iface/Model.hpp"
-#include <functional>
+#include <memory>
 
 namespace arm::app::fwk::et {
 
@@ -33,6 +33,8 @@ using executorch::runtime::Result;
  * Backend data for ExecuTorch framework.
  */
 struct EtBackendData {
+    std::shared_ptr<executorch::extension::BufferDataLoader> m_loader{nullptr};
+    std::vector<executorch::runtime::Span<uint8_t>> m_plannedSpans{};
     std::shared_ptr<EtMemoryAllocator> m_methodAllocPtr{nullptr};
     std::shared_ptr<EtMemoryAllocator> m_tmpAllocPtr{nullptr};
     std::shared_ptr<HierarchicalAllocator> m_plannedMemAllocPtr{nullptr};
@@ -42,7 +44,7 @@ struct EtBackendData {
 };
 
 /**
- * @brief   NN model class wrapping the underlying TensorFlow-Lite-Micro API.
+ * @brief   NN model class wrapping the ExecuTorch API.
  */
 class EtModel : public iface::Model {
 public:
@@ -52,7 +54,7 @@ public:
     /** @brief Destructor. */
     virtual ~EtModel();
 
-    /** @brief  Gets the pointer to the model's input tensor at given input index. */
+    /** @brief Gets a tensor backed by method input storage; refill before every inference. */
     std::shared_ptr<iface::TensorIface> GetInputTensor(size_t index) const override;
 
     /** @brief  Gets the pointer to the model's output tensor at given output index. */
@@ -127,10 +129,9 @@ protected:
     virtual bool PrepareInputTensors();
 
 private:
-    std::function<executorch::runtime::Method&()> m_fnGetMethod; /**< Gets the forward inference
-                                                                      method. */
-    EtBackendData m_backendData{}; /**< Backend data object */
-    bool m_inited{false}; /**< Indicates whether this object has been initialised. */
+    EtBackendData m_backendData{};                                   /**< Backend data object */
+    std::unique_ptr<Result<executorch::runtime::Method>> m_method{}; /**< Loaded method. */
+    bool m_inited{false};            /**< Indicates whether this object has been initialised. */
     bool m_hasEthosUDelegate{false}; /**< Indicates whether the model has NPU delegate. */
     iface::MemoryRegion m_computeBuffer{}; /**< Compute buffer region */
     iface::MemoryRegion m_modelBuffer{};   /**< Buffer where model is hosted */
@@ -140,9 +141,6 @@ private:
     std::vector<std::shared_ptr<iface::TensorIface>>
         m_output{}; /**< Model's output tensor pointers. */
 
-    std::vector<std::pair<executorch::aten::TensorImpl, size_t>>
-        m_inputTensorImplMap{}; /**< ExecuTorch's tensor implementation vector mapping to index of
-                                     inputs */
     std::vector<executorch::aten::Tensor>
         m_outputTensor{}; /**< ExecuTorch output tensor (results are read from this space) */
 

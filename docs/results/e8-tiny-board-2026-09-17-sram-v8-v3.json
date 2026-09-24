@@ -1,0 +1,996 @@
+{
+  "date": "2026-09-17",
+  "platform": "Alif E8 Cortex-M55-HP CPU-only 400 MHz",
+  "compiler": "GNU Arm 15.2.1: runtime/operator wrappers -Oz; CMSIS-NN 8.0.0 -O3; function/data sections",
+  "protocol": "Per boot: one separate first call, 10 warmups, 100 measured calls; three boots per model/framework; synthetic_v1 inputs; input filling and reporting outside timing; caches not flushed.",
+  "flash_scope": {
+    "core_bytes": "Framework execution/allocation/planning; excludes dedicated logging objects.",
+    "operators_bytes": "Framework kernels and utilities + CMSIS-NN + selected registry/resolver.",
+    "excluded_support_bytes": "Platform, runner, diagnostics, fixtures, MLEK adapter, shared toolchain/string pools, linker tables and padding.",
+    "full_mram_bytes": "Complete deployable MRAM payload, including the excluded support."
+  },
+  "ram_scope": "Accounted inference arena/pools, runtime/kernel persistent allocations, outside persistent state and ET runtime static storage. Excludes unused reservations, stack high water, initialization workspace and benchmark/platform/reporting memory.",
+  "profile_scope": "Latency and RAM are measured with logging enabled. Size columns come from the separate logging-disabled build. No silent-profile latency/RAM measurements.",
+  "model_scope": "Trained reference weights; ET v8 adds integer/list pooling to v6 Q/DQ-cleaned PTEs. Quantization/calibration differ from TFLM. Saved-output checks are not dataset accuracy validation or an MLPerf submission.",
+  "inference_memory": "sram",
+  "collection_scope": "New ET v8 final complete pass; reused measured TFLM v3 SRAM baseline, no new TFLM collection.",
+  "baseline_results": "e8-tiny-board-2026-09-17-v6-v3.json",
+  "baseline_results_sha256": "821bb4694178b13bfc1bba5347daee4583d7547517223e0873e671758b3c2944",
+  "archive_audit": {
+    "et": {
+      "archive": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling-results-20260917-154311.tar.gz",
+      "archive_sha256": "49dfb86e2adb353cc8fb695d0c50f2dbfe92a7a1f62dc0d25886a5f122e5d9b7",
+      "manifest_sha256": "2abd65373a10e852f0fee8ec75d42780df82f927134d1513309a336af4f92bb4",
+      "firmware_package": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling.tar.gz",
+      "manifest_matches_firmware_package": true,
+      "supplied_results_match_reparsed_uart": true,
+      "selected_boots": 12,
+      "selected_measured_inferences": 1200,
+      "selection_policy": "Final complete pass identified by supplied results.json; all earlier attempts retained without pooling.",
+      "log_audit": [
+        {
+          "file": "ad-20260917-154254-830101.log",
+          "selected": true,
+          "sha256": "4489df4e2ee5c3437804caade8e3ac76f8ab1fa794af52cc6550698badc4b076",
+          "bytes": 25522,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "ad",
+            "ad",
+            "ad"
+          ],
+          "mean_cycles_by_boot": [
+            483220.1,
+            483138.32,
+            483193.16
+          ]
+        },
+        {
+          "file": "ic-20260917-153657-168960.log",
+          "selected": false,
+          "sha256": "062e794d7b02c3888997006229c9baad43857596de9838e41cbaf4f813f152d3",
+          "bytes": 4329,
+          "status": "excluded_invalid",
+          "error": "Expected one BENCHMARK build record, found 0"
+        },
+        {
+          "file": "ic-20260917-153817-652765.log",
+          "selected": false,
+          "sha256": "be397ed7ce9d85063af074cb938113d8e7da694e2f362df0a034d68b6b6d69c8",
+          "bytes": 26508,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "ic",
+            "ic",
+            "ic"
+          ],
+          "mean_cycles_by_boot": [
+            6121454.9,
+            6116454.32,
+            6116200.52
+          ]
+        },
+        {
+          "file": "ic-20260917-154103-725715.log",
+          "selected": true,
+          "sha256": "109f532afef181aaab44975442c38ba2f7759ce23152f4729981d6d9376def27",
+          "bytes": 26509,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "ic",
+            "ic",
+            "ic"
+          ],
+          "mean_cycles_by_boot": [
+            6115386.2,
+            6114238.33,
+            6117877.7
+          ]
+        },
+        {
+          "file": "kws-20260917-153613-675308.log",
+          "selected": false,
+          "sha256": "204fba0725e627a569b95ba78cb9ff73cce4540285b343472410f15fce08bb0d",
+          "bytes": 26559,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "kws",
+            "kws",
+            "kws"
+          ],
+          "mean_cycles_by_boot": [
+            2329973.66,
+            2329983.38,
+            2330153.39
+          ]
+        },
+        {
+          "file": "kws-20260917-153733-567952.log",
+          "selected": false,
+          "sha256": "85615fccefad0f8d7d92265bc1d8952f025527da1ea7df657fd22d70da1a1fa8",
+          "bytes": 26560,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "kws",
+            "kws",
+            "kws"
+          ],
+          "mean_cycles_by_boot": [
+            2329931.85,
+            2330191.37,
+            2329833.42
+          ]
+        },
+        {
+          "file": "kws-20260917-154015-231689.log",
+          "selected": true,
+          "sha256": "c8db97bab42f094edaa627e3fbbbe491ba7b6c07c0aed7e2f7675eb6bf826415",
+          "bytes": 26560,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "kws",
+            "kws",
+            "kws"
+          ],
+          "mean_cycles_by_boot": [
+            2330015.05,
+            2330229.27,
+            2330177.32
+          ]
+        },
+        {
+          "file": "vww-20260917-153908-971526.log",
+          "selected": false,
+          "sha256": "4cfa263f02c7c1c1f319eba533525649a3f8f7fcd440e347121e65ca01e63e19",
+          "bytes": 2579,
+          "status": "excluded_invalid",
+          "error": "Expected one BENCHMARK build record, found 0"
+        },
+        {
+          "file": "vww-20260917-154159-374797.log",
+          "selected": true,
+          "sha256": "f27e6a286724d6472089a8cbaa33f3b6e82f5dc3a081698cfb3d170ae87248c1",
+          "bytes": 26575,
+          "status": "valid",
+          "boots": 3,
+          "models": [
+            "vww",
+            "vww",
+            "vww"
+          ],
+          "mean_cycles_by_boot": [
+            8580177.24,
+            8579974.21,
+            8579532.91
+          ]
+        }
+      ]
+    },
+    "tflm": {
+      "archive": "build-e8-tflm-tiny-artifacts-v3-results-20260917-120927.tar.gz",
+      "archive_sha256": "875756f7a8f44b83341c09887b2c9055afb97edc92d927f800c45334894869b8",
+      "manifest_sha256": "07f5f162769ba788ee121b0eef0da946212b1c4f2f811137707a9525ec864a0e",
+      "firmware_package": "build-e8-tflm-tiny-artifacts-v3.tar.gz",
+      "log_audit": [
+        {
+          "file": "ad-20260917-120911-525749.log",
+          "selected": true,
+          "sha256": "4c1d61c4ca4cbf86b47485c4765894c56fedfa4f3fdd84c2bb1b76b033630438",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "ad",
+            "ad",
+            "ad"
+          ]
+        },
+        {
+          "file": "ic-20260917-120139-999324.log",
+          "selected": false,
+          "sha256": "7934286e2940bd92cd9d28d726c791998e42308432dca9a2c85e73295c23f37f",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "ic",
+            "ic",
+            "ic"
+          ]
+        },
+        {
+          "file": "ic-20260917-120726-901551.log",
+          "selected": true,
+          "sha256": "881ec2fa1d077364050b16dd9cc796ef4224b4cb324e301288cd314e156cc416",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "ic",
+            "ic",
+            "ic"
+          ]
+        },
+        {
+          "file": "kws-20260917-112648-797597.log",
+          "selected": false,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": "excluded_invalid",
+          "error": "No complete benchmark boots found"
+        },
+        {
+          "file": "kws-20260917-120055-399761.log",
+          "selected": false,
+          "sha256": "70cabf28d70e87254bda105b7315806ce06f7b7b333249cc3a3785a136fd0877",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "kws",
+            "kws",
+            "kws"
+          ]
+        },
+        {
+          "file": "kws-20260917-120646-321577.log",
+          "selected": true,
+          "sha256": "f3d65943a34c8f288dd3293d6b6287a96ad1cc36ee3efecb7438d0a96754d01a",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "kws",
+            "kws",
+            "kws"
+          ]
+        },
+        {
+          "file": "vww-20260917-120243-966908.log",
+          "selected": false,
+          "sha256": "cd25ffe44ed7b4bc134bf793ddf112660e600a6b2581691e2784b9913b2f1271",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "vww",
+            "vww",
+            "vww"
+          ]
+        },
+        {
+          "file": "vww-20260917-120819-431275.log",
+          "selected": true,
+          "sha256": "4cfe5d92327a414b9c068bd211a24009f8b13b92da19c90b752cd0b34a0f93e0",
+          "boots": 3,
+          "status": "valid",
+          "models": [
+            "vww",
+            "vww",
+            "vww"
+          ]
+        }
+      ],
+      "manifest_matches_firmware_package": true,
+      "supplied_results_match_reparsed_uart": true,
+      "selection_policy": "Use the final complete pass named by the supplied results.json; retain earlier attempts without pooling them."
+    }
+  },
+  "aggregates": [
+    {
+      "model": "kws",
+      "framework": "TFLM",
+      "bundle": "build-e8-tflm-tiny-artifacts-v3",
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 2415103.4566666665,
+      "median_cycles": 2415113.0,
+      "min_cycles": 2411910,
+      "max_cycles": 2417657,
+      "p95_cycles": 2416487,
+      "mean_latency_ms": 6.037758641666667,
+      "first_mean_cycles": 2453466,
+      "first_mean_ms": 6.133665,
+      "first_overhead_percent": 1.5884430634819147,
+      "accounted_inference_ram_bytes": 28136,
+      "model_bytes": 53936,
+      "size_operators_bytes": 31314,
+      "size_core_bytes": 10548,
+      "size_filtered_flash_bytes": 95798,
+      "latency_operators_bytes": 34154,
+      "latency_core_bytes": 11870,
+      "latency_filtered_flash_bytes": 99960,
+      "model_sha256": "aeea436800704fce17b17292e4412630ad856e9d777c044c64ef748a880bd0ae",
+      "latency_firmware_sha256": "869fc9ff584a420249687eb56abe0331a856331900ba5dd9136d016b6c98bd7e",
+      "size_firmware_sha256": "cfc2dfbf92ccf7263d0a607e02a6e1fed9d8e89bd1556cfa7f88d7ad55f3bb59",
+      "latency_change_from_historical_percent": 0.014236613412155208,
+      "ram_change_from_historical_bytes": 0,
+      "validation_checks": 0,
+      "first_cycles_by_boot": [
+        2453104,
+        2454898,
+        2452396
+      ],
+      "mean_cycles_by_boot": [
+        2415104.63,
+        2415047.19,
+        2415158.55
+      ],
+      "memory_components": {
+        "arena_reserved_bytes": 262144,
+        "arena_head_bytes": 20464,
+        "arena_persistent_bytes": 6884,
+        "arena_init_peak_bytes": 262100,
+        "arena_invoke_peak_bytes": 27348,
+        "arena_peak_bytes": 262100,
+        "arena_audit_overhead_bytes": 32,
+        "arena_raw_peak_bytes": 262132,
+        "outside_model_object_bytes": 292,
+        "outside_init_heap_delta_bytes": 496,
+        "outside_interpreter_object_bytes": 208,
+        "outside_persistent_bytes": 788,
+        "ram_inference_peak_bytes": 28136,
+        "ram_lifecycle_arena_plus_persistent_bytes": 262888,
+        "invoke_allocation_calls": 0
+      },
+      "source_log": "logs/kws-20260917-120646-321577.log",
+      "per_boot_results": "e8-tflm-tiny-2026-09-17-v3.json",
+      "inference_memory": "sram",
+      "reused_previous_collection": true
+    },
+    {
+      "model": "kws",
+      "framework": "ExecuTorch",
+      "bundle": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling",
+      "build_id": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling-latency",
+      "inference_memory": "sram",
+      "reused_previous_collection": false,
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 2330140.546666667,
+      "median_cycles": 2330133.0,
+      "min_cycles": 2327320,
+      "max_cycles": 2333671,
+      "p95_cycles": 2332001,
+      "mean_latency_ms": 5.825351366666667,
+      "first_mean_cycles": 2367730,
+      "first_mean_ms": 5.919325,
+      "first_overhead_percent": 1.6131839509468948,
+      "mean_cycles_by_boot": [
+        2330015.05,
+        2330229.27,
+        2330177.32
+      ],
+      "first_cycles_by_boot": [
+        2369144,
+        2365358,
+        2368688
+      ],
+      "boot_mean_span_percent": 0.009193436863997442,
+      "accounted_inference_ram_bytes": 26628,
+      "memory_components": {
+        "et_method_reserved_bytes": 262144,
+        "et_method_planned_bytes": 20464,
+        "et_method_runtime_and_inputs_bytes": 5056,
+        "et_method_used_bytes": 25520,
+        "et_method_peak_bytes": 25520,
+        "et_temp_reserved_bytes": 65536,
+        "et_temp_used_bytes": 0,
+        "et_temp_peak_bytes": 0,
+        "et_outside_model_object_bytes": 152,
+        "et_outside_init_heap_delta_bytes": 656,
+        "et_outside_persistent_bytes": 808,
+        "et_total_pools_plus_persistent_bytes": 26328,
+        "runtime_static_bytes": 300,
+        "input_pool_allocation_bytes": 0,
+        "et_init_method_peak_bytes": 25520,
+        "et_init_temp_peak_bytes": 212,
+        "invoke_heap_scope": "inference_batch_v1",
+        "invoke_heap_delta_bytes": 0,
+        "diagnostic_heap_delta_bytes": 200,
+        "ram_accounted_peak_bytes": 26628
+      },
+      "model_sha256": "206dc7a286bad78bf60d4671e6a8ca329fc46800b1aae9b81ba4ef8f22e6b1d1",
+      "model_bytes": 38576,
+      "latency_firmware_sha256": "c7098761fdedbd0d4d85b2aeb0a0674dd1ca2718949b010203df47dee39bdfdb",
+      "size_firmware_sha256": "b2f602a74d580f6675b1365df7f110ab9d6b4a0bea74a4d213f3b9102602e3b8",
+      "validation_checks": 3,
+      "source_log": "logs/kws-20260917-154015-231689.log",
+      "per_boot_results": "e8-et-tiny-2026-09-17-v8-sram.json",
+      "placement": {
+        "placement": "sram",
+        "pools": {
+          "arm::app::activationBuf": {
+            "address": "0x2000000",
+            "bytes": 262144
+          },
+          "sTmpAllocationPool": {
+            "address": "0x2040000",
+            "bytes": 65536
+          }
+        },
+        "pool_reserved_bytes": 327680,
+        "startup_zero_table_verified": true,
+        "heap_end": "0x200120d8",
+        "stack_base": "0x200f8000",
+        "dtcm_reserved_bytes": 106712,
+        "dtcm_unallocated_bytes": 941864
+      },
+      "fvp_memory_matches_all_board_boots": true,
+      "prior_sram_bundle": "build-e8-et-tiny-artifacts-v6",
+      "latency_change_from_prior_sram_percent": 0.027172838844324865,
+      "ram_change_from_prior_sram_bytes": -2952,
+      "latency_operators_bytes": 28222,
+      "latency_core_bytes": 23808,
+      "latency_filtered_flash_bytes": 90606,
+      "size_operators_bytes": 24494,
+      "size_core_bytes": 12398,
+      "size_filtered_flash_bytes": 75468
+    },
+    {
+      "model": "ic",
+      "framework": "TFLM",
+      "bundle": "build-e8-tflm-tiny-artifacts-v3",
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 6261149.273333333,
+      "median_cycles": 6260913.0,
+      "min_cycles": 6246171,
+      "max_cycles": 6277677,
+      "p95_cycles": 6272841,
+      "mean_latency_ms": 15.652873183333334,
+      "first_mean_cycles": 6261042,
+      "first_mean_ms": 15.652605,
+      "first_overhead_percent": -0.0017133169750493948,
+      "accounted_inference_ram_bytes": 55816,
+      "model_bytes": 98496,
+      "size_operators_bytes": 26076,
+      "size_core_bytes": 10538,
+      "size_filtered_flash_bytes": 135110,
+      "latency_operators_bytes": 28756,
+      "latency_core_bytes": 11860,
+      "latency_filtered_flash_bytes": 139112,
+      "model_sha256": "3c002613d1b2475eb51dd78dfb85a546c8ae658dee71cf6ade43b022fe205415",
+      "latency_firmware_sha256": "fa349322cab8681a6ffa626be6d1a9d570a6d84de26540dc35f4cc68be80d7a0",
+      "size_firmware_sha256": "3051154fa0d5491fdf06f9c1b9d7f59f2c94ab9bf53612bb3a455b40e5f07944",
+      "latency_change_from_historical_percent": -0.4295368853866832,
+      "ram_change_from_historical_bytes": 0,
+      "validation_checks": 0,
+      "first_cycles_by_boot": [
+        6259834,
+        6263032,
+        6260260
+      ],
+      "mean_cycles_by_boot": [
+        6263471.84,
+        6255862.71,
+        6264113.27
+      ],
+      "memory_components": {
+        "arena_reserved_bytes": 262144,
+        "arena_head_bytes": 49728,
+        "arena_persistent_bytes": 5300,
+        "arena_init_peak_bytes": 262108,
+        "arena_invoke_peak_bytes": 55028,
+        "arena_peak_bytes": 262108,
+        "arena_audit_overhead_bytes": 32,
+        "arena_raw_peak_bytes": 262140,
+        "outside_model_object_bytes": 292,
+        "outside_init_heap_delta_bytes": 496,
+        "outside_interpreter_object_bytes": 208,
+        "outside_persistent_bytes": 788,
+        "ram_inference_peak_bytes": 55816,
+        "ram_lifecycle_arena_plus_persistent_bytes": 262896,
+        "invoke_allocation_calls": 0
+      },
+      "source_log": "logs/ic-20260917-120726-901551.log",
+      "per_boot_results": "e8-tflm-tiny-2026-09-17-v3.json",
+      "inference_memory": "sram",
+      "reused_previous_collection": true
+    },
+    {
+      "model": "ic",
+      "framework": "ExecuTorch",
+      "bundle": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling",
+      "build_id": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling-latency",
+      "inference_memory": "sram",
+      "reused_previous_collection": false,
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 6115834.076666667,
+      "median_cycles": 6115688.0,
+      "min_cycles": 6101702,
+      "max_cycles": 6137210,
+      "p95_cycles": 6125852,
+      "mean_latency_ms": 15.289585191666667,
+      "first_mean_cycles": 6110695,
+      "first_mean_ms": 15.2767375,
+      "first_overhead_percent": -0.0840290400662469,
+      "mean_cycles_by_boot": [
+        6115386.2,
+        6114238.33,
+        6117877.7
+      ],
+      "first_cycles_by_boot": [
+        6107107,
+        6108217,
+        6116761
+      ],
+      "boot_mean_span_percent": 0.059507337092174505,
+      "accounted_inference_ram_bytes": 56464,
+      "memory_components": {
+        "et_method_reserved_bytes": 262144,
+        "et_method_planned_bytes": 49728,
+        "et_method_runtime_and_inputs_bytes": 5640,
+        "et_method_used_bytes": 55368,
+        "et_method_peak_bytes": 55368,
+        "et_temp_reserved_bytes": 65536,
+        "et_temp_used_bytes": 0,
+        "et_temp_peak_bytes": 0,
+        "et_outside_model_object_bytes": 152,
+        "et_outside_init_heap_delta_bytes": 656,
+        "et_outside_persistent_bytes": 808,
+        "et_total_pools_plus_persistent_bytes": 56176,
+        "runtime_static_bytes": 288,
+        "input_pool_allocation_bytes": 0,
+        "et_init_method_peak_bytes": 55368,
+        "et_init_temp_peak_bytes": 200,
+        "invoke_heap_scope": "inference_batch_v1",
+        "invoke_heap_delta_bytes": 0,
+        "diagnostic_heap_delta_bytes": 200,
+        "ram_accounted_peak_bytes": 56464
+      },
+      "model_sha256": "e91b8d270ade7c017c298bcc6d4cee26c487c0e6500367c91fbc17606e3c10b2",
+      "model_bytes": 91928,
+      "latency_firmware_sha256": "9480f5c52be6726dec9d9401e4be36dfb239409c6fc52b4238537d4f5deb5d79",
+      "size_firmware_sha256": "8560ae4d65dc454b025ee9d44991846a27fd797146765f4ae1ac022cb3ac1677",
+      "validation_checks": 3,
+      "source_log": "logs/ic-20260917-154103-725715.log",
+      "per_boot_results": "e8-et-tiny-2026-09-17-v8-sram.json",
+      "placement": {
+        "placement": "sram",
+        "pools": {
+          "arm::app::activationBuf": {
+            "address": "0x2000000",
+            "bytes": 262144
+          },
+          "sTmpAllocationPool": {
+            "address": "0x2040000",
+            "bytes": 65536
+          }
+        },
+        "pool_reserved_bytes": 327680,
+        "startup_zero_table_verified": true,
+        "heap_end": "0x200120d0",
+        "stack_base": "0x200f8000",
+        "dtcm_reserved_bytes": 106704,
+        "dtcm_unallocated_bytes": 941872
+      },
+      "fvp_memory_matches_all_board_boots": true,
+      "prior_sram_bundle": "build-e8-et-tiny-artifacts-v6",
+      "latency_change_from_prior_sram_percent": 0.3820358451105843,
+      "ram_change_from_prior_sram_bytes": -3280,
+      "latency_operators_bytes": 21794,
+      "latency_core_bytes": 23808,
+      "latency_filtered_flash_bytes": 137530,
+      "size_operators_bytes": 18132,
+      "size_core_bytes": 12398,
+      "size_filtered_flash_bytes": 122458
+    },
+    {
+      "model": "vww",
+      "framework": "TFLM",
+      "bundle": "build-e8-tflm-tiny-artifacts-v3",
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 9597726.746666666,
+      "median_cycles": 9597723.0,
+      "min_cycles": 9585813,
+      "max_cycles": 9609524,
+      "p95_cycles": 9605043,
+      "mean_latency_ms": 23.994316866666665,
+      "first_mean_cycles": 9609592.333333334,
+      "first_mean_ms": 24.023980833333336,
+      "first_overhead_percent": 0.12362913614714088,
+      "accounted_inference_ram_bytes": 101560,
+      "model_bytes": 333288,
+      "size_operators_bytes": 31314,
+      "size_core_bytes": 10548,
+      "size_filtered_flash_bytes": 375150,
+      "latency_operators_bytes": 34154,
+      "latency_core_bytes": 11870,
+      "latency_filtered_flash_bytes": 379312,
+      "model_sha256": "597a384c8c2c8a1276f04702f25013b7838f2f814f1ca7c174d295b73e3d6b7b",
+      "latency_firmware_sha256": "1aa71b6db5288bc25e9d650bc79b44b5b8c9b321ed16303cdff5456711414312",
+      "size_firmware_sha256": "731ea2570bdbca42baed9544e44c8c6a5a50d9f7bd8e242b72fb7031af8b3c57",
+      "latency_change_from_historical_percent": 0.38738143820842286,
+      "ram_change_from_historical_bytes": 0,
+      "validation_checks": 0,
+      "first_cycles_by_boot": [
+        9613739,
+        9614386,
+        9600652
+      ],
+      "mean_cycles_by_boot": [
+        9598406.72,
+        9597154.08,
+        9597619.44
+      ],
+      "memory_components": {
+        "arena_reserved_bytes": 262144,
+        "arena_head_bytes": 73728,
+        "arena_persistent_bytes": 27044,
+        "arena_init_peak_bytes": 262104,
+        "arena_invoke_peak_bytes": 100772,
+        "arena_peak_bytes": 262104,
+        "arena_audit_overhead_bytes": 32,
+        "arena_raw_peak_bytes": 262136,
+        "outside_model_object_bytes": 292,
+        "outside_init_heap_delta_bytes": 496,
+        "outside_interpreter_object_bytes": 208,
+        "outside_persistent_bytes": 788,
+        "ram_inference_peak_bytes": 101560,
+        "ram_lifecycle_arena_plus_persistent_bytes": 262892,
+        "invoke_allocation_calls": 0
+      },
+      "source_log": "logs/vww-20260917-120819-431275.log",
+      "per_boot_results": "e8-tflm-tiny-2026-09-17-v3.json",
+      "inference_memory": "sram",
+      "reused_previous_collection": true
+    },
+    {
+      "model": "vww",
+      "framework": "ExecuTorch",
+      "bundle": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling",
+      "build_id": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling-latency",
+      "inference_memory": "sram",
+      "reused_previous_collection": false,
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 8579894.786666667,
+      "median_cycles": 8580210.0,
+      "min_cycles": 8566739,
+      "max_cycles": 8592806,
+      "p95_cycles": 8587622,
+      "mean_latency_ms": 21.449736966666666,
+      "first_mean_cycles": 8588953,
+      "first_mean_ms": 21.4723825,
+      "first_overhead_percent": 0.10557487659883513,
+      "mean_cycles_by_boot": [
+        8580177.24,
+        8579974.21,
+        8579532.91
+      ],
+      "first_cycles_by_boot": [
+        8590231,
+        8594377,
+        8582251
+      ],
+      "boot_mean_span_percent": 0.007509765749125229,
+      "accounted_inference_ram_bytes": 87196,
+      "memory_components": {
+        "et_method_reserved_bytes": 262144,
+        "et_method_planned_bytes": 73728,
+        "et_method_runtime_and_inputs_bytes": 12372,
+        "et_method_used_bytes": 86100,
+        "et_method_peak_bytes": 86100,
+        "et_temp_reserved_bytes": 65536,
+        "et_temp_used_bytes": 0,
+        "et_temp_peak_bytes": 0,
+        "et_outside_model_object_bytes": 152,
+        "et_outside_init_heap_delta_bytes": 656,
+        "et_outside_persistent_bytes": 808,
+        "et_total_pools_plus_persistent_bytes": 86908,
+        "runtime_static_bytes": 288,
+        "input_pool_allocation_bytes": 0,
+        "et_init_method_peak_bytes": 86100,
+        "et_init_temp_peak_bytes": 212,
+        "invoke_heap_scope": "inference_batch_v1",
+        "invoke_heap_delta_bytes": 0,
+        "diagnostic_heap_delta_bytes": 200,
+        "ram_accounted_peak_bytes": 87196
+      },
+      "model_sha256": "15fc83830bddb65f8966103d735a4058f8c1284e3159b551549b40df92280b65",
+      "model_bytes": 259144,
+      "latency_firmware_sha256": "98b52d90c52787c413f692fa71a70800b691bb9c6f08349232205200dbc0d1ec",
+      "size_firmware_sha256": "f372ad6a97fedaeb82c0489900acfce001ec97f5edca6ac9709b500af459f74d",
+      "validation_checks": 3,
+      "source_log": "logs/vww-20260917-154159-374797.log",
+      "per_boot_results": "e8-et-tiny-2026-09-17-v8-sram.json",
+      "placement": {
+        "placement": "sram",
+        "pools": {
+          "arm::app::activationBuf": {
+            "address": "0x2000000",
+            "bytes": 262144
+          },
+          "sTmpAllocationPool": {
+            "address": "0x2040000",
+            "bytes": 65536
+          }
+        },
+        "pool_reserved_bytes": 327680,
+        "startup_zero_table_verified": true,
+        "heap_end": "0x200120d0",
+        "stack_base": "0x200f8000",
+        "dtcm_reserved_bytes": 106704,
+        "dtcm_unallocated_bytes": 941872
+      },
+      "fvp_memory_matches_all_board_boots": true,
+      "prior_sram_bundle": "build-e8-et-tiny-artifacts-v6",
+      "latency_change_from_prior_sram_percent": -1.37189003617314,
+      "ram_change_from_prior_sram_bytes": -9216,
+      "latency_operators_bytes": 28222,
+      "latency_core_bytes": 23808,
+      "latency_filtered_flash_bytes": 311174,
+      "size_operators_bytes": 24494,
+      "size_core_bytes": 12398,
+      "size_filtered_flash_bytes": 296036
+    },
+    {
+      "model": "ad",
+      "framework": "TFLM",
+      "bundle": "build-e8-tflm-tiny-artifacts-v3",
+      "build_id": "build-e8-tflm-tiny-artifacts-v3-latency",
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 481860.0733333333,
+      "median_cycles": 481882.0,
+      "min_cycles": 481149,
+      "max_cycles": 482170,
+      "p95_cycles": 482080,
+      "mean_latency_ms": 1.2046501833333332,
+      "first_mean_cycles": 483805,
+      "first_mean_ms": 1.2095125,
+      "first_overhead_percent": 0.4036289317793873,
+      "accounted_inference_ram_bytes": 9876,
+      "model_bytes": 276976,
+      "size_operators_bytes": 7978,
+      "size_core_bytes": 9748,
+      "size_filtered_flash_bytes": 294702,
+      "latency_operators_bytes": 8696,
+      "latency_core_bytes": 11030,
+      "latency_filtered_flash_bytes": 296702,
+      "model_sha256": "87cf24194ef93d1d9b11a591d805526b98008e351655d29883c825c9c106ba24",
+      "latency_firmware_sha256": "0fb6aff1aeae67b92df5083a2f61ac592f9c7b8ef04992457d4b0ccc1b03184b",
+      "size_firmware_sha256": "c084092aba8db274590cde93042b2e9b63eff0baef43c7e13d766b431b5d1bba",
+      "latency_change_from_historical_percent": 0.15356767187046927,
+      "ram_change_from_historical_bytes": 0,
+      "validation_checks": 0,
+      "first_cycles_by_boot": [
+        484129,
+        483573,
+        483713
+      ],
+      "mean_cycles_by_boot": [
+        481851.66,
+        481885.72,
+        481842.84
+      ],
+      "memory_components": {
+        "arena_reserved_bytes": 262144,
+        "arena_head_bytes": 768,
+        "arena_persistent_bytes": 8500,
+        "arena_init_peak_bytes": 262112,
+        "arena_invoke_peak_bytes": 9268,
+        "arena_peak_bytes": 262112,
+        "arena_audit_overhead_bytes": 32,
+        "arena_raw_peak_bytes": 262144,
+        "outside_model_object_bytes": 112,
+        "outside_init_heap_delta_bytes": 496,
+        "outside_interpreter_object_bytes": 208,
+        "outside_persistent_bytes": 608,
+        "ram_inference_peak_bytes": 9876,
+        "ram_lifecycle_arena_plus_persistent_bytes": 262720,
+        "invoke_allocation_calls": 0
+      },
+      "source_log": "logs/ad-20260917-120911-525749.log",
+      "per_boot_results": "e8-tflm-tiny-2026-09-17-v3.json",
+      "inference_memory": "sram",
+      "reused_previous_collection": true
+    },
+    {
+      "model": "ad",
+      "framework": "ExecuTorch",
+      "bundle": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling",
+      "build_id": "build-e8-et-tiny-artifacts-v8-sram-integer-pooling-latency",
+      "inference_memory": "sram",
+      "reused_previous_collection": false,
+      "clock_hz": 400000000,
+      "boots": 3,
+      "measured_inferences": 300,
+      "mean_cycles": 483183.86,
+      "median_cycles": 483272.0,
+      "min_cycles": 481640,
+      "max_cycles": 483956,
+      "p95_cycles": 483638,
+      "mean_latency_ms": 1.20795965,
+      "first_mean_cycles": 485581,
+      "first_mean_ms": 1.2139525,
+      "first_overhead_percent": 0.49611342564299665,
+      "mean_cycles_by_boot": [
+        483220.1,
+        483138.32,
+        483193.16
+      ],
+      "first_cycles_by_boot": [
+        485611,
+        485599,
+        485533
+      ],
+      "boot_mean_span_percent": 0.016925234216219418,
+      "accounted_inference_ram_bytes": 5320,
+      "memory_components": {
+        "et_method_reserved_bytes": 262144,
+        "et_method_planned_bytes": 768,
+        "et_method_runtime_and_inputs_bytes": 3552,
+        "et_method_used_bytes": 4320,
+        "et_method_peak_bytes": 4320,
+        "et_temp_reserved_bytes": 65536,
+        "et_temp_used_bytes": 0,
+        "et_temp_peak_bytes": 0,
+        "et_outside_model_object_bytes": 152,
+        "et_outside_init_heap_delta_bytes": 656,
+        "et_outside_persistent_bytes": 808,
+        "et_total_pools_plus_persistent_bytes": 5128,
+        "runtime_static_bytes": 192,
+        "input_pool_allocation_bytes": 0,
+        "et_init_method_peak_bytes": 4320,
+        "et_init_temp_peak_bytes": 166,
+        "invoke_heap_scope": "inference_batch_v1",
+        "invoke_heap_delta_bytes": 0,
+        "diagnostic_heap_delta_bytes": 200,
+        "ram_accounted_peak_bytes": 5320
+      },
+      "model_sha256": "ced0e14f92f39f467ddad0312de5856574414b2c99cf05be957db01921a07d5e",
+      "model_bytes": 278560,
+      "latency_firmware_sha256": "a0a8f08e6a549f84d929096fe1e73ceca772acd758f0cce7f4d8fd78c56ec14e",
+      "size_firmware_sha256": "50bdcb79a20c1dc74f8bd3e7444e845cb9d0abc1af78109a1b440a0babb70e4a",
+      "validation_checks": 3,
+      "source_log": "logs/ad-20260917-154254-830101.log",
+      "per_boot_results": "e8-et-tiny-2026-09-17-v8-sram.json",
+      "placement": {
+        "placement": "sram",
+        "pools": {
+          "arm::app::activationBuf": {
+            "address": "0x2000000",
+            "bytes": 262144
+          },
+          "sTmpAllocationPool": {
+            "address": "0x2040000",
+            "bytes": 65536
+          }
+        },
+        "pool_reserved_bytes": 327680,
+        "startup_zero_table_verified": true,
+        "heap_end": "0x20012070",
+        "stack_base": "0x200f8000",
+        "dtcm_reserved_bytes": 106608,
+        "dtcm_unallocated_bytes": 941968
+      },
+      "fvp_memory_matches_all_board_boots": true,
+      "prior_sram_bundle": "build-e8-et-tiny-artifacts-v6",
+      "latency_change_from_prior_sram_percent": 0.038994150504745306,
+      "ram_change_from_prior_sram_bytes": -928,
+      "latency_operators_bytes": 4040,
+      "latency_core_bytes": 23808,
+      "latency_filtered_flash_bytes": 306408,
+      "size_operators_bytes": 2924,
+      "size_core_bytes": 12398,
+      "size_filtered_flash_bytes": 293882
+    }
+  ],
+  "et_relative_to_tflm": [
+    {
+      "model": "kws",
+      "mean_cycles_et_relative_to_tflm_percent": -3.517982211713022,
+      "size_filtered_flash_bytes_et_relative_to_tflm_percent": -21.22173740579135,
+      "accounted_inference_ram_bytes_et_relative_to_tflm_percent": -5.359681546772821
+    },
+    {
+      "model": "ic",
+      "mean_cycles_et_relative_to_tflm_percent": -2.320902925690871,
+      "size_filtered_flash_bytes_et_relative_to_tflm_percent": -9.364221745244617,
+      "accounted_inference_ram_bytes_et_relative_to_tflm_percent": 1.1609574315608384
+    },
+    {
+      "model": "vww",
+      "mean_cycles_et_relative_to_tflm_percent": -10.604927467366132,
+      "size_filtered_flash_bytes_et_relative_to_tflm_percent": -21.088631214180996,
+      "accounted_inference_ram_bytes_et_relative_to_tflm_percent": -14.143363528948406
+    },
+    {
+      "model": "ad",
+      "mean_cycles_et_relative_to_tflm_percent": 0.27472429029224976,
+      "size_filtered_flash_bytes_et_relative_to_tflm_percent": -0.27824717850574165,
+      "accounted_inference_ram_bytes_et_relative_to_tflm_percent": -46.13203726204941
+    }
+  ],
+  "et_changes_from_v6": [
+    {
+      "model": "kws",
+      "old_mean_cycles": 2329507.553333333,
+      "new_mean_cycles": 2330140.546666667,
+      "old_mean_latency_ms": 5.823768883333333,
+      "new_mean_latency_ms": 5.825351366666667,
+      "latency_change_percent": 0.027172838844324865,
+      "old_ram_bytes": 29580,
+      "new_ram_bytes": 26628,
+      "ram_saved_bytes": 2952,
+      "ram_saved_percent": 9.979716024340767,
+      "old_model_bytes": 42416,
+      "new_model_bytes": 38576,
+      "model_saved_bytes": 3840,
+      "model_saved_percent": 9.053187476423997,
+      "old_method_metadata_bytes": 8008,
+      "new_method_metadata_bytes": 5056,
+      "boot_mean_span_percent": 0.009193436863997442
+    },
+    {
+      "model": "ic",
+      "old_mean_cycles": 6092558.32,
+      "new_mean_cycles": 6115834.076666667,
+      "old_mean_latency_ms": 15.231395800000001,
+      "new_mean_latency_ms": 15.289585191666667,
+      "latency_change_percent": 0.3820358451105843,
+      "old_ram_bytes": 59744,
+      "new_ram_bytes": 56464,
+      "ram_saved_bytes": 3280,
+      "ram_saved_percent": 5.4900910551687225,
+      "old_model_bytes": 96152,
+      "new_model_bytes": 91928,
+      "model_saved_bytes": 4224,
+      "model_saved_percent": 4.393044346451447,
+      "old_method_metadata_bytes": 8920,
+      "new_method_metadata_bytes": 5640,
+      "boot_mean_span_percent": 0.059507337092174505
+    },
+    {
+      "model": "vww",
+      "old_mean_cycles": 8699238.776666667,
+      "new_mean_cycles": 8579894.786666667,
+      "old_mean_latency_ms": 21.748096941666667,
+      "new_mean_latency_ms": 21.449736966666666,
+      "latency_change_percent": -1.37189003617314,
+      "old_ram_bytes": 96412,
+      "new_ram_bytes": 87196,
+      "ram_saved_bytes": 9216,
+      "ram_saved_percent": 9.558976061071235,
+      "old_model_bytes": 270792,
+      "new_model_bytes": 259144,
+      "model_saved_bytes": 11648,
+      "model_saved_percent": 4.30145646843334,
+      "old_method_metadata_bytes": 21588,
+      "new_method_metadata_bytes": 12372,
+      "boot_mean_span_percent": 0.007509765749125229
+    },
+    {
+      "model": "ad",
+      "old_mean_cycles": 482995.52,
+      "new_mean_cycles": 483183.86,
+      "old_mean_latency_ms": 1.2074888000000001,
+      "new_mean_latency_ms": 1.20795965,
+      "latency_change_percent": 0.038994150504745306,
+      "old_ram_bytes": 6248,
+      "new_ram_bytes": 5320,
+      "ram_saved_bytes": 928,
+      "ram_saved_percent": 14.852752880921894,
+      "old_model_bytes": 279968,
+      "new_model_bytes": 278560,
+      "model_saved_bytes": 1408,
+      "model_saved_percent": 0.5029146188135769,
+      "old_method_metadata_bytes": 4480,
+      "new_method_metadata_bytes": 3552,
+      "boot_mean_span_percent": 0.016925234216219418
+    }
+  ]
+}

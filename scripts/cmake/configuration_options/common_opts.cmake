@@ -27,7 +27,7 @@ message(STATUS "Assessing common user options...")
 
 include(util_functions)
 
-USER_OPTION(MLEK_LOG_ENABLE "Enable MLEK logging functions."
+USER_OPTION(MLEK_LOG_ENABLE "Enable MLEK and ML framework logging functions."
     ON
     BOOL)
 

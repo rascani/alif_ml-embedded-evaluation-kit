@@ -62,6 +62,7 @@ repos:
         additional_dependencies:
           # Keep this list in sync with scripts/py/requirements-dev.txt.
           - pylint==3.3.8
+          - pyserial==3.5
           - Jinja2==3.1.6
           - pillow==12.1.1
           - numpy==2.1.3

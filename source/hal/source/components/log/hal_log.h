@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: Copyright 2025 Arm Limited and/or
+ * SPDX-FileCopyrightText: Copyright 2025-2026 Arm Limited and/or
  * its affiliates <open-source-office@arm.com>
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -18,6 +18,9 @@
 #ifndef HAL_BASIC_LOGGER_H
 #define HAL_BASIC_LOGGER_H
 
+#include <inttypes.h>
+#include <stdio.h>
+
 #if !defined(UNUSED)
 #define UNUSED(x) ((void)(x))
 #endif /* #if !defined(UNUSED) */
@@ -28,19 +31,15 @@
 extern "C" {
 #endif
 
-#include <inttypes.h>
-#include <stdio.h>
-
-#define HAL_LOG_LEVEL_TRACE    (0)
-#define HAL_LOG_LEVEL_DEBUG    (1)
-#define HAL_LOG_LEVEL_INFO     (2)
-#define HAL_LOG_LEVEL_WARN     (3)
-#define HAL_LOG_LEVEL_ERROR    (4)
+#define HAL_LOG_LEVEL_TRACE (0)
+#define HAL_LOG_LEVEL_DEBUG (1)
+#define HAL_LOG_LEVEL_INFO  (2)
+#define HAL_LOG_LEVEL_WARN  (3)
+#define HAL_LOG_LEVEL_ERROR (4)
 
 #ifndef HAL_LOG_LEVEL
 #define HAL_LOG_LEVEL HAL_LOG_LEVEL_INFO
 #endif /* HAL_LOG_LEVEL */
-
 
 #if (HAL_LOG_LEVEL == HAL_LOG_LEVEL_TRACE)
 #define trace(...)      \
@@ -93,23 +92,23 @@ extern "C" {
  * Provide stubs if the definitions have not been overridden externally.
  */
 #if !defined(trace)
-    #define trace(...)
+#define trace(...)
 #endif
 
 #if !defined(debug)
-    #define debug(...)
+#define debug(...)
 #endif
 
 #if !defined(info)
-    #define info(...)
+#define info(...)
 #endif
 
 #if !defined(warn)
-    #define warn(...)
+#define warn(...)
 #endif
 
 #if !defined(printf_err)
-    #define printf_err(...)
+#define printf_err(...)
 #endif
 
 #endif /* defined(HAL_LOG_ENABLE) */

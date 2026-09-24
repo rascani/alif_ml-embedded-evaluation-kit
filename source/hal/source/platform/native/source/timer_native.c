@@ -1,5 +1,6 @@
 /*
- * SPDX-FileCopyrightText: Copyright 2021 Arm Limited and/or its affiliates <open-source-office@arm.com>
+ * SPDX-FileCopyrightText: Copyright 2021, 2026 Arm Limited and/or its affiliates
+ * <open-source-office@arm.com>
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,29 +21,39 @@ extern "C" {
 
 #include "timer_native.h"
 
-#include <time.h>
 #include <string.h>
+#include <time.h>
 
-#define MILLISECONDS_IN_SECOND      1000
-#define MICROSECONDS_IN_SECOND      1000000
-#define NANOSECONDS_IN_MILLISECOND  1000000
-#define NANOSECONDS_IN_MICROSECOND  1000
+#define MILLISECONDS_IN_SECOND     1000
+#define MICROSECONDS_IN_SECOND     1000000
+#define NANOSECONDS_IN_MILLISECOND 1000000
+#define NANOSECONDS_IN_MICROSECOND 1000
 
-void platform_reset_counters() { /* Nothing to do */ }
+void platform_init_counters(void)
+{ /* Nothing to do */
+}
+
+void platform_final_counters(void)
+{ /* Nothing to do */
+}
+
+void platform_reset_counters(void)
+{ /* Nothing to do */
+}
 
 void platform_get_counters(pmu_counters* counters)
 {
     struct timespec current_time;
     counters->num_counters = 0;
-    counters->initialised = true;
+    counters->initialised  = true;
     clock_gettime(1, &current_time);
     uint64_t microseconds = (current_time.tv_sec * MICROSECONDS_IN_SECOND) +
                             (current_time.tv_nsec / NANOSECONDS_IN_MICROSECOND);
 
 #if NUM_PMU_COUNTERS > 0
     counters->counters[0].value = microseconds;
-    counters->counters[0].name = "Duration";
-    counters->counters[0].unit = "microseconds";
+    counters->counters[0].name  = "Duration";
+    counters->counters[0].unit  = "microseconds";
     ++counters->num_counters;
 #endif /* NUM_PMU_COUNTERS > 0 */
 }

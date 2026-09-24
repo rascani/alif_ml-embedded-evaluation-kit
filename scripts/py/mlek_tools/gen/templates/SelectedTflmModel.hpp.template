@@ -1,0 +1,54 @@
+/*
+ * SPDX-FileCopyrightText: Copyright 2026 Arm Limited and/or its affiliates
+ * <open-source-office@arm.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+// Generated file. Do not edit.
+// Model SHA256: {{ model_sha256 }}
+#ifndef MLEK_SELECTED_TFLM_MODEL_HPP
+#define MLEK_SELECTED_TFLM_MODEL_HPP
+
+#include "mlek/fwk/tflm/TflmModel.hpp"
+
+namespace arm::app::inference_runner {
+
+class SelectedTflmModel : public fwk::tflm::TflmModel {
+public:
+    static constexpr unsigned int kOperatorCount = {{ operator_count }};
+
+    using OpResolver = tflite::MicroMutableOpResolver<{{ resolver_capacity }}>;
+
+protected:
+    const tflite::MicroOpResolver& GetOpResolver() override
+    {
+        return this->m_opResolver;
+    }
+
+    bool EnlistOperations() override
+    {
+        if (this->m_opResolver.GetRegistrationLength() == kOperatorCount) {
+            return true;
+        }
+{% for operator in operators %}
+{% if operator.registration %}
+        if (this->m_opResolver.{{ operator.method }}(
+#if defined(CMSIS_NN)
+                tflite::{{ operator.registration }}()
+#endif
+                ) != kTfLiteOk) {
+{% else %}
+        if (this->m_opResolver.{{ operator.method }}() != kTfLiteOk) {
+{% endif %}
+            return false;
+        }
+{% endfor %}
+        return true;
+    }
+
+private:
+    OpResolver m_opResolver;
+};
+
+} // namespace arm::app::inference_runner
+
+#endif // MLEK_SELECTED_TFLM_MODEL_HPP
