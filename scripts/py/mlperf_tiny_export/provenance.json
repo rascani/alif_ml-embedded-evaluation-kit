@@ -1,0 +1,73 @@
+{
+  "source_archive": "mlperf-tiny-trained-integer-pooling.zip",
+  "source_archive_sha256": "74fb28e6783590f957968675a1fc763377de0b102b5ea0a901139f48cd32bdac",
+  "source_prefix": "mlperf-tiny-trained-integer-pooling/scripts/",
+  "executorch_producer_commit": "ae64c3c72e31445f3243f5e7811ab97b76ad27ca",
+  "executorch_uncommitted_patch": "provenance/model-alignment.patch in the source archive",
+  "executorch_uncommitted_patch_sha256": "61e8ad261f8992006b419cd38eabd7b862660d1ea0c0c9376034b06524e322f9",
+  "copy_changes": "Only SPDX header comments added; all original source bytes are otherwise preserved.",
+  "files": {
+    "suite/export_trained.py": {
+      "original_sha256": "057403fff0a154128a8ffb13a600175ee5a62f192badb52ae2dbcf6bf955c288",
+      "copy_sha256": "4a6eef3eca9e0553862d2d3af93db2766ca337e01105671d7ec3dfe61c8918b4"
+    },
+    "suite/reference_models.py": {
+      "original_sha256": "606fd9c5843aafa89dea6be07818b361099790ea704948f75f5d9a7732a0a163",
+      "copy_sha256": "0f5e87295a0bf4cbc09a494f59c4960bf907be31bde05a6a725ae7f253dfc2ec"
+    },
+    "suite/metrics.py": {
+      "original_sha256": "c2676e78fedf5da90df3aba955d06181c3c14b9f10b01aacb89860f6bf9f0d8b",
+      "copy_sha256": "5791dadc06bb8de20a17ddedbad03f20ab6d42933822d1d58545deb3c3f4e3ff"
+    },
+    "suite/specs.py": {
+      "original_sha256": "2974497db98864e6622cef6a3ac47f8161b463dfbfe8a4218b016c04b8074c9c",
+      "copy_sha256": "9bed17f880017e6837588d11875fddf2c96c8c245c23cded3baa3a94ad30ef23"
+    },
+    "resnet8/export_trained.py": {
+      "original_sha256": "c20c3545d1a3a00c0fc54ee68eb452269bab7350075f9a11f2d8db73364c17e3",
+      "copy_sha256": "607fcf20e95c17472000b1d220c157790c8eeb2792d9ab2ebd1ff2d47a388a79"
+    },
+    "resnet8/reference_model.py": {
+      "original_sha256": "39e396e8c348e1d87bbfb654520eb30a019f5a85af690c265f781d4c693b609e",
+      "copy_sha256": "cfec54eea9c5c646af11af90853a36a7deb57d19337845c0d1bc98e1d53743ae"
+    },
+    "resnet8/validation_metrics.py": {
+      "original_sha256": "2e50df012b407b771e223c4f6fccb38688615a3efbc6edb524871411928c8bd7",
+      "copy_sha256": "cac23497ca66b6f2355edf766bfe60425108a260bb40afcc164f2f7378319eb1"
+    }
+  },
+  "expected_pte": {
+    "resnet8": {
+      "path": "resnet8/cortex-m55/resnet8.pte",
+      "bytes": 91928,
+      "sha256": "e91b8d270ade7c017c298bcc6d4cee26c487c0e6500367c91fbc17606e3c10b2"
+    },
+    "ds_cnn": {
+      "path": "ds_cnn/cortex-m55/ds_cnn.pte",
+      "bytes": 38576,
+      "sha256": "206dc7a286bad78bf60d4671e6a8ca329fc46800b1aae9b81ba4ef8f22e6b1d1"
+    },
+    "mobilenet_v1_025": {
+      "path": "mobilenet_v1_025/cortex-m55/mobilenet_v1_025.pte",
+      "bytes": 259144,
+      "sha256": "15fc83830bddb65f8966103d735a4058f8c1284e3159b551549b40df92280b65"
+    },
+    "deep_autoencoder": {
+      "path": "deep_autoencoder/cortex-m55/deep_autoencoder.pte",
+      "bytes": 278560,
+      "sha256": "ced0e14f92f39f467ddad0312de5856574414b2c99cf05be957db01921a07d5e"
+    }
+  },
+  "python_packages": {
+    "torch": "2.14.0+cpu",
+    "torchao": "0.18.0.dev20260729+cpu",
+    "cmsis_nn_source": {
+      "url": "https://github.com/ARM-software/CMSIS-NN.git",
+      "vcs_info": {
+        "vcs": "git",
+        "commit_id": "13c97dbb6f781d4aab38ed34e6e441f42b79aff4",
+        "requested_revision": "13c97dbb6f781d4aab38ed34e6e441f42b79aff4"
+      }
+    }
+  }
+}

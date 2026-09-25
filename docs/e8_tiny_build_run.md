@@ -70,6 +70,12 @@ The final export's producer revision was
 examples and checksum inventory together. The import step verifies and normalizes
 these files without changing the PTEs. Use fresh output/bundle names for each run.
 
+Copies of the actual exporters and their helper modules are in
+`scripts/py/mlperf_tiny_export/`; its README records prerequisites and invocations,
+and `provenance.json` records source and PTE hashes. Both exporters apply
+`QuantizeInputs` and `QuantizeOutputs`: all four final PTEs have INT8 inputs and
+outputs. The floating-point-I/O smoke exporter is a separate bring-up example.
+
 ```bash
 export EXPORT_ZIP=/path/to/mlperf-tiny-trained-integer-pooling.zip
 python scripts/py/import_et_tiny_bundle.py --archive "$EXPORT_ZIP" \

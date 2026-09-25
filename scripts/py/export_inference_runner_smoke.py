@@ -20,7 +20,9 @@ from torchao.quantization.pt2e.quantize_pt2e import convert_pt2e, prepare_pt2e
 
 def export_smoke_models(output_dir: Path):
     """
-    Export a Cortex-M quantized model and its portable floating-point counterpart.
+    Export a Cortex-M model with float I/O and its portable floating-point counterpart.
+
+    The final INT8-I/O Tiny model exporters are archived in ``mlperf_tiny_export/``.
 
     :param output_dir:  Destination for the programs and reference JSON.
     """
